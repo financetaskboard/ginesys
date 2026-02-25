@@ -156,6 +156,20 @@ select.input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xml
 .rt-delay-warn{font-family:'DM Mono',monospace;font-size:.72rem;color:#c4921a;font-weight:700}
 .rt-delay-bad{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--red);font-weight:700}
 .rt-delay-na{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--ink-dim)}
+
+/* ── DASHBOARD SWITCHER ── */
+.dash-switcher{display:flex;gap:0;background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:3px;margin:10px 16px 0}
+.dash-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:8px 14px;border:none;background:none;cursor:pointer;font-family:'Instrument Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--ink-mid);border-radius:8px;transition:all .18s;white-space:nowrap}
+.dash-tab:hover{background:rgba(28,23,18,.06);color:var(--ink)}
+.dash-tab.active{background:var(--surface);color:var(--ink);box-shadow:0 2px 8px rgba(28,23,18,.12)}
+.dash-tab.active.personal{background:linear-gradient(135deg,#e8f4fd,#f0e8fd);color:#1a5fa0;border:1.5px solid #b3d9f5}
+.dash-tab.active.team{background:linear-gradient(135deg,#e8faf0,#f0fae8);color:#1a6b3f;border:1.5px solid #90d4aa}
+.dash-icon{font-size:1rem}
+.dash-badge{font-family:'DM Mono',monospace;font-size:.6rem;padding:1px 6px;border-radius:99px;font-weight:700;background:var(--ink);color:#fff;margin-left:3px}
+.dash-tab.active.personal .dash-badge{background:#1a5fa0}
+.dash-tab.active.team .dash-badge{background:#1a6b3f}
+.personal-banner{background:linear-gradient(90deg,#e8f4fd,#f5f0fe);border:1px solid #b3d9f5;border-radius:8px;padding:10px 14px;font-size:.79rem;color:#1a5fa0;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.team-banner{background:linear-gradient(90deg,#e6f7ef,#f0fae8);border:1px solid #90d4aa;border-radius:8px;padding:10px 14px;font-size:.79rem;color:#1a6b3f;margin-bottom:4px;display:flex;align-items:center;gap:8px}
 </style>
 </head>
 <body>
@@ -200,8 +214,8 @@ select.input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xml
 
     <div class="auth-info">
       🔐 Secured by Firebase Authentication<br>
-      <strong>Admin</strong> can create/assign/delete tasks &amp; manage team<br>
-      <strong>Member</strong> can view tasks, update status &amp; comment
+      <strong>Admin</strong> can create/assign/delete team tasks &amp; manage the Finance Team Dashboard<br>
+      <strong>Member</strong> can create personal tasks &amp; update status on assigned tasks
     </div>
   </div>
 </div>
@@ -255,11 +269,23 @@ select.input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xml
 
   <main class="main">
     <div id="tasksView">
+      <!-- DASHBOARD SWITCHER -->
+      <div class="dash-switcher" id="dashSwitcher">
+        <button class="dash-tab personal active" id="dashPersonalBtn" onclick="switchDashboard('personal')">
+          <span class="dash-icon">👤</span> Personal Dashboard
+          <span class="dash-badge" id="personalCount">0</span>
+        </button>
+        <button class="dash-tab team" id="dashTeamBtn" onclick="switchDashboard('team')">
+          <span class="dash-icon">🏢</span> Finance Team Dashboard
+          <span class="dash-badge" id="teamCount">0</span>
+        </button>
+      </div>
       <div class="toolbar">
         <div class="search-wrap"><span class="si">🔍</span><input class="search-input" id="searchInput" placeholder="Search tasks…" oninput="renderTasks()"></div>
         <button class="btn btn-ghost btn-sm" id="cfBtn" onclick="clearFilters()" style="display:none">✕ Clear</button>
         <span class="tc" id="taskCount"></span>
-        <button class="btn btn-primary btn-sm" id="newTaskBtn" onclick="openTaskModal()" style="margin-left:auto">+ New Task</button>
+        <button class="btn btn-primary btn-sm" id="newPersonalTaskBtn" onclick="openTaskModal(null,'personal')" style="margin-left:auto;background:linear-gradient(135deg,#1a5fa0,#6b3fa0);display:none">+ New Personal Task</button>
+        <button class="btn btn-primary btn-sm" id="newTaskBtn" onclick="openTaskModal()" style="display:none">+ New Team Task</button>
       </div>
       <div class="grid-wrap">
         <div id="tasksGrouped" style="display:flex;gap:14px;align-items:flex-start;min-width:max-content;height:100%"></div>
@@ -374,6 +400,7 @@ select.input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xml
     </div>
     <div class="form-body">
       <input type="hidden" id="editId">
+      <input type="hidden" id="taskSource" value="team">
       <div class="fg"><label>Title *</label><input class="input" id="tTitle" placeholder="What needs to be done?"></div>
       <div class="fg"><label>Description</label><textarea class="input" id="tDesc" placeholder="Add more context…" style="min-height:65px;resize:vertical"></textarea></div>
       <div class="form-row">
@@ -390,10 +417,11 @@ select.input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xml
           </select>
         </div>
       </div>
-      <div class="form-row">
+      <div class="form-row" id="assigneeRow">
         <div class="fg"><label>Assign To</label><select class="input" id="tAssignee"><option value="">— Unassigned —</option></select></div>
         <div class="fg"><label>Due Date</label><input class="input" type="date" id="tDue"></div>
       </div>
+      <div id="personalAssigneeNote" style="display:none" class="info-box" style="font-size:.76rem">👤 This task will be assigned to <strong>you</strong> and only visible to you.</div>
       <div class="fg">
         <label>📧 Send email notification to assignee</label>
         <div class="warn-box" id="emailNote">EmailJS must be configured below for emails to send. Once set up, assignee gets an email automatically!</div>
@@ -476,6 +504,7 @@ function toast(msg,dur=3000){
 // ── state ─────────────────────────────────────────────────────────────────
 let members=[],tasks=[],activity=[],currentUser=null,currentUserProfile=null;
 let filters={status:'',priority:'',assignee:''},currentView='tasks',openDetailId=null;
+let currentDashboard='personal';
 
 // ── expose globals ─────────────────────────────────────────────────────────
 window.switchAuthTab=switchAuthTab;window.doLogin=doLogin;window.doRegister=doRegister;window.doLogout=doLogout;
@@ -487,6 +516,7 @@ window.closeEmailModal=closeEmailModal;window.saveEmailConfig=saveEmailConfig;
 window.openEmailConfig=openEmailConfig;
 window.clearReportFilters=clearReportFilters;
 window.exportReportCSV=exportReportCSV;
+window.switchDashboard=switchDashboard;
 
 // ── AUTH ──────────────────────────────────────────────────────────────────
 function switchAuthTab(tab){
@@ -584,12 +614,45 @@ function updateUserHeader(){
   rb.textContent=m.role==='admin'?'Admin':'Member';
   rb.className='role-badge '+(m.role==='admin'?'role-admin':'role-member');
   // show/hide admin-only UI
-  const isAdmin=m.role==='admin';
-  document.getElementById('newTaskBtn').style.display=isAdmin?'':'none';
-  document.getElementById('teamTab').style.display=isAdmin?'':'none';
-  const tfs=document.getElementById('teamFilterSection');if(tfs)tfs.style.display=isAdmin?'':'none';
-  
-  const rt=document.getElementById('reportTab');if(rt)rt.style.display=isAdmin?'':'none';
+  const isAdm=m.role==='admin';
+  document.getElementById('teamTab').style.display=isAdm?'':'none';
+  const tfs=document.getElementById('teamFilterSection');if(tfs)tfs.style.display=isAdm?'':'none';
+  const rt=document.getElementById('reportTab');if(rt)rt.style.display=isAdm?'':'none';
+  // update dashboard buttons
+  updateDashboardButtons();
+}
+
+function updateDashboardButtons(){
+  const isAdm=isAdmin();
+  const newTeamBtn=document.getElementById('newTaskBtn');
+  const newPersonalBtn=document.getElementById('newPersonalTaskBtn');
+  if(newTeamBtn)newTeamBtn.style.display=(currentDashboard==='team'&&isAdm)?'':'none';
+  if(newPersonalBtn)newPersonalBtn.style.display=currentDashboard==='personal'?'':'none';
+}
+
+function switchDashboard(dash){
+  currentDashboard=dash;
+  // update tab appearance
+  document.getElementById('dashPersonalBtn').className='dash-tab personal'+(dash==='personal'?' active':'');
+  document.getElementById('dashTeamBtn').className='dash-tab team'+(dash==='team'?' active':'');
+  // reset filters
+  filters={status:'',priority:'',assignee:''};
+  const si=document.getElementById('searchInput');if(si)si.value='';
+  const cfBtn=document.getElementById('cfBtn');if(cfBtn)cfBtn.style.display='none';
+  closeDetail();
+  updateDashboardButtons();
+  updateDashboardCounts();
+  renderAll();
+}
+
+function updateDashboardCounts(){
+  const personalTasks=tasks.filter(t=>(t.source||'team')==='personal'&&t.createdBy===currentUser?.uid);
+  const teamTasks=tasks.filter(t=>(t.source||'team')!=='personal');
+  const myTeamTasks=isAdmin()?teamTasks:teamTasks.filter(t=>!t.assigneeId||t.assigneeId===currentUser?.uid);
+  const pc=document.getElementById('personalCount');
+  const tc2=document.getElementById('teamCount');
+  if(pc)pc.textContent=personalTasks.length;
+  if(tc2)tc2.textContent=myTeamTasks.length;
 }
 
 const isAdmin=()=>currentUserProfile?.role==='admin';
@@ -636,23 +699,30 @@ async function sendTaskEmail(task,assigneeMember){
 async function log(tid,mid,detail){await push(ref(db,'activity'),{taskId:tid,memberId:mid,detail,ts:Date.now()});}
 
 // ── render ────────────────────────────────────────────────────────────────
-function renderAll(){renderSidebar();renderTasks();renderActivity();renderTeam();if(currentView==='report')renderReport();}
+function renderAll(){updateDashboardCounts();renderSidebar();renderTasks();renderActivity();renderTeam();if(currentView==='report')renderReport();}
 
 function renderSidebar(){
-  // for members, scope stats to their own tasks only
-  const scopedTasks=isAdmin()?tasks:tasks.filter(t=>t.assigneeId===currentUser?.uid);
+  // scope tasks based on current dashboard
+  let scopedTasks;
+  if(currentDashboard==='personal'){
+    scopedTasks=tasks.filter(t=>(t.source||'team')==='personal'&&t.createdBy===currentUser?.uid);
+  } else {
+    // team dashboard
+    const teamTasks=tasks.filter(t=>(t.source||'team')!=='personal');
+    scopedTasks=isAdmin()?teamTasks:teamTasks.filter(t=>!t.assigneeId||t.assigneeId===currentUser?.uid);
+  }
   const counts={};Object.keys(S).forEach(s=>counts[s]=0);scopedTasks.forEach(t=>counts[t.status]=(counts[t.status]||0)+1);
   const overdue=scopedTasks.filter(t=>t.due&&new Date(t.due+'T00:00:00')<new Date()&&t.status!=='done').length;
   const pCounts={};Object.keys(P).forEach(p=>pCounts[p]=0);scopedTasks.forEach(t=>pCounts[t.priority]=(pCounts[t.priority]||0)+1);
 
-  // Status stats
-  let h=`<div class="stat-card" onclick="clearFilters()"><div class="stat-num">${scopedTasks.length}</div><div class="stat-lbl">${isAdmin()?'Total':'My Tasks'}</div></div>`;
+  const lbl=currentDashboard==='personal'?'My Tasks':(isAdmin()?'Total':'My Tasks');
+  let h=`<div class="stat-card" onclick="clearFilters()"><div class="stat-num">${scopedTasks.length}</div><div class="stat-lbl">${lbl}</div></div>`;
   Object.entries(S).forEach(([k,v])=>h+=`<div class="stat-card" onclick="tf('status','${k}')"><div class="stat-num" style="color:${v.color}">${counts[k]||0}</div><div class="stat-lbl">${v.label}</div></div>`);
   if(overdue>0)h+=`<div class="stat-card" style="grid-column:span 2"><div class="stat-num" style="color:#c41a2d">${overdue}</div><div class="stat-lbl">Overdue</div></div>`;
   document.getElementById('statsGrid').innerHTML=h;
 
-  // Priority breakdown (admin) or Status breakdown (member)
-  if(isAdmin()){
+  // Priority breakdown (admin on team dash) or Status breakdown (member/personal)
+  if(isAdmin()&&currentDashboard==='team'){
     document.getElementById('breakdownLabel').textContent='Priority Breakdown';
     let ph='';
     Object.entries(P).forEach(([k,v])=>ph+=`<div class="stat-card" onclick="tf('priority','${k}')"><div class="stat-num" style="color:${v.color}">${pCounts[k]||0}</div><div class="stat-lbl">${v.icon} ${v.label}</div></div>`);
@@ -663,10 +733,15 @@ function renderSidebar(){
     Object.entries(S).forEach(([k,v])=>sh+=`<div class="stat-card" onclick="tf('status','${k}')"><div class="stat-num" style="color:${v.color}">${counts[k]||0}</div><div class="stat-lbl">${v.label}</div></div>`);
     document.getElementById('priorityGrid').innerHTML=sh;
   }
-  document.getElementById('teamFilters').innerHTML=members.map(m=>{
-    const open=tasks.filter(t=>t.assigneeId===m.id&&t.status!=='done').length;
-    return`<button class="filter-btn ${filters.assignee===m.id?'active':''}" onclick="tf('assignee','${m.id}')">${av(m,20)}<span style="flex:1">${esc(m.name.split(' ')[0])}</span><span style="font-family:'DM Mono';font-size:.66rem;background:rgba(0,0,0,.07);padding:1px 5px;border-radius:99px">${open}</span></button>`;
-  }).join('');
+  // team filter only shown to admin on team dashboard
+  const tfs=document.getElementById('teamFilterSection');
+  if(tfs)tfs.style.display=(isAdmin()&&currentDashboard==='team')?'':'none';
+  if(isAdmin()&&currentDashboard==='team'){
+    document.getElementById('teamFilters').innerHTML=members.map(m=>{
+      const open=tasks.filter(t=>t.assigneeId===m.id&&t.status!=='done'&&(t.source||'team')!=='personal').length;
+      return`<button class="filter-btn ${filters.assignee===m.id?'active':''}" onclick="tf('assignee','${m.id}')">${av(m,20)}<span style="flex:1">${esc(m.name.split(' ')[0])}</span><span style="font-family:'DM Mono';font-size:.66rem;background:rgba(0,0,0,.07);padding:1px 5px;border-radius:99px">${open}</span></button>`;
+    }).join('');
+  }
 }
 
 function tf(type,val){filters[type]=filters[type]===val?'':val;document.getElementById('cfBtn').style.display=Object.values(filters).some(v=>v)||document.getElementById('searchInput').value?'':'none';renderSidebar();renderTasks();}
@@ -675,9 +750,15 @@ function clearFilters(){filters={status:'',priority:'',assignee:''};document.get
 function getFiltered(){
   const q=document.getElementById('searchInput').value.toLowerCase();
   const po={critical:0,high:1,medium:2,low:3};
-  let list=tasks;
-  // members only see their tasks + unassigned
-  if(!isAdmin())list=tasks.filter(t=>!t.assigneeId||t.assigneeId===currentUser?.uid);
+  let list;
+  if(currentDashboard==='personal'){
+    // Personal: only tasks created by this user with source='personal'
+    list=tasks.filter(t=>(t.source||'team')==='personal'&&t.createdBy===currentUser?.uid);
+  } else {
+    // Finance Team: tasks NOT personal (admin-created team tasks)
+    list=tasks.filter(t=>(t.source||'team')!=='personal');
+    if(!isAdmin())list=list.filter(t=>!t.assigneeId||t.assigneeId===currentUser?.uid);
+  }
   return list.filter(t=>{
     if(filters.status&&t.status!==filters.status)return false;
     if(filters.priority&&t.priority!==filters.priority)return false;
@@ -693,22 +774,22 @@ function fmtDate(ts){
   return d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
 }
 
-function taskCardHtml(t){
+function taskCardHtml(t,isPersonal=false){
   const p=P[t.priority]||P.medium,s_=S[t.status]||S.todo,assignee=members.find(m=>m.id===t.assigneeId),due=fd(t.due);
   const cmtCount=t.comments&&typeof t.comments==='object'?Object.keys(t.comments).length:0;
   const assignedDate=t.assignedAt?fmtDate(t.assignedAt):t.assigneeId&&t.ts?fmtDate(t.ts):null;
   return`<div class="task-card" onclick="openDetail('${t.id}')">
-    <div class="ct"><span class="badge" style="color:${s_.color};background:${s_.bg}">${s_.label}</span></div>
+    <div class="ct"><span class="badge" style="color:${s_.color};background:${s_.bg}">${s_.label}</span><span class="badge" style="color:${p.color};background:${p.bg}">${p.icon} ${p.label}</span></div>
     <div class="card-title">${esc(t.title)}</div>
     ${t.description?`<div class="card-desc">${esc(t.description)}</div>`:''}
     <div class="cb">
-      ${assignee?`<div style="display:flex;align-items:center;gap:5px;font-size:.72rem;color:var(--ink-mid)">${av(assignee,19)}<span>${esc(assignee.name)}</span></div>`:'<span style="font-size:.72rem;color:var(--ink-dim);font-style:italic">Unassigned</span>'}
+      ${isPersonal?'<span style="font-size:.7rem;color:#1a5fa0;font-weight:600">👤 Personal</span>':(assignee?`<div style="display:flex;align-items:center;gap:5px;font-size:.72rem;color:var(--ink-mid)">${av(assignee,19)}<span>${esc(assignee.name)}</span></div>`:'<span style="font-size:.72rem;color:var(--ink-dim);font-style:italic">Unassigned</span>')}
       <div style="display:flex;align-items:center;gap:6px">
         ${cmtCount>0?`<span style="font-size:.68rem;color:var(--ink-dim)">💬${cmtCount}</span>`:''}
         ${due?`<span style="font-size:.68rem;font-family:'DM Mono',monospace;color:${due.cls==='overdue'?'#c41a2d':due.cls==='warning'?'#c4921a':'var(--ink-dim)'}">${due.text}</span>`:''}
       </div>
     </div>
-    ${assignedDate?`<div style="margin-top:7px;padding-top:7px;border-top:1px solid var(--border);display:flex;align-items:center;gap:4px"><span style="font-size:.62rem;color:var(--ink-dim);font-family:'DM Mono',monospace">📅 Assigned</span><span style="font-size:.62rem;font-family:'DM Mono',monospace;color:var(--ink-mid);font-weight:600">${assignedDate}</span></div>`:''}
+    ${assignedDate&&!isPersonal?`<div style="margin-top:7px;padding-top:7px;border-top:1px solid var(--border);display:flex;align-items:center;gap:4px"><span style="font-size:.62rem;color:var(--ink-dim);font-family:'DM Mono',monospace">📅 Assigned</span><span style="font-size:.62rem;font-family:'DM Mono',monospace;color:var(--ink-mid);font-weight:600">${assignedDate}</span></div>`:''}
   </div>`;
 }
 
@@ -718,11 +799,39 @@ function renderTasks(){
   const hasF=Object.values(filters).some(v=>v)||document.getElementById('searchInput').value;
   document.getElementById('cfBtn').style.display=hasF?'':'none';
   document.getElementById('taskCount').textContent=`${f.length} task${f.length!==1?'s':''}`;
-  if(f.length===0){grouped.innerHTML='';empty.style.display='flex';return;}
+
+  // update search placeholder
+  const si=document.getElementById('searchInput');
+  if(si)si.placeholder=currentDashboard==='personal'?'Search personal tasks…':'Search team tasks…';
+
+  if(f.length===0){grouped.innerHTML='';empty.style.display='flex';
+    empty.innerHTML=currentDashboard==='personal'
+      ?'<div class="ei">👤</div><p>No personal tasks yet.</p><p style="font-size:.76rem;color:var(--ink-dim);margin-top:4px">Click "+ New Personal Task" to create one for yourself.</p>'
+      :'<div class="ei">🏢</div><p>No team tasks found.</p>'+(isAdmin()?'<p style="font-size:.76rem;color:var(--ink-dim);margin-top:4px">Click "+ New Team Task" to create one.</p>':'');
+    return;}
   empty.style.display='none';
 
-  if(isAdmin()){
-    // Admin: Group by priority
+  if(currentDashboard==='personal'){
+    // Personal dashboard: group by status
+    const statusGroups=[['todo','To Do'],['in_progress','In Progress'],['review','In Review'],['done','Done']];
+    grouped.innerHTML=statusGroups.map(([sk,sl])=>{
+      const sts=f.filter(t=>t.status===sk);
+      if(sts.length===0)return'';
+      const sInfo=S[sk];
+      const bgMap={todo:'#f0edf8',in_progress:'#e8f1fb',review:'#f0eaf8',done:'#e6f4ec'};
+      const bg=bgMap[sk]||'#f5f2ee';
+      return`<div class="priority-group" id="pg_${sk}" style="width:280px;flex-shrink:0">
+        <div class="priority-group-header" style="background:${bg}">
+          <span style="width:10px;height:10px;border-radius:50%;background:${sInfo.color};display:inline-block;flex-shrink:0"></span>
+          <span class="priority-group-title" style="color:${sInfo.color}">${sl}</span>
+          <span class="priority-group-count" style="background:${bg};color:${sInfo.color}">${sts.length} task${sts.length!==1?'s':''}</span>
+          <button class="priority-group-toggle" onclick="toggleGroup('${sk}')">▾ collapse</button>
+        </div>
+        <div class="pg-tasks" id="pgt_${sk}">${sts.map(t=>taskCardHtml(t,true)).join('')}</div>
+      </div>`;
+    }).join('');
+  } else if(isAdmin()){
+    // Admin team dashboard: Group by priority
     const groups=[['critical','Critical'],['high','High'],['medium','Medium'],['low','Low']];
     grouped.innerHTML=groups.map(([pk,pl])=>{
       const pts=f.filter(t=>t.priority===pk);
@@ -739,7 +848,7 @@ function renderTasks(){
       </div>`;
     }).join('');
   } else {
-    // Member: Group by status
+    // Member team dashboard: Group by status
     const statusGroups=[['todo','To Do'],['in_progress','In Progress'],['review','In Review'],['done','Done']];
     grouped.innerHTML=statusGroups.map(([sk,sl])=>{
       const sts=f.filter(t=>t.status===sk);
@@ -778,7 +887,7 @@ function renderDetail(){
   const p=P[t.priority]||P.medium,s_=S[t.status]||S.todo,due=fd(t.due);
   const comments=t.comments&&typeof t.comments==='object'?Object.entries(t.comments).map(([k,v])=>({id:k,...v})).sort((a,b)=>a.ts-b.ts):[];
   const acts=activity.filter(a=>a.taskId===t.id).slice(0,12);
-  const canEdit=isAdmin();
+  const canEdit=isAdmin()||(t.source==='personal'&&t.createdBy===currentUser?.uid);
   const mOpts=members.map(m=>`<option value="${m.id}" ${t.assigneeId===m.id?'selected':''}>${esc(m.name)}</option>`).join('');
   const sOpts=Object.entries(S).map(([k,v])=>`<option value="${k}" ${t.status===k?'selected':''}>${v.label}</option>`).join('');
   const pOpts=Object.entries(P).map(([k,v])=>`<option value="${k}" ${t.priority===k?'selected':''}>${v.icon} ${v.label}</option>`).join('');
@@ -791,10 +900,11 @@ function renderDetail(){
     </div>
     <div class="db">
       <div class="detail-title">${esc(t.title)}</div>
+      ${t.source==='personal'?`<div style="display:inline-flex;align-items:center;gap:5px;background:#e8f4fd;border:1px solid #b3d9f5;border-radius:99px;padding:3px 10px;font-size:.71rem;font-weight:600;color:#1a5fa0;margin-bottom:12px">👤 Personal Task</div>`:`<div style="display:inline-flex;align-items:center;gap:5px;background:#e6f7ef;border:1px solid #90d4aa;border-radius:99px;padding:3px 10px;font-size:.71rem;font-weight:600;color:#1a6b3f;margin-bottom:12px">🏢 Finance Team Task</div>`}
       <div class="meta-grid">
         <div class="mi"><div class="ml">Status</div>${canEdit||t.assigneeId===currentUser?.uid?`<select class="ms" onchange="qu('${t.id}','status',this.value)">${sOpts}</select>`:`<span style="font-size:.8rem;font-weight:600">${s_.label}</span>`}</div>
         <div class="mi"><div class="ml">Priority</div>${canEdit?`<select class="ms" onchange="qu('${t.id}','priority',this.value)">${pOpts}</select>`:`<span style="font-size:.8rem;font-weight:600">${p.icon} ${p.label}</span>`}</div>
-        <div class="mi"><div class="ml">Assigned To</div>${canEdit?`<select class="ms" onchange="qu('${t.id}','assigneeId',this.value)"><option value="" ${!t.assigneeId?'selected':''}>Unassigned</option>${mOpts}</select>`:`<span style="font-size:.8rem;font-weight:600">${members.find(m=>m.id===t.assigneeId)?.name||'Unassigned'}</span>`}</div>
+        <div class="mi"><div class="ml">Assigned To</div>${(isAdmin()&&t.source!=='personal')?`<select class="ms" onchange="qu('${t.id}','assigneeId',this.value)"><option value="" ${!t.assigneeId?'selected':''}>Unassigned</option>${mOpts}</select>`:`<span style="font-size:.8rem;font-weight:600">${t.source==='personal'?'👤 Me (Personal)':members.find(m=>m.id===t.assigneeId)?.name||'Unassigned'}</span>`}</div>
         <div class="mi"><div class="ml">Due Date</div><div style="font-size:.8rem;font-weight:600;color:${due?.cls==='overdue'?'#c41a2d':due?.cls==='warning'?'#c4921a':'var(--ink)'}">${due?due.text:'—'}</div></div>
         <div class="mi"><div class="ml">Assigned On</div><div style="font-size:.8rem;font-weight:600;color:var(--ink)">${t.assignedAt?new Date(t.assignedAt).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'—'}</div></div>
       </div>
@@ -844,21 +954,39 @@ async function deleteTask(tid){
   closeDetail();toast('🗑 Task deleted');
 }
 
-function openTaskModal(tid){
-  if(!isAdmin()){toast('Only admins can create/edit tasks.');return;}
+function openTaskModal(tid,forceSource){
+  const source=forceSource||(currentDashboard==='personal'?'personal':'team');
+  if(source==='team'&&!isAdmin()){toast('Only admins can create/edit team tasks.');return;}
   const t=tid?tasks.find(x=>x.id===tid):null;
-  document.getElementById('tmTitle').textContent=t?'Edit Task':'New Task';
+  const isPersonalMode=(t?.source||source)==='personal';
+  document.getElementById('tmTitle').textContent=isPersonalMode?(t?'Edit Personal Task':'New Personal Task'):(t?'Edit Task':'New Team Task');
   document.getElementById('editId').value=tid||'';
+  document.getElementById('taskSource').value=t?.source||source;
   document.getElementById('tTitle').value=t?.title||'';
   document.getElementById('tDesc').value=t?.description||'';
   document.getElementById('tStatus').value=t?.status||'todo';
   document.getElementById('tPriority').value=t?.priority||'medium';
   document.getElementById('tDue').value=t?.due||'';
-  document.getElementById('tAssignee').innerHTML=`<option value="">— Unassigned —</option>`+members.map(m=>`<option value="${m.id}" ${t?.assigneeId===m.id?'selected':''}>${esc(m.name)}</option>`).join('');
-  const cfg=getEmailConfig();
-  const note=document.getElementById('emailNote');
-  if(cfg){note.className='info-box';note.textContent='✅ EmailJS configured — assignee will receive an email!';}
-  else{note.className='warn-box';note.innerHTML='⚠️ EmailJS not configured. <a href="#" onclick="closeTaskModal();openEmailConfig();return false" style="color:var(--accent)">Set it up here</a> to enable email notifications.';}
+  // show/hide assignee row
+  const assigneeRow=document.getElementById('assigneeRow');
+  const personalNote=document.getElementById('personalAssigneeNote');
+  const emailNoteEl=document.getElementById('emailNote')?.parentElement;
+  if(isPersonalMode){
+    if(assigneeRow)assigneeRow.style.display='none';
+    if(personalNote)personalNote.style.display='block';
+    if(emailNoteEl)emailNoteEl.style.display='none';
+  } else {
+    if(assigneeRow)assigneeRow.style.display='grid';
+    if(personalNote)personalNote.style.display='none';
+    if(emailNoteEl)emailNoteEl.style.display='';
+    document.getElementById('tAssignee').innerHTML=`<option value="">— Unassigned —</option>`+members.map(m=>`<option value="${m.id}" ${t?.assigneeId===m.id?'selected':''}>${esc(m.name)}</option>`).join('');
+    const cfg=getEmailConfig();
+    const note=document.getElementById('emailNote');
+    if(note){
+      if(cfg){note.className='info-box';note.textContent='✅ EmailJS configured — assignee will receive an email!';}
+      else{note.className='warn-box';note.innerHTML='⚠️ EmailJS not configured. <a href="#" onclick="closeTaskModal();openEmailConfig();return false" style="color:var(--accent)">Set it up here</a> to enable email notifications.';}
+    }
+  }
   document.getElementById('taskModal').style.display='flex';
   setTimeout(()=>document.getElementById('tTitle').focus(),50);
 }
@@ -868,32 +996,31 @@ async function saveTask(){
   const title=document.getElementById('tTitle').value.trim();
   if(!title)return alert('Please enter a title!');
   const eid=document.getElementById('editId').value;
-  const assigneeId=document.getElementById('tAssignee').value||null;
+  const source=document.getElementById('taskSource').value||'team';
+  const isPersonalTask=source==='personal';
+  const assigneeId=isPersonalTask?currentUser.uid:(document.getElementById('tAssignee').value||null);
   const prevTask=eid?tasks.find(x=>x.id===eid):null;
   const prevAssignee=prevTask?.assigneeId||null;
-  // only update assignedAt if assignee actually changed or it's a new task
   const assignedAt=!assigneeId?null:assigneeId!==prevAssignee?Date.now():(prevTask?.assignedAt||Date.now());
-  const data={title,description:document.getElementById('tDesc').value.trim(),status:document.getElementById('tStatus').value,priority:document.getElementById('tPriority').value,assigneeId,due:document.getElementById('tDue').value||null,assignedAt};
+  const data={title,description:document.getElementById('tDesc').value.trim(),status:document.getElementById('tStatus').value,priority:document.getElementById('tPriority').value,assigneeId,due:document.getElementById('tDue').value||null,assignedAt,source};
 
   if(eid){
     await update(ref(db,`tasks/${eid}`),data);
     await log(eid,currentUser.uid,'Task updated');
-    // send email if assignee changed
-    if(assigneeId&&assigneeId!==prevAssignee){
+    if(!isPersonalTask&&assigneeId&&assigneeId!==prevAssignee){
       const assignee=members.find(m=>m.id===assigneeId);
       await sendTaskEmail({...data,id:eid},assignee);
     }
   } else {
     const newId=uid();
     await set(ref(db,`tasks/${newId}`),{...data,createdBy:currentUser.uid,ts:Date.now(),comments:{}});
-    await log(newId,currentUser.uid,`Task created with priority ${data.priority}`);
-    // send email to assignee
-    if(assigneeId){
+    await log(newId,currentUser.uid,isPersonalTask?'Personal task created':`Task created with priority ${data.priority}`);
+    if(!isPersonalTask&&assigneeId){
       const assignee=members.find(m=>m.id===assigneeId);
       await sendTaskEmail({...data,id:newId},assignee);
     }
   }
-  closeTaskModal();toast('✅ Task saved!');
+  closeTaskModal();toast(isPersonalTask?'✅ Personal task saved!':'✅ Task saved!');
 }
 
 function renderActivity(){
@@ -1063,7 +1190,6 @@ const savedEmail=localStorage.getItem('tf_email');
 if(savedEmail){try{const c=JSON.parse(savedEmail);emailjs.init(c.pubkey);}catch(e){}}
 
 // add email button once profile loads
-const _origUpdate=updateUserHeader;
 window._profileReady=()=>{if(isAdmin())addEmailButton();};
 </script>
 </body>
