@@ -797,7 +797,7 @@ select option{background:var(--white);color:var(--ink)}
         <div class="sidebar-label">Team Member</div>
         <div id="teamFilters"></div>
       </div>
-      <div class="sidebar-section" id="adminActionsSection">
+      <div class="sidebar-section" id="adminActionsSection" style="display:none">
         <div class="sidebar-label">Actions</div>
         <button class="filter-btn" onclick="openArchiveView()">📦 Archive</button>
         <button class="filter-btn" onclick="openAutomations()">⚡ Automations</button>
@@ -1997,7 +1997,7 @@ onAuthStateChanged(auth,user=>{
 
 // ── FIREBASE ──
 function subscribeAll(){
-  onValue(ref(db,'members'),snap=>{const v=snap.val()||{};members=Object.entries(v).map(([id,m])=>({id,...m}));currentUserProfile=members.find(m=>m.id===currentUser?.uid)||null;updateUserHeader();renderAll();});
+  onValue(ref(db,'members'),snap=>{const v=snap.val()||{};members=Object.entries(v).map(([id,m])=>({id,...m}));currentUserProfile=members.find(m=>m.id===currentUser?.uid)||null;updateUserHeader();renderAll();if(currentView==='compliance')renderCompliance();});
   onValue(ref(db,'tasks'),snap=>{const v=snap.val()||{};const VP=['critical','high','medium','low'];const VS=['todo','in_progress','review','done'];
     const prevTasks=[...tasks];
     tasks=Object.entries(v).map(([id,t])=>({id,...t,priority:VP.includes(t.priority)?t.priority:'medium',status:VS.includes(t.status)?t.status:'todo',tags:t.tags||[],subtasks:t.subtasks||[],timeLogged:t.timeLogged||0,color:t.color||'',archived:t.archived||false}));// restore timers logged
@@ -2100,7 +2100,10 @@ function updateUserHeader(){
   document.getElementById('reportTab').style.display=isAdm?'':'none';
   // Hide admin-only sidebar actions from members
   const actSec=document.getElementById('adminActionsSection');
-  if(actSec)actSec.style.display=isAdm?'':'none';
+  if(actSec)actSec.style.display=isAdm?'block':'none';
+  // Also hide compliance tab for members with no assignments — tab always visible but content filtered
+  // Force re-render compliance if currently viewing it
+  if(currentView==='compliance') renderCompliance();
   // Notes shortcut: visible to ALL users on personal dashboard
   const notesWrap=document.getElementById('notesShortcutWrap');
   if(notesWrap)notesWrap.style.display=(currentDashboard==='personal')?'':'none';
@@ -3082,6 +3085,8 @@ async function spawnNextCycle(c){
 /* ── render ── */
 function renderCompliance(){
   if(currentView!=='compliance') return;
+  // Wait until user profile is loaded - prevents showing all records before role is known
+  if(!currentUserProfile) return;
   // Show/hide Add button based on role
   const addBtn=document.getElementById('cAddBtn');
   if(addBtn) addBtn.style.display=isAdmin()?'':'none';
@@ -3092,7 +3097,7 @@ function renderCompliance(){
 
   let items=complianceItems.filter(c=>{
     // Members only see compliance records assigned to them
-    if(!isAdmin()&&c.assigneeId!==currentUser?.uid) return false;
+    if(!isAdmin()&&c.assigneeId!==(currentUser&&currentUser.uid)) return false;
     if(month &&c.month!==month)  return false;
     if(type  &&c.type!==type)    return false;
     if(status&&c.status!==status)return false;
