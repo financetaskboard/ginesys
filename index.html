@@ -797,7 +797,7 @@ select option{background:var(--white);color:var(--ink)}
         <div class="sidebar-label">Team Member</div>
         <div id="teamFilters"></div>
       </div>
-      <div class="sidebar-section">
+      <div class="sidebar-section" id="adminActionsSection">
         <div class="sidebar-label">Actions</div>
         <button class="filter-btn" onclick="openArchiveView()">📦 Archive</button>
         <button class="filter-btn" onclick="openAutomations()">⚡ Automations</button>
@@ -2098,6 +2098,9 @@ function updateUserHeader(){
   document.getElementById('teamTab').style.display=isAdm?'':'none';
   document.getElementById('teamFilterSection').style.display=isAdm?'':'none';
   document.getElementById('reportTab').style.display=isAdm?'':'none';
+  // Hide admin-only sidebar actions from members
+  const actSec=document.getElementById('adminActionsSection');
+  if(actSec)actSec.style.display=isAdm?'':'none';
   // Notes shortcut: visible to ALL users on personal dashboard
   const notesWrap=document.getElementById('notesShortcutWrap');
   if(notesWrap)notesWrap.style.display=(currentDashboard==='personal')?'':'none';
@@ -3088,6 +3091,8 @@ function renderCompliance(){
   const q     =(document.getElementById('cfSearch')?.value||'').toLowerCase();
 
   let items=complianceItems.filter(c=>{
+    // Members only see compliance records assigned to them
+    if(!isAdmin()&&c.assigneeId!==currentUser?.uid) return false;
     if(month &&c.month!==month)  return false;
     if(type  &&c.type!==type)    return false;
     if(status&&c.status!==status)return false;
