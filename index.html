@@ -620,77 +620,37 @@ select option{background:var(--white);color:var(--ink)}
 <body>
 
 <!-- ═══ AUTH ═══ -->
+<style>
+.portal-toggle{display:flex;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:3px;gap:2px;margin-bottom:20px}
+.portal-btn{flex:1;padding:8px 10px;border:none;border-radius:5px;cursor:pointer;font-family:'Figtree',sans-serif;font-size:.82rem;font-weight:600;color:var(--ink-mid);background:none;transition:all .18s;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
+.portal-btn.active-admin{background:var(--white);color:var(--accent);box-shadow:var(--shadow-sm)}
+.portal-btn.active-member{background:var(--white);color:var(--green);box-shadow:var(--shadow-sm)}
+</style>
 <div id="authScreen">
-
-  <!-- STEP 1: Portal Selector -->
-  <div id="portalSelector" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;width:100%">
-    <!-- Logo -->
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:40px">
-      <div class="auth-logo-mark" style="width:44px;height:44px;font-size:15px">GF</div>
-      <span class="auth-logo-text" style="font-size:1.3rem">Ginesysone <span>Finance</span></span>
-    </div>
-    <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.9rem;font-weight:800;color:var(--ink);letter-spacing:-.03em;margin-bottom:8px;text-align:center">Who are you signing in as?</div>
-    <div style="font-size:.9rem;color:var(--ink-dim);margin-bottom:40px;text-align:center">Choose your portal to continue</div>
-
-    <!-- Two portal cards -->
-    <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;max-width:600px;width:100%">
-
-      <!-- Admin Portal -->
-      <div onclick="selectPortal('admin')" style="flex:1;min-width:240px;max-width:270px;background:var(--white);border:2px solid var(--border);border-radius:var(--radius-xl);padding:32px 28px;cursor:pointer;transition:all .22s;text-align:center;position:relative;overflow:hidden"
-        onmouseover="this.style.borderColor='#2056d8';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(32,86,216,.18)'"
-        onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)';this.style.boxShadow='none'">
-        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad-accent);border-radius:var(--radius-xl) var(--radius-xl) 0 0"></div>
-        <div style="width:64px;height:64px;background:var(--accent-light);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 16px">🏆</div>
-        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:var(--ink);margin-bottom:8px;letter-spacing:-.02em">Admin Portal</div>
-        <div style="font-size:.8rem;color:var(--ink-dim);line-height:1.55;margin-bottom:20px">Full access — manage team, tasks, compliance, reports & analytics</div>
-        <div style="display:flex;flex-direction:column;gap:5px;text-align:left;margin-bottom:20px">
-          <div style="font-size:.75rem;color:var(--ink-mid);display:flex;align-items:center;gap:6px"><span style="color:var(--accent);font-weight:700">✓</span> Assign tasks to members</div>
-          <div style="font-size:.75rem;color:var(--ink-mid);display:flex;align-items:center;gap:6px"><span style="color:var(--accent);font-weight:700">✓</span> View reports & analytics</div>
-          <div style="font-size:.75rem;color:var(--ink-mid);display:flex;align-items:center;gap:6px"><span style="color:var(--accent);font-weight:700">✓</span> Manage compliance tracker</div>
-        </div>
-        <div style="background:var(--grad-accent);color:#fff;padding:10px 20px;border-radius:var(--radius-sm);font-weight:700;font-size:.85rem;font-family:'Figtree',sans-serif">Sign in as Admin →</div>
-      </div>
-
-      <!-- Member Portal -->
-      <div onclick="selectPortal('member')" style="flex:1;min-width:240px;max-width:270px;background:var(--white);border:2px solid var(--border);border-radius:var(--radius-xl);padding:32px 28px;cursor:pointer;transition:all .22s;text-align:center;position:relative;overflow:hidden"
-        onmouseover="this.style.borderColor='#059669';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(5,150,105,.15)'"
-        onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)';this.style.boxShadow='none'">
-        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad-green);border-radius:var(--radius-xl) var(--radius-xl) 0 0"></div>
-        <div style="width:64px;height:64px;background:var(--green-bg);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 16px">👤</div>
-        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:var(--ink);margin-bottom:8px;letter-spacing:-.02em">Team Member Portal</div>
-        <div style="font-size:.8rem;color:var(--ink-dim);line-height:1.55;margin-bottom:20px">Personal dashboard — manage your tasks, notes & team assignments</div>
-        <div style="display:flex;flex-direction:column;gap:5px;text-align:left;margin-bottom:20px">
-          <div style="font-size:.75rem;color:var(--ink-mid);display:flex;align-items:center;gap:6px"><span style="color:var(--green);font-weight:700">✓</span> Personal task board</div>
-          <div style="font-size:.75rem;color:var(--ink-mid);display:flex;align-items:center;gap:6px"><span style="color:var(--green);font-weight:700">✓</span> View assigned team tasks</div>
-          <div style="font-size:.75rem;color:var(--ink-mid);display:flex;align-items:center;gap:6px"><span style="color:var(--green);font-weight:700">✓</span> Notes & Temp Board</div>
-        </div>
-        <div style="background:var(--grad-green);color:#fff;padding:10px 20px;border-radius:var(--radius-sm);font-weight:700;font-size:.85rem;font-family:'Figtree',sans-serif">Sign in as Member →</div>
-      </div>
-
-    </div>
-    <div style="margin-top:28px;font-size:.75rem;color:var(--ink-dim)">🔐 Secured by Firebase Authentication</div>
-  </div>
-
-  <!-- STEP 2: Login Form (shown after portal selection) -->
-  <div id="portalLoginScreen" style="display:none;align-items:center;justify-content:center;min-height:100vh;padding:24px;width:100%">
+  <!-- Single unified login screen -->
+  <div id="portalSelector" style="display:none"></div><!-- kept for JS compat -->
+  <div id="portalLoginScreen" style="display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;width:100%">
     <div class="auth-wrapper" style="max-width:420px;width:100%">
       <div class="auth-box">
-        <!-- Back button -->
-        <button onclick="backToPortal()" style="background:none;border:none;cursor:pointer;font-size:.8rem;color:var(--ink-dim);display:flex;align-items:center;gap:5px;margin-bottom:18px;padding:0;font-family:'Figtree',sans-serif;font-weight:600;transition:color .14s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--ink-dim)'">← Back to portal selection</button>
-
-        <!-- Portal badge -->
-        <div id="portalBadge" style="display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:99px;font-size:.75rem;font-weight:700;margin-bottom:16px;font-family:'JetBrains Mono',monospace"></div>
-
         <div class="auth-logo">
           <div class="auth-logo-mark">GF</div>
           <span class="auth-logo-text">Ginesysone <span>Finance</span></span>
         </div>
         <div class="auth-title" id="authTitle">Welcome back</div>
         <div class="auth-sub" id="authSub">Sign in to your workspace</div>
+
+        <!-- Role toggle — inline, right here -->
+        <div class="portal-toggle">
+          <button class="portal-btn active-admin" id="portalBtnAdmin" onclick="selectPortal('admin')">🏆 Admin</button>
+          <button class="portal-btn" id="portalBtnMember" onclick="selectPortal('member')">👤 Team Member</button>
+        </div>
+
+        <!-- Sign In / Create Account tabs -->
         <div class="auth-tabs">
           <button class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
-          <button class="auth-tab" id="registerTabBtn" onclick="switchAuthTab('register')">Create Account</button>
+          <button class="auth-tab" id="registerTabBtn" onclick="switchAuthTab('register')" style="display:none">Create Account</button>
         </div>
+
         <div id="authErr" class="auth-err"></div>
         <div id="loginForm">
           <div class="fg"><label>Email</label><input class="input" id="loginEmail" type="email" placeholder="you@company.com" autocomplete="email"></div>
@@ -701,15 +661,13 @@ select option{background:var(--white);color:var(--ink)}
           <div class="fg"><label>Full Name</label><input class="input" id="regName" placeholder="Jane Smith"></div>
           <div class="fg"><label>Work Email</label><input class="input" id="regEmail" type="email" placeholder="you@company.com"></div>
           <div class="fg"><label>Password</label><input class="input" id="regPassword" type="password" placeholder="Min 6 characters"></div>
-          <!-- Role is auto-set based on portal, hidden from user -->
           <input type="hidden" id="regRole" value="member">
           <button class="btn btn-primary" id="registerBtn" onclick="doRegister()" style="margin-top:8px">Create Account →</button>
         </div>
-        <div class="auth-info" id="authPortalInfo">🔐 Secured by Firebase</div>
+        <div class="auth-info" id="authPortalInfo">🔐 Secured by Firebase Authentication</div>
       </div>
     </div>
   </div>
-
 </div>
 
 <!-- ═══ FIRST-TIME WELCOME MODAL ═══ -->
@@ -1008,8 +966,18 @@ select option{background:var(--white);color:var(--ink)}
       <!-- TEAM VIEW -->
       <div id="teamView" style="display:none;flex:1;overflow:hidden">
         <div class="team-page">
-          <div class="pg-title">Team Members</div>
-          <div class="pg-sub">Registered users in your workspace</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;flex-wrap:wrap;gap:10px">
+            <div><div class="pg-title">Team Members</div><div class="pg-sub">Registered users in your workspace</div></div>
+            <button class="btn btn-primary btn-sm" onclick="generateInviteLink()" style="width:auto">🔗 Generate Invite Link</button>
+          </div>
+          <div id="inviteLinkBox" style="display:none;background:var(--accent-light);border:1.5px solid var(--accent-mid);border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;flex-direction:column;gap:8px">
+            <div style="font-size:.78rem;font-weight:600;color:var(--accent)">📨 Share this link with new members to let them register:</div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input id="inviteLinkInput" class="input" readonly style="font-size:.8rem;font-family:JetBrains Mono,monospace;background:var(--white);flex:1">
+              <button class="btn btn-ghost btn-sm" onclick="copyInviteLink()" style="width:auto;white-space:nowrap">📋 Copy</button>
+            </div>
+            <div style="font-size:.7rem;color:var(--ink-dim)">⚠️ This link lets anyone with it register as a member. Share carefully.</div>
+          </div>
           <div id="teamGrid" class="team-grid"></div>
         </div>
       </div>
@@ -1633,6 +1601,37 @@ let undoStack=[];
 let chartInstances={};
 let tourStep=0;
 
+// ── INVITE TOKEN ──
+const _INVITE_SECRET='gf-invite-2025'; // Change this to a real secret in production
+const _urlParams=new URLSearchParams(location.search);
+const _inviteToken=_urlParams.get('invite');
+const _inviteValid=_inviteToken===_INVITE_SECRET;
+
+// ── SESSION TIMEOUT (5 minutes) ──
+const SESSION_TIMEOUT_MS=5*60*1000;
+let _sessionTimer=null;
+function resetSessionTimer(){
+  if(!currentUser)return;
+  clearTimeout(_sessionTimer);
+  _sessionTimer=setTimeout(async()=>{
+    toast('⏱ Session expired due to inactivity. Signing out…',4000);
+    await new Promise(r=>setTimeout(r,1500));
+    await signOut(auth);
+  },SESSION_TIMEOUT_MS);
+}
+function initSessionTimeout(){
+  ['mousemove','mousedown','keydown','touchstart','scroll','click'].forEach(evt=>{
+    document.addEventListener(evt,resetSessionTimer,{passive:true});
+  });
+  resetSessionTimer();
+}
+function clearSessionTimeout(){
+  clearTimeout(_sessionTimer);
+  ['mousemove','mousedown','keydown','touchstart','scroll','click'].forEach(evt=>{
+    document.removeEventListener(evt,resetSessionTimer);
+  });
+}
+
 // ── DARK MODE ──
 const savedTheme=localStorage.getItem('tf_theme')||'light';
 document.documentElement.setAttribute('data-theme',savedTheme);
@@ -1878,29 +1877,47 @@ window.selectPortal=function(role){
   selectedPortalRole=role;
   const isAdm=role==='admin';
   document.getElementById('regRole').value=role;
-  const badge=document.getElementById('portalBadge');
-  if(isAdm){badge.style.cssText='display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:99px;font-size:.75rem;font-weight:700;margin-bottom:16px;font-family:JetBrains Mono,monospace;background:var(--accent-light);color:var(--accent);border:1.5px solid var(--accent-mid)';badge.textContent='🏆 Admin Portal';}
-  else{badge.style.cssText='display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:99px;font-size:.75rem;font-weight:700;margin-bottom:16px;font-family:JetBrains Mono,monospace;background:var(--green-bg);color:var(--green);border:1.5px solid var(--green-border)';badge.textContent='👤 Team Member Portal';}
+  // Update toggle button styles
+  const ba=document.getElementById('portalBtnAdmin');
+  const bm=document.getElementById('portalBtnMember');
+  if(ba){ba.className=isAdm?'portal-btn active-admin':'portal-btn';}
+  if(bm){bm.className=isAdm?'portal-btn':'portal-btn active-member';}
+  // Update title/sub
   document.getElementById('authTitle').textContent=isAdm?'Admin Sign In':'Member Sign In';
   document.getElementById('authSub').textContent=isAdm?'Sign in to manage your team workspace':'Sign in to your personal dashboard';
   document.getElementById('authPortalInfo').innerHTML=isAdm?'🏆 Admin access · Manage team, tasks & compliance':'👤 Member access · Personal tasks, notes & assignments';
+  // Update button gradient
   const lb=document.getElementById('loginBtn');const rb=document.getElementById('registerBtn');
   if(lb)lb.style.background=isAdm?'var(--grad-accent)':'linear-gradient(135deg,#0a9060,#059669)';
   if(rb)rb.style.background=isAdm?'var(--grad-accent)':'linear-gradient(135deg,#0a9060,#059669)';
+  // Show/hide register tab: admins never register; members only via invite
   const regTab=document.getElementById('registerTabBtn');
-  if(regTab)regTab.style.display=isAdm?'none':''; // admins don't self-register
-  document.getElementById('portalSelector').style.display='none';
-  document.getElementById('portalLoginScreen').style.display='flex';
-  switchAuthTab('login');
-  setTimeout(()=>document.getElementById('loginEmail').focus(),100);
+  if(regTab){
+    if(isAdm){
+      regTab.style.display='none';
+      switchAuthTab('login');
+    } else if(_inviteValid){
+      regTab.style.display='';
+      regTab.style.opacity='1';
+      regTab.title='';
+    } else {
+      regTab.style.display='none';
+    }
+  }
+  document.getElementById('authErr').style.display='none';
 };
 window.backToPortal=function(){
-  document.getElementById('portalLoginScreen').style.display='none';
-  document.getElementById('portalSelector').style.display='flex';
   document.getElementById('authErr').style.display='none';
 };
 
 window.switchAuthTab=function(tab){
+  // Block register tab if no valid invite token
+  if(tab==='register'&&!_inviteValid){
+    const err=document.getElementById('authErr');
+    err.textContent='Registration requires a valid invite link from your admin.';
+    err.style.display='block';
+    return;
+  }
   document.getElementById('loginForm').style.display=tab==='login'?'block':'none';
   document.getElementById('registerForm').style.display=tab==='register'?'block':'none';
   document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',['login','register'][i]===tab));
@@ -1911,7 +1928,21 @@ window.switchAuthTab=function(tab){
 window.doLogin=async function(){
   const email=document.getElementById('loginEmail').value.trim();const pw=document.getElementById('loginPassword').value;
   const err=document.getElementById('authErr');if(!email||!pw){err.textContent='Please fill in all fields.';err.style.display='block';return;}
-  try{await signInWithEmailAndPassword(auth,email,pw);}catch(e){err.textContent=e.code==='auth/invalid-credential'?'Invalid email or password.':e.message;err.style.display='block';}
+  try{
+    const cred=await signInWithEmailAndPassword(auth,email,pw);
+    // Role enforcement: check Firebase profile role vs selected portal
+    const snap=await new Promise(res=>onValue(ref(db,`members/${cred.user.uid}`),res,{onlyOnce:true}));
+    const profile=snap.val();
+    const actualRole=profile?.role||'member';
+    if(actualRole!==selectedPortalRole){
+      await signOut(auth);
+      err.textContent=actualRole==='admin'
+        ?'This account is an Admin. Please sign in via the Admin Portal.'
+        :'This account is a Member. Please sign in via the Team Member Portal.';
+      err.style.display='block';
+      return;
+    }
+  }catch(e){err.textContent=e.code==='auth/invalid-credential'?'Invalid email or password.':e.message;err.style.display='block';}
 };
 window.doRegister=async function(){
   const name=document.getElementById('regName').value.trim();const email=document.getElementById('regEmail').value.trim();
@@ -1924,6 +1955,17 @@ window.doRegister=async function(){
   }
   catch(e){err.textContent=e.code==='auth/email-already-in-use'?'Email already registered.':e.message;err.style.display='block';}
 };
+window.generateInviteLink=function(){
+  const box=document.getElementById('inviteLinkBox');
+  const inp=document.getElementById('inviteLinkInput');
+  const base=location.origin+location.pathname;
+  inp.value=base+'?invite=gf-invite-2025';
+  box.style.display='flex';
+};
+window.copyInviteLink=function(){
+  const inp=document.getElementById('inviteLinkInput');
+  navigator.clipboard.writeText(inp.value).then(()=>toast('📋 Invite link copied!')).catch(()=>{inp.select();document.execCommand('copy');toast('📋 Copied!');});
+};
 window.doLogout=async function(){await signOut(auth);};
 
 onAuthStateChanged(auth,user=>{
@@ -1932,6 +1974,7 @@ onAuthStateChanged(auth,user=>{
     document.getElementById('authScreen').style.display='none';
     document.getElementById('app').style.display='block';
     subscribeAll();
+    initSessionTimeout();
     // Check if first-ever login for this user
     const isNew=localStorage.getItem('gf_newuser_'+user.uid)==='1';
     if(isNew){
@@ -1942,11 +1985,13 @@ onAuthStateChanged(auth,user=>{
     }
   } else {
     currentUser=null;currentUserProfile=null;
+    clearSessionTimeout();
     document.getElementById('authScreen').style.display='flex';
     document.getElementById('app').style.display='none';
-    // Always go back to portal selector on logout
-    document.getElementById('portalSelector').style.display='flex';
-    document.getElementById('portalLoginScreen').style.display='none';
+    // Reset login form
+    document.getElementById('loginEmail').value='';
+    document.getElementById('loginPassword').value='';
+    switchAuthTab('login');
   }
 });
 
@@ -3852,6 +3897,8 @@ setInterval(()=>{
 },60000);
 
 const savedEmail=localStorage.getItem('tf_email');if(savedEmail){try{const c=JSON.parse(savedEmail);emailjs.init(c.pubkey);}catch(e){}}
+// Auto-init portal toggle to 'member' on load
+selectedPortalRole='member';selectPortal('member');
 window.openEmailConfig=openEmailConfig;
 
 // Request notification permission on app load
