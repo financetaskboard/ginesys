@@ -60,7 +60,52 @@ body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--ink);min-
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
 ::-webkit-scrollbar-thumb:hover{background:var(--ink-dim)}
 
-/* ═══ AUTH ═══ */
+/* ═══ WELCOME MODAL ═══ */
+.welcome-step{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);transition:all .15s}
+.welcome-step:hover{border-color:var(--accent-mid);background:var(--accent-light)}
+.welcome-step-num{width:24px;height:24px;border-radius:50%;background:var(--grad-accent);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.welcome-step-title{font-size:.84rem;font-weight:700;color:var(--ink);font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.02em}
+.welcome-step-sub{font-size:.73rem;color:var(--ink-dim);margin-top:2px;line-height:1.4}
+
+
+.temp-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);padding:10px 12px;box-shadow:var(--shadow-xs);transition:all .15s;position:relative}
+.temp-card:hover{border-color:var(--border2);box-shadow:var(--shadow-sm);transform:translateY(-1px)}
+.temp-card.done-card{background:var(--green-bg);border-color:var(--green-border);opacity:.8}
+.temp-card-title{font-size:.85rem;font-weight:600;color:var(--ink);line-height:1.4;padding-right:52px}
+.temp-card.done-card .temp-card-title{text-decoration:line-through;color:var(--ink-dim)}
+.temp-card-actions{position:absolute;top:8px;right:8px;display:flex;gap:3px}
+.temp-card-btn{width:22px;height:22px;border:none;background:none;cursor:pointer;border-radius:4px;font-size:.7rem;display:flex;align-items:center;justify-content:center;color:var(--ink-dim);transition:all .13s}
+.temp-card-btn:hover{background:var(--bg2);color:var(--ink)}
+.temp-card-priority{display:inline-flex;align-items:center;gap:3px;font-size:.65rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:1px 6px;border-radius:99px;margin-top:5px}
+#tempBoardPanel{transition:transform .25s cubic-bezier(.4,0,.2,1)}
+
+
+.note-fmt-btn{padding:4px 9px;border:none;background:none;cursor:pointer;font-size:.78rem;font-weight:600;color:var(--ink-mid);border-radius:4px;transition:all .14s;font-family:'Figtree',sans-serif}
+.note-fmt-btn:hover{background:var(--white);color:var(--accent)}
+.note-item{padding:10px 12px;border-radius:var(--radius-sm);cursor:pointer;border:1.5px solid transparent;transition:all .14s;background:none}
+.note-item:hover{background:var(--bg);border-color:var(--border)}
+.note-item.active{background:var(--accent-light);border-color:var(--accent-mid)}
+.note-item-title{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.84rem;color:var(--ink);letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.note-item-preview{font-size:.72rem;color:var(--ink-dim);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
+.note-item-meta{font-size:.64rem;color:var(--ink-dim);margin-top:4px;font-family:'JetBrains Mono',monospace;display:flex;gap:6px;align-items:center}
+.nb-btn{width:100%;display:flex;align-items:center;gap:7px;padding:6px 8px;border:none;background:none;cursor:pointer;font-family:'Figtree',sans-serif;font-size:.79rem;color:var(--ink-mid);text-align:left;border-radius:var(--radius-sm);transition:all .14s;font-weight:500}
+.nb-btn:hover{background:var(--bg);color:var(--ink)}
+.nb-btn.active{background:var(--green-bg);color:var(--green);font-weight:600}
+#noteBody h1{font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;margin:12px 0 6px;letter-spacing:-.03em}
+#noteBody h2{font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;margin:10px 0 4px;letter-spacing:-.02em}
+#noteBody h3{font-family:'Bricolage Grotesque',sans-serif;font-size:.95rem;font-weight:700;margin:8px 0 4px}
+#noteBody ul,#noteBody ol{padding-left:22px;margin:4px 0}
+#noteBody li{margin:3px 0}
+#noteBody code{font-family:'JetBrains Mono',monospace;background:var(--bg2);padding:1px 5px;border-radius:4px;font-size:.83rem}
+#noteBody pre{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;margin:8px 0;font-family:'JetBrains Mono',monospace;font-size:.8rem;overflow-x:auto}
+#noteBody hr{border:none;border-top:1.5px solid var(--border);margin:14px 0}
+#noteBody input[type=checkbox]{margin-right:6px;accent-color:var(--accent);width:14px;height:14px;cursor:pointer}
+.note-tag-chip{padding:2px 9px;border-radius:99px;font-size:.68rem;font-weight:600;font-family:'JetBrains Mono',monospace;cursor:pointer;border:1.5px solid var(--green-border);background:var(--green-bg);color:var(--green);transition:all .13s;display:flex;align-items:center;gap:4px}
+.note-tag-chip:hover{opacity:.75}
+.note-tag-filter{padding:2px 9px;border-radius:99px;font-size:.68rem;font-weight:600;font-family:'JetBrains Mono',monospace;cursor:pointer;border:1.5px solid var(--border);background:var(--bg);color:var(--ink-mid);transition:all .13s}
+.note-tag-filter.active{border-color:var(--accent-mid);background:var(--accent-light);color:var(--accent)}
+
+
 #authScreen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px;overflow:hidden;background:linear-gradient(135deg,#f0f4ff 0%,#faf5ff 40%,#f0fdf9 100%)}
 [data-theme="dark"] #authScreen{background:linear-gradient(135deg,#0d1525 0%,#160d2e 40%,#0d2518 100%)}
 #authScreen::before{content:'';position:absolute;width:900px;height:900px;background:radial-gradient(circle,rgba(37,99,235,.06) 0%,transparent 65%);top:-300px;right:-200px;pointer-events:none}
@@ -576,50 +621,139 @@ select option{background:var(--white);color:var(--ink)}
 
 <!-- ═══ AUTH ═══ -->
 <div id="authScreen">
-  <div class="auth-wrapper">
-    <div class="auth-hero">
-      <div class="auth-hero-label">✦ Task Management Platform</div>
-      <div class="auth-hero-title">Ship work faster,<br><span>together.</span></div>
-      <div class="auth-hero-sub">The smart task management platform for modern finance teams. Assign, track, and report — all in one place.</div>
-      <div class="auth-features">
-        <div class="auth-feat"><div class="auth-feat-icon">⚡</div>Real-time collaboration with live sync</div>
-        <div class="auth-feat"><div class="auth-feat-icon">📊</div>Charts, workload & burndown analytics</div>
-        <div class="auth-feat"><div class="auth-feat-icon">🌙</div>Dark mode, templates & time tracking</div>
-        <div class="auth-feat"><div class="auth-feat-icon">🔐</div>Secured with Firebase Authentication</div>
+
+  <!-- STEP 1: Portal Selector -->
+  <div id="portalSelector" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;width:100%">
+    <!-- Logo -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:40px">
+      <div class="auth-logo-mark" style="width:44px;height:44px;font-size:15px">GF</div>
+      <span class="auth-logo-text" style="font-size:1.3rem">Ginesysone <span>Finance</span></span>
+    </div>
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.9rem;font-weight:800;color:var(--ink);letter-spacing:-.03em;margin-bottom:8px;text-align:center">Who are you signing in as?</div>
+    <div style="font-size:.9rem;color:var(--ink-dim);margin-bottom:40px;text-align:center">Choose your portal to continue</div>
+
+    <!-- Two portal cards -->
+    <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;max-width:600px;width:100%">
+
+      <!-- Admin Portal -->
+      <div onclick="selectPortal('admin')" style="flex:1;min-width:240px;max-width:270px;background:var(--white);border:2px solid var(--border);border-radius:var(--radius-xl);padding:32px 28px;cursor:pointer;transition:all .22s;text-align:center;position:relative;overflow:hidden"
+        onmouseover="this.style.borderColor='#2056d8';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(32,86,216,.18)'"
+        onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad-accent);border-radius:var(--radius-xl) var(--radius-xl) 0 0"></div>
+        <div style="width:64px;height:64px;background:var(--accent-light);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 16px">🏆</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:var(--ink);margin-bottom:8px;letter-spacing:-.02em">Admin Portal</div>
+        <div style="font-size:.8rem;color:var(--ink-dim);line-height:1.55;margin-bottom:20px">Full access — manage team, tasks, compliance, reports & analytics</div>
+        <div style="display:flex;flex-direction:column;gap:5px;text-align:left;margin-bottom:20px">
+          <div style="font-size:.75rem;color:var(--ink-mid);display:flex;align-items:center;gap:6px"><span style="color:var(--accent);font-weight:700">✓</span> Assign tasks to members</div>
+          <div style="font-size:.75rem;color:var(--ink-mid);display:flex;align-items:center;gap:6px"><span style="color:var(--accent);font-weight:700">✓</span> View reports & analytics</div>
+          <div style="font-size:.75rem;color:var(--ink-mid);display:flex;align-items:center;gap:6px"><span style="color:var(--accent);font-weight:700">✓</span> Manage compliance tracker</div>
+        </div>
+        <div style="background:var(--grad-accent);color:#fff;padding:10px 20px;border-radius:var(--radius-sm);font-weight:700;font-size:.85rem;font-family:'Figtree',sans-serif">Sign in as Admin →</div>
+      </div>
+
+      <!-- Member Portal -->
+      <div onclick="selectPortal('member')" style="flex:1;min-width:240px;max-width:270px;background:var(--white);border:2px solid var(--border);border-radius:var(--radius-xl);padding:32px 28px;cursor:pointer;transition:all .22s;text-align:center;position:relative;overflow:hidden"
+        onmouseover="this.style.borderColor='#059669';this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 32px rgba(5,150,105,.15)'"
+        onmouseout="this.style.borderColor='var(--border)';this.style.transform='translateY(0)';this.style.boxShadow='none'">
+        <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad-green);border-radius:var(--radius-xl) var(--radius-xl) 0 0"></div>
+        <div style="width:64px;height:64px;background:var(--green-bg);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 16px">👤</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;color:var(--ink);margin-bottom:8px;letter-spacing:-.02em">Team Member Portal</div>
+        <div style="font-size:.8rem;color:var(--ink-dim);line-height:1.55;margin-bottom:20px">Personal dashboard — manage your tasks, notes & team assignments</div>
+        <div style="display:flex;flex-direction:column;gap:5px;text-align:left;margin-bottom:20px">
+          <div style="font-size:.75rem;color:var(--ink-mid);display:flex;align-items:center;gap:6px"><span style="color:var(--green);font-weight:700">✓</span> Personal task board</div>
+          <div style="font-size:.75rem;color:var(--ink-mid);display:flex;align-items:center;gap:6px"><span style="color:var(--green);font-weight:700">✓</span> View assigned team tasks</div>
+          <div style="font-size:.75rem;color:var(--ink-mid);display:flex;align-items:center;gap:6px"><span style="color:var(--green);font-weight:700">✓</span> Notes & Temp Board</div>
+        </div>
+        <div style="background:var(--grad-green);color:#fff;padding:10px 20px;border-radius:var(--radius-sm);font-weight:700;font-size:.85rem;font-family:'Figtree',sans-serif">Sign in as Member →</div>
+      </div>
+
+    </div>
+    <div style="margin-top:28px;font-size:.75rem;color:var(--ink-dim)">🔐 Secured by Firebase Authentication</div>
+  </div>
+
+  <!-- STEP 2: Login Form (shown after portal selection) -->
+  <div id="portalLoginScreen" style="display:none;align-items:center;justify-content:center;min-height:100vh;padding:24px;width:100%">
+    <div class="auth-wrapper" style="max-width:420px;width:100%">
+      <div class="auth-box">
+        <!-- Back button -->
+        <button onclick="backToPortal()" style="background:none;border:none;cursor:pointer;font-size:.8rem;color:var(--ink-dim);display:flex;align-items:center;gap:5px;margin-bottom:18px;padding:0;font-family:'Figtree',sans-serif;font-weight:600;transition:color .14s" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--ink-dim)'">← Back to portal selection</button>
+
+        <!-- Portal badge -->
+        <div id="portalBadge" style="display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:99px;font-size:.75rem;font-weight:700;margin-bottom:16px;font-family:'JetBrains Mono',monospace"></div>
+
+        <div class="auth-logo">
+          <div class="auth-logo-mark">GF</div>
+          <span class="auth-logo-text">Ginesysone <span>Finance</span></span>
+        </div>
+        <div class="auth-title" id="authTitle">Welcome back</div>
+        <div class="auth-sub" id="authSub">Sign in to your workspace</div>
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
+          <button class="auth-tab" id="registerTabBtn" onclick="switchAuthTab('register')">Create Account</button>
+        </div>
+        <div id="authErr" class="auth-err"></div>
+        <div id="loginForm">
+          <div class="fg"><label>Email</label><input class="input" id="loginEmail" type="email" placeholder="you@company.com" autocomplete="email"></div>
+          <div class="fg"><label>Password</label><input class="input" id="loginPassword" type="password" placeholder="Your password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+          <button class="btn btn-primary" id="loginBtn" onclick="doLogin()" style="margin-top:8px">Sign In →</button>
+        </div>
+        <div id="registerForm" style="display:none">
+          <div class="fg"><label>Full Name</label><input class="input" id="regName" placeholder="Jane Smith"></div>
+          <div class="fg"><label>Work Email</label><input class="input" id="regEmail" type="email" placeholder="you@company.com"></div>
+          <div class="fg"><label>Password</label><input class="input" id="regPassword" type="password" placeholder="Min 6 characters"></div>
+          <!-- Role is auto-set based on portal, hidden from user -->
+          <input type="hidden" id="regRole" value="member">
+          <button class="btn btn-primary" id="registerBtn" onclick="doRegister()" style="margin-top:8px">Create Account →</button>
+        </div>
+        <div class="auth-info" id="authPortalInfo">🔐 Secured by Firebase</div>
       </div>
     </div>
-    <div class="auth-box">
-      <div class="auth-logo">
-        <div class="auth-logo-mark">GF</div>
-        <span class="auth-logo-text">Ginesysone <span>Finance</span></span>
+  </div>
+
+</div>
+
+<!-- ═══ FIRST-TIME WELCOME MODAL ═══ -->
+<div id="welcomeModal" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(10,15,30,.55);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--white);border-radius:var(--radius-xl);box-shadow:var(--shadow-xl);max-width:520px;width:100%;overflow:hidden;animation:modalIn .35s ease">
+    <!-- Top gradient banner -->
+    <div style="background:var(--grad-accent);padding:32px 36px 28px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:rgba(255,255,255,.08);border-radius:50%"></div>
+      <div style="position:absolute;bottom:-60px;left:-30px;width:140px;height:140px;background:rgba(255,255,255,.05);border-radius:50%"></div>
+      <div style="position:relative;z-index:1">
+        <div style="font-size:2.2rem;margin-bottom:10px" id="welcomeEmoji">🎉</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.6rem;font-weight:800;color:#fff;letter-spacing:-.03em;margin-bottom:6px">Welcome to Ginesysone Finance!</div>
+        <div style="font-size:.88rem;color:rgba(255,255,255,.8);line-height:1.5" id="welcomeSubtitle">Your account is ready. Let's get you set up.</div>
       </div>
-      <div class="auth-title" id="authTitle">Welcome back</div>
-      <div class="auth-sub" id="authSub">Sign in to your team workspace</div>
-      <div class="auth-tabs">
-        <button class="auth-tab active" onclick="switchAuthTab('login')">Sign In</button>
-        <button class="auth-tab" onclick="switchAuthTab('register')">Create Account</button>
-      </div>
-      <div id="authErr" class="auth-err"></div>
-      <div id="loginForm">
-        <div class="fg"><label>Email</label><input class="input" id="loginEmail" type="email" placeholder="you@company.com" autocomplete="email"></div>
-        <div class="fg"><label>Password</label><input class="input" id="loginPassword" type="password" placeholder="Your password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
-        <button class="btn btn-primary" onclick="doLogin()" style="margin-top:8px">Sign In →</button>
-      </div>
-      <div id="registerForm" style="display:none">
-        <div class="fg"><label>Full Name</label><input class="input" id="regName" placeholder="Jane Smith"></div>
-        <div class="fg"><label>Work Email</label><input class="input" id="regEmail" type="email" placeholder="you@company.com"></div>
-        <div class="fg"><label>Password</label><input class="input" id="regPassword" type="password" placeholder="Min 6 characters"></div>
-        <div class="fg"><label>Role</label>
-          <select class="input" id="regRole"><option value="member">Team Member</option><option value="admin">Admin</option></select>
+    </div>
+    <!-- Body -->
+    <div style="padding:28px 36px">
+      <!-- User greeting -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;padding:14px 16px;background:var(--accent-light);border:1.5px solid var(--accent-mid);border-radius:var(--radius)">
+        <div id="welcomeAvatar" style="width:44px;height:44px;border-radius:50%;background:var(--grad-accent);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1rem;color:#fff;flex-shrink:0"></div>
+        <div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.95rem;color:var(--ink)" id="welcomeName">Hey there!</div>
+          <div style="font-size:.78rem;color:var(--ink-mid);margin-top:2px" id="welcomeRoleDesc">You're all set up and ready to go.</div>
         </div>
-        <button class="btn btn-primary" onclick="doRegister()" style="margin-top:8px">Create Account →</button>
+        <span class="role-badge" id="welcomeRoleBadge" style="margin-left:auto"></span>
       </div>
-      <div class="auth-info">🔐 Secured by Firebase · <strong>Admin</strong> manages team · <strong>Member</strong> handles personal tasks</div>
+
+      <!-- Quick start steps -->
+      <div style="margin-bottom:24px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:2px;color:var(--ink-dim);font-weight:600;margin-bottom:12px">Quick Start</div>
+        <div id="welcomeSteps" style="display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+
+      <!-- CTA buttons -->
+      <div style="display:flex;gap:10px">
+        <button id="welcomePrimaryBtn" onclick="closeWelcome(true)" class="btn btn-primary" style="flex:1;font-size:.9rem;padding:12px">🚀 Go to My Dashboard</button>
+        <button onclick="closeWelcome(false)" class="btn btn-ghost" style="width:auto;padding:12px 18px;font-size:.85rem">Skip →</button>
+      </div>
+      <div style="text-align:center;margin-top:12px;font-size:.72rem;color:var(--ink-dim)">You can always find help in the <strong>Tour</strong> guide from the sidebar</div>
     </div>
   </div>
 </div>
 
-<!-- ═══ MAIN APP ═══ -->
+
 <div id="app">
   <header class="header">
     <div style="display:flex;align-items:center;gap:8px">
@@ -710,6 +844,8 @@ select option{background:var(--white);color:var(--ink)}
         <button class="filter-btn" onclick="openArchiveView()">📦 Archive</button>
         <button class="filter-btn" onclick="openAutomations()">⚡ Automations</button>
         <button class="filter-btn" onclick="startTour()">🎓 Tour</button>
+        <button class="filter-btn" onclick="openTempBoard()" id="tempBoardBtn" style="color:var(--amber);font-weight:600">🧲 Temp Board</button>
+        <button class="filter-btn" onclick="openGmailPanel()" style="color:#ea4335;font-weight:600">✉️ Gmail Tasks</button>
       </div>
     </aside>
 
@@ -723,6 +859,16 @@ select option{background:var(--white);color:var(--ink)}
           <button class="dash-tab team" id="dashTeamBtn" onclick="switchDashboard('team')">
             <span>🏢</span> Finance Team <span class="dash-badge" id="teamCount">0</span>
           </button>
+          <!-- Notes shortcut button — only shown for members on personal dashboard -->
+          <div id="notesShortcutWrap" style="display:none;margin-left:auto">
+            <button onclick="openNotesPanel()" id="notesShortcutBtn"
+              style="display:flex;align-items:center;gap:8px;padding:7px 18px;border:1.5px solid var(--green-border);background:var(--green-bg);border-radius:99px;cursor:pointer;font-family:'Figtree',sans-serif;font-size:.83rem;font-weight:600;color:var(--green);transition:all .18s;white-space:nowrap;letter-spacing:-.01em"
+              onmouseover="this.style.background='var(--green)';this.style.color='#fff';this.style.borderColor='var(--green)'"
+              onmouseout="this.style.background='var(--green-bg)';this.style.color='var(--green)';this.style.borderColor='var(--green-border)'">
+              <span>📝</span> My Notes
+              <span id="notesCount" style="font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:1px 7px;border-radius:99px;font-weight:600;background:rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.08)">0</span>
+            </button>
+          </div>
         </div>
         <div class="toolbar">
           <div class="view-toggle">
@@ -765,6 +911,89 @@ select option{background:var(--white);color:var(--ink)}
           <div class="cal-grid" id="calGrid"></div>
         </div>
         <div id="workloadWrap" class="workload-wrap" style="display:none"></div>
+        <!-- NOTES WRAP (inside personal dashboard) -->
+        <div id="notesWrap" style="display:none;flex:1;overflow:hidden;flex-direction:row;height:100%">
+          <!-- Notes Sidebar -->
+          <div id="notesSidebar" style="width:260px;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--white);overflow:hidden">
+            <div style="padding:14px 14px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px">
+              <button onclick="switchDashboard('personal')" style="background:none;border:none;cursor:pointer;font-size:.75rem;color:var(--ink-dim);display:flex;align-items:center;gap:4px;padding:4px 6px;border-radius:var(--radius-sm);transition:all .14s;font-family:'Figtree',sans-serif;font-weight:600" onmouseover="this.style.background='var(--bg)';this.style.color='var(--ink)'" onmouseout="this.style.background='none';this.style.color='var(--ink-dim)'">← Tasks</button>
+              <div style="width:1px;height:16px;background:var(--border)"></div>
+              <div style="position:relative;flex:1">
+                <span style="position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:.75rem;opacity:.4">🔍</span>
+                <input id="notesSearch" class="input" placeholder="Search notes…" style="padding-left:28px;font-size:.8rem" oninput="renderNotesList()">
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="newNote()" title="New Note" style="width:auto;padding:7px 11px;font-size:.8rem">＋</button>
+            </div>
+            <!-- Notebooks -->
+            <div style="padding:10px 14px 6px">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--ink-dim);text-transform:uppercase;letter-spacing:2px;font-weight:500;margin-bottom:7px">Notebooks</div>
+              <div id="notebooksList" style="display:flex;flex-direction:column;gap:2px"></div>
+              <button onclick="createNotebook()" style="width:100%;margin-top:6px;padding:5px 8px;background:none;border:1px dashed var(--border2);border-radius:var(--radius-sm);cursor:pointer;font-size:.75rem;color:var(--ink-dim);text-align:left;transition:all .14s" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--ink-dim)'">＋ New Notebook</button>
+            </div>
+            <!-- Tags -->
+            <div style="padding:4px 14px 6px">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--ink-dim);text-transform:uppercase;letter-spacing:2px;font-weight:500;margin-bottom:7px">Tags</div>
+              <div id="notesTagFilter" style="display:flex;flex-wrap:wrap;gap:4px"></div>
+            </div>
+            <!-- Notes list -->
+            <div id="notesListWrap" style="flex:1;overflow-y:auto;padding:8px 10px;display:flex;flex-direction:column;gap:4px"></div>
+          </div>
+          <!-- Notes Editor -->
+          <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+            <!-- Empty state -->
+            <div id="notesEmptyState" style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--ink-dim)">
+              <div style="font-size:3rem">📝</div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:700;color:var(--ink)">No note selected</div>
+              <div style="font-size:.84rem;color:var(--ink-dim)">Select a note to edit, or create a new one</div>
+              <button class="btn btn-primary" onclick="newNote()" style="width:auto;margin-top:4px">＋ New Note</button>
+            </div>
+            <!-- Editor area -->
+            <div id="notesEditorArea" style="display:none;flex:1;flex-direction:column;overflow:hidden">
+              <!-- Editor Toolbar -->
+              <div style="padding:10px 20px;border-bottom:1px solid var(--border);background:var(--white);display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                <div style="display:flex;gap:2px;background:var(--bg2);padding:2px;border-radius:var(--radius-sm);border:1px solid var(--border)">
+                  <button class="note-fmt-btn" onclick="noteFmt('bold')" title="Bold"><b>B</b></button>
+                  <button class="note-fmt-btn" onclick="noteFmt('italic')" title="Italic"><i>I</i></button>
+                  <button class="note-fmt-btn" onclick="noteFmt('underline')" title="Underline"><u>U</u></button>
+                  <button class="note-fmt-btn" onclick="noteFmt('strikeThrough')" title="Strikethrough"><s>S</s></button>
+                </div>
+                <div style="display:flex;gap:2px;background:var(--bg2);padding:2px;border-radius:var(--radius-sm);border:1px solid var(--border)">
+                  <button class="note-fmt-btn" onclick="noteFmt('insertUnorderedList')" title="Bullet list">• List</button>
+                  <button class="note-fmt-btn" onclick="noteFmt('insertOrderedList')" title="Numbered list">1. List</button>
+                </div>
+                <div style="display:flex;gap:2px;background:var(--bg2);padding:2px;border-radius:var(--radius-sm);border:1px solid var(--border)">
+                  <button class="note-fmt-btn" onclick="noteFmtBlock('H1')" title="Heading 1">H1</button>
+                  <button class="note-fmt-btn" onclick="noteFmtBlock('H2')" title="Heading 2">H2</button>
+                  <button class="note-fmt-btn" onclick="noteFmtBlock('H3')" title="Heading 3">H3</button>
+                  <button class="note-fmt-btn" onclick="noteFmtBlock('P')" title="Paragraph">¶</button>
+                </div>
+                <div style="display:flex;gap:2px;background:var(--bg2);padding:2px;border-radius:var(--radius-sm);border:1px solid var(--border)">
+                  <button class="note-fmt-btn" onclick="insertNoteCheckbox()" title="Checkbox">☑ Check</button>
+                  <button class="note-fmt-btn" onclick="insertNoteHr()" title="Divider">— HR</button>
+                  <button class="note-fmt-btn" onclick="insertNoteCode()" title="Code">&lt;/&gt;</button>
+                </div>
+                <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+                  <span id="notesSaveStatus" style="font-size:.72rem;color:var(--ink-dim);font-family:'JetBrains Mono',monospace"></span>
+                  <select id="noteNotebook" class="input" style="font-size:.75rem;padding:5px 24px 5px 8px;width:auto" onchange="moveNoteToNotebook()"></select>
+                  <button class="btn btn-ghost btn-sm" onclick="pinNote()" id="notePinBtn" title="Pin note" style="width:auto">📌</button>
+                  <button class="btn btn-danger btn-sm" onclick="deleteCurrentNote()" title="Delete note" style="width:auto">🗑</button>
+                </div>
+              </div>
+              <!-- Title -->
+              <div style="padding:20px 28px 0;background:var(--white)">
+                <input id="noteTitleInput" placeholder="Note title…" style="width:100%;border:none;outline:none;font-family:'Bricolage Grotesque',sans-serif;font-size:1.6rem;font-weight:800;color:var(--ink);background:transparent;letter-spacing:-.03em" oninput="onNoteChange()">
+                <!-- Tags row -->
+                <div style="display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--border)">
+                  <div id="noteCurTags" style="display:flex;gap:4px;flex-wrap:wrap"></div>
+                  <input id="noteTagInput" placeholder="＋ tag" style="border:none;outline:none;background:transparent;font-size:.75rem;color:var(--ink-mid);width:70px;font-family:'Figtree',sans-serif" onkeydown="noteTagKey(event)" title="Press Enter to add tag">
+                  <span style="font-size:.7rem;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;margin-left:auto" id="noteMetaInfo"></span>
+                </div>
+              </div>
+              <!-- Body -->
+              <div id="noteBody" contenteditable="true" style="flex:1;padding:16px 28px 40px;overflow-y:auto;outline:none;font-size:.93rem;line-height:1.75;color:var(--ink);caret-color:var(--accent);background:var(--white)" oninput="onNoteChange()"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ACTIVITY VIEW -->
@@ -922,6 +1151,9 @@ select option{background:var(--white);color:var(--ink)}
         </div>
       </div>
 
+      </div>
+
+
     </main>
 
     <div class="detail-panel" id="detailPanel" style="display:none"></div>
@@ -929,6 +1161,61 @@ select option{background:var(--white);color:var(--ink)}
 </div>
 
 <!-- Toast container -->
+
+<!-- TEMP BOARD PANEL -->
+<div id="tempBoardOverlay" style="display:none;position:fixed;inset:0;z-index:800;background:rgba(10,15,30,.35);backdrop-filter:blur(2px)" onclick="if(event.target===this)closeTempBoard()"></div>
+<div id="tempBoardPanel" style="display:none;position:fixed;top:0;right:0;width:480px;max-width:100vw;height:100vh;background:var(--white);border-left:1.5px solid var(--border);box-shadow:var(--shadow-xl);z-index:801;flex-direction:column;overflow:hidden">
+  <!-- Header -->
+  <div style="padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fff8e6,#fffaf0)">
+    <div style="width:36px;height:36px;background:var(--amber-bg);border:1.5px solid var(--amber-border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem">🧲</div>
+    <div style="flex:1">
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-.02em;color:var(--ink)">Temporary Board</div>
+      <div style="font-size:.72rem;color:var(--ink-dim);margin-top:1px">Park tasks temporarily — clear when done</div>
+    </div>
+    <button onclick="closeTempBoard()" style="background:none;border:none;cursor:pointer;font-size:1rem;color:var(--ink-dim);padding:4px;border-radius:6px;transition:all .14s" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background='none'">✕</button>
+  </div>
+  <!-- Purpose label -->
+  <div style="padding:12px 20px;border-bottom:1px solid var(--border);background:var(--surface2);display:flex;align-items:center;gap:8px">
+    <span style="font-size:.75rem;font-weight:700;color:var(--ink-mid);white-space:nowrap">📌 Purpose:</span>
+    <input id="tempBoardPurpose" class="input" placeholder="e.g. Meeting prep, EOD review, Sprint…" style="font-size:.8rem;padding:6px 10px;flex:1;background:var(--white)">
+    <button onclick="clearTempBoard()" class="btn btn-danger btn-sm" style="white-space:nowrap" title="Clear all tasks from temp board">🗑 Clear All</button>
+  </div>
+  <!-- Add task row -->
+  <div style="padding:12px 20px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center">
+    <input id="tempTaskInput" class="input" placeholder="Add a task… (Enter to add)" style="flex:1;font-size:.85rem" onkeydown="if(event.key==='Enter')addTempTask()">
+    <select id="tempTaskPriority" class="input" style="width:auto;padding:8px 28px 8px 10px;font-size:.8rem">
+      <option value="medium">🟡 Medium</option>
+      <option value="critical">🔴 Critical</option>
+      <option value="high">🟠 High</option>
+      <option value="low">🟢 Low</option>
+    </select>
+    <button class="btn btn-primary btn-sm" onclick="addTempTask()" style="width:auto;white-space:nowrap">＋ Add</button>
+  </div>
+  <!-- Columns -->
+  <div style="flex:1;overflow-y:auto;padding:16px 20px;display:flex;gap:12px;align-items:flex-start">
+    <!-- Todo column -->
+    <div style="flex:1;min-width:0">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-dim);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px">
+        <span style="width:8px;height:8px;border-radius:50%;background:#94a3b8;display:inline-block"></span> To Do
+        <span id="tempTodoCount" style="margin-left:auto;background:var(--bg2);padding:1px 6px;border-radius:99px;font-size:.6rem">0</span>
+      </div>
+      <div id="tempTodoList" style="display:flex;flex-direction:column;gap:6px;min-height:60px"></div>
+    </div>
+    <!-- Done column -->
+    <div style="flex:1;min-width:0">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span> Done
+        <span id="tempDoneCount" style="margin-left:auto;background:var(--green-bg);color:var(--green);padding:1px 6px;border-radius:99px;font-size:.6rem">0</span>
+      </div>
+      <div id="tempDoneList" style="display:flex;flex-direction:column;gap:6px;min-height:60px"></div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div style="padding:10px 20px;border-top:1px solid var(--border);background:var(--surface2);display:flex;align-items:center;justify-content:space-between">
+    <span id="tempBoardStats" style="font-size:.75rem;color:var(--ink-dim);font-family:'JetBrains Mono',monospace"></span>
+    <button onclick="clearDoneTempTasks()" class="btn btn-ghost btn-sm" style="font-size:.75rem">✓ Clear Done</button>
+  </div>
+</div>
 <div class="toast-wrap" id="toastWrap"></div>
 
 <!-- AUTOMATIONS MODAL -->
@@ -1585,6 +1872,34 @@ window.toggleTaskDone=async function(e,id){
 };
 
 // ── AUTH ──
+// ── PORTAL SELECTION ──
+let selectedPortalRole='member';
+window.selectPortal=function(role){
+  selectedPortalRole=role;
+  const isAdm=role==='admin';
+  document.getElementById('regRole').value=role;
+  const badge=document.getElementById('portalBadge');
+  if(isAdm){badge.style.cssText='display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:99px;font-size:.75rem;font-weight:700;margin-bottom:16px;font-family:JetBrains Mono,monospace;background:var(--accent-light);color:var(--accent);border:1.5px solid var(--accent-mid)';badge.textContent='🏆 Admin Portal';}
+  else{badge.style.cssText='display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:99px;font-size:.75rem;font-weight:700;margin-bottom:16px;font-family:JetBrains Mono,monospace;background:var(--green-bg);color:var(--green);border:1.5px solid var(--green-border)';badge.textContent='👤 Team Member Portal';}
+  document.getElementById('authTitle').textContent=isAdm?'Admin Sign In':'Member Sign In';
+  document.getElementById('authSub').textContent=isAdm?'Sign in to manage your team workspace':'Sign in to your personal dashboard';
+  document.getElementById('authPortalInfo').innerHTML=isAdm?'🏆 Admin access · Manage team, tasks & compliance':'👤 Member access · Personal tasks, notes & assignments';
+  const lb=document.getElementById('loginBtn');const rb=document.getElementById('registerBtn');
+  if(lb)lb.style.background=isAdm?'var(--grad-accent)':'linear-gradient(135deg,#0a9060,#059669)';
+  if(rb)rb.style.background=isAdm?'var(--grad-accent)':'linear-gradient(135deg,#0a9060,#059669)';
+  const regTab=document.getElementById('registerTabBtn');
+  if(regTab)regTab.style.display=isAdm?'none':''; // admins don't self-register
+  document.getElementById('portalSelector').style.display='none';
+  document.getElementById('portalLoginScreen').style.display='flex';
+  switchAuthTab('login');
+  setTimeout(()=>document.getElementById('loginEmail').focus(),100);
+};
+window.backToPortal=function(){
+  document.getElementById('portalLoginScreen').style.display='none';
+  document.getElementById('portalSelector').style.display='flex';
+  document.getElementById('authErr').style.display='none';
+};
+
 window.switchAuthTab=function(tab){
   document.getElementById('loginForm').style.display=tab==='login'?'block':'none';
   document.getElementById('registerForm').style.display=tab==='register'?'block':'none';
@@ -1600,18 +1915,39 @@ window.doLogin=async function(){
 };
 window.doRegister=async function(){
   const name=document.getElementById('regName').value.trim();const email=document.getElementById('regEmail').value.trim();
-  const pw=document.getElementById('regPassword').value;const role=document.getElementById('regRole').value;
+  const pw=document.getElementById('regPassword').value;const role=selectedPortalRole;
   const err=document.getElementById('authErr');if(!name||!email||!pw){err.textContent='Fill all fields.';err.style.display='block';return;}
-  try{const cred=await createUserWithEmailAndPassword(auth,email,pw);await set(ref(db,`members/${cred.user.uid}`),{name,email,role,color:COLORS[Math.floor(Math.random()*COLORS.length)],createdAt:Date.now()});}
+  try{
+    const cred=await createUserWithEmailAndPassword(auth,email,pw);
+    await set(ref(db,`members/${cred.user.uid}`),{name,email,role,color:COLORS[Math.floor(Math.random()*COLORS.length)],createdAt:Date.now()});
+    localStorage.setItem('gf_newuser_'+cred.user.uid,'1');
+  }
   catch(e){err.textContent=e.code==='auth/email-already-in-use'?'Email already registered.':e.message;err.style.display='block';}
 };
 window.doLogout=async function(){await signOut(auth);};
 
 onAuthStateChanged(auth,user=>{
-  if(user){currentUser=user;document.getElementById('authScreen').style.display='none';document.getElementById('app').style.display='block';subscribeAll();
-    // Check if first time → show tour
-    if(!localStorage.getItem('tf_toured')){setTimeout(startTour,1000);}
-  } else {currentUser=null;currentUserProfile=null;document.getElementById('authScreen').style.display='flex';document.getElementById('app').style.display='none';}
+  if(user){
+    currentUser=user;
+    document.getElementById('authScreen').style.display='none';
+    document.getElementById('app').style.display='block';
+    subscribeAll();
+    // Check if first-ever login for this user
+    const isNew=localStorage.getItem('gf_newuser_'+user.uid)==='1';
+    if(isNew){
+      // Show welcome screen after profile loads (wait for subscribeAll)
+      setTimeout(()=>showWelcomeModal(),1200);
+    } else if(!localStorage.getItem('tf_toured')){
+      setTimeout(startTour,1000);
+    }
+  } else {
+    currentUser=null;currentUserProfile=null;
+    document.getElementById('authScreen').style.display='flex';
+    document.getElementById('app').style.display='none';
+    // Always go back to portal selector on logout
+    document.getElementById('portalSelector').style.display='flex';
+    document.getElementById('portalLoginScreen').style.display='none';
+  }
 });
 
 // ── FIREBASE ──
@@ -1635,6 +1971,8 @@ function subscribeAll(){
     renderAll();if(openDetailId)renderDetail();
     // Check recurring tasks
     checkRecurring();
+    // Auto-delete done tasks older than 90 days (admin only, runs once per session)
+    if(isAdmin())autoDeleteOldDoneTasks();
   });
   onValue(ref(db,'activity'),snap=>{const v=snap.val()||{};activity=Object.entries(v).map(([id,a])=>({id,...a})).sort((a,b)=>b.ts-a.ts).slice(0,300);renderActivity();});
   subscribeCompliance();
@@ -1655,6 +1993,57 @@ async function checkRecurring(){
   }
 }
 
+// ── AUTO-DELETE DONE TASKS AFTER 90 DAYS ──
+let _autoDeleteRan=false;
+async function autoDeleteOldDoneTasks(){
+  if(_autoDeleteRan)return; // run once per session
+  _autoDeleteRan=true;
+  const NINETY_DAYS=90*24*60*60*1000;
+  const now=Date.now();
+  const expired=tasks.filter(t=>
+    t.status==='done'&&
+    !t.archived&&
+    t.finishedAt&&
+    (now-t.finishedAt)>=NINETY_DAYS
+  );
+  if(!expired.length)return;
+
+  // ── Auto-export CSV before deleting ──
+  const headers=['#','Title','Priority','Status','Assigned To','Created','Completed','Tags','Description'];
+  const rows=expired.map((t,i)=>{
+    const assignee=members.find(m=>m.id===t.assigneeId);
+    const created=t.ts?new Date(t.ts).toLocaleDateString('en-IN'):'';
+    const finished=t.finishedAt?new Date(t.finishedAt).toLocaleDateString('en-IN'):'';
+    return[
+      i+1,
+      `"${(t.title||'').replace(/"/g,'""')}"`,
+      t.priority||'',
+      'Done',
+      assignee?`"${assignee.name}"`:'Unassigned',
+      created,
+      finished,
+      `"${(t.tags||[]).join(', ')}"`,
+      `"${(t.description||'').replace(/"/g,'""')}"`
+    ];
+  });
+  const csv=[headers.join(','),...rows.map(r=>r.join(','))].join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  const dateStr=new Date().toISOString().slice(0,10);
+  a.download=`done-tasks-archive-${dateStr}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+
+  // ── Now delete from Firebase ──
+  for(const t of expired){
+    await remove(ref(db,`tasks/${t.id}`));
+  }
+  toast(`📥 Archived & deleted ${expired.length} completed task${expired.length>1?'s':''} older than 90 days`);
+  console.log(`[Auto-clean] Exported and deleted ${expired.length} done tasks older than 90 days`);
+}
+
 function updateUserHeader(){
   if(!currentUserProfile)return;const m=currentUserProfile;
   document.getElementById('userAvatar').innerHTML=av(m,22);
@@ -1664,6 +2053,11 @@ function updateUserHeader(){
   document.getElementById('teamTab').style.display=isAdm?'':'none';
   document.getElementById('teamFilterSection').style.display=isAdm?'':'none';
   document.getElementById('reportTab').style.display=isAdm?'':'none';
+  // Notes shortcut: visible to ALL users on personal dashboard
+  const notesWrap=document.getElementById('notesShortcutWrap');
+  if(notesWrap)notesWrap.style.display=(currentDashboard==='personal')?'':'none';
+  // If admin somehow landed on notes, redirect to personal
+  if(isAdm&&currentDashboard==='notes')switchDashboard('personal');
   updateDashboardButtons();
   if(isAdm&&!document.getElementById('emailConfigBtn')){
     const hr=document.querySelector('.header-right');
@@ -1682,17 +2076,49 @@ window.switchDashboard=function(dash){
   currentDashboard=dash;
   document.getElementById('dashPersonalBtn').className='dash-tab personal'+(dash==='personal'?' active':'');
   document.getElementById('dashTeamBtn').className='dash-tab team'+(dash==='team'?' active':'');
+
+  // Show notes shortcut for all users on personal dashboard
+  const notesShortcut=document.getElementById('notesShortcutWrap');
+  if(notesShortcut)notesShortcut.style.display=(dash==='personal')?'':'none';
+
+  // Show/hide notes wrap vs task wrap
+  const isNotes=dash==='notes';
+  const tasksGridWrap=document.getElementById('tasksGridWrap');
+  const calWrap=document.getElementById('calendarWrap');
+  const wlWrap=document.getElementById('workloadWrap');
+  const notesWrap=document.getElementById('notesWrap');
+  const toolbar=document.querySelector('.toolbar');
+  if(notesWrap)notesWrap.style.display=isNotes?'flex':'none';
+  if(tasksGridWrap)tasksGridWrap.style.display=isNotes?'none':(currentViewMode==='board'||currentViewMode==='list'?'block':'none');
+  if(calWrap)calWrap.style.display=isNotes?'none':(currentViewMode==='calendar'?'block':'none');
+  if(wlWrap)wlWrap.style.display=isNotes?'none':(currentViewMode==='workload'?'block':'none');
+  if(toolbar)toolbar.style.display=isNotes?'none':'';
+
+  // Hide sidebar when in notes mode
+  const sb=document.getElementById('mainSidebar');
+  if(sb)sb.style.display=isNotes?'none':'';
+
+  if(isNotes){
+    renderNotesView();
+    return;
+  }
+
   filters={status:'',priority:'',assignee:'',dueFilter:''};
   const si=document.getElementById('searchInput');if(si)si.value='';
   document.getElementById('cfBtn').style.display='none';
   closeDetail();updateDashboardButtons();updateDashboardCounts();renderAll();
 };
+
+// Open notes panel (called from the My Notes shortcut button)
+window.openNotesPanel=function(){
+  switchDashboard('notes');
+};
 function updateDashboardCounts(){
   const pt=tasks.filter(t=>(t.source||'team')==='personal'&&t.createdBy===currentUser?.uid&&!t.archived);
   const tt=tasks.filter(t=>(t.source||'team')!=='personal'&&!t.archived);
   const mt=isAdmin()?tt:tt.filter(t=>!t.assigneeId||t.assigneeId===currentUser?.uid);
-  const pc=document.getElementById('personalCount');const tc=document.getElementById('teamCount');
-  if(pc)pc.textContent=pt.length;if(tc)tc.textContent=mt.length;
+  const pc=document.getElementById('personalCount');const tc=document.getElementById('teamCount');const nc=document.getElementById('notesCount');
+  if(pc)pc.textContent=pt.length;if(tc)tc.textContent=mt.length;if(nc)nc.textContent=notes.length;
 }
 const isAdmin=()=>currentUserProfile?.role==='admin';
 
@@ -2284,7 +2710,10 @@ window.switchView=function(view){
   // Hide sidebar for compliance (full-width), show for all other views
   const sb=document.getElementById('mainSidebar');
   if(sb) sb.style.display=view==='compliance'?'none':'';
-  if(view==='activity')renderActivity();if(view==='team')renderTeam();if(view==='tasks')renderTasks();if(view==='report')renderReport();if(view==='goals')renderGoals();if(view==='compliance')renderCompliance();
+  // Notes shortcut visible on Tasks view for all users when on personal dashboard
+  const notesShortcut=document.getElementById('notesShortcutWrap');
+  if(notesShortcut)notesShortcut.style.display=(view==='tasks'&&currentDashboard==='personal')?'':'none';
+  if(view==='activity')renderActivity();if(view==='team')renderTeam();if(view==='tasks'){if(currentDashboard==='notes')switchDashboard('personal');else renderTasks();}if(view==='report')renderReport();if(view==='goals')renderGoals();if(view==='compliance')renderCompliance();
 };
 
 // ══════════════════════════════════════════════
@@ -2913,9 +3342,475 @@ window.exportComplianceCSV=function(){
 
 
 
+
+// ══════════════════════════════════════════════
+// ── NOTES MODULE (Evernote-style) ──
+// ══════════════════════════════════════════════
+let notes = JSON.parse(localStorage.getItem('gf_notes') || '[]');
+let notebooks = JSON.parse(localStorage.getItem('gf_notebooks') || '["Personal","Work","Finance"]');
+let currentNoteId = null;
+let activeNotebook = null;
+let activeNoteTag = null;
+let noteSaveTimer = null;
+
+function saveNotesToStorage() {
+  localStorage.setItem('gf_notes', JSON.stringify(notes));
+  localStorage.setItem('gf_notebooks', JSON.stringify(notebooks));
+}
+
+function noteUid() { return 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+
+window.newNote = function() {
+  const note = {
+    id: noteUid(),
+    title: '',
+    body: '',
+    tags: [],
+    notebook: activeNotebook || notebooks[0] || 'Personal',
+    pinned: false,
+    created: Date.now(),
+    updated: Date.now()
+  };
+  notes.unshift(note);
+  saveNotesToStorage();
+  renderNotesList();
+  openNote(note.id);
+  setTimeout(() => document.getElementById('noteTitleInput')?.focus(), 50);
+};
+
+window.openNote = function(id) {
+  currentNoteId = id;
+  const note = notes.find(n => n.id === id);
+  if (!note) return;
+  document.getElementById('notesEmptyState').style.display = 'none';
+  document.getElementById('notesEditorArea').style.display = 'flex';
+  document.getElementById('notesEditorArea').style.flexDirection = 'column';
+  document.getElementById('noteTitleInput').value = note.title;
+  document.getElementById('noteBody').innerHTML = note.body;
+  renderCurNoteTags(note);
+  document.getElementById('notePinBtn').textContent = note.pinned ? '📌' : '📍';
+  document.getElementById('notePinBtn').title = note.pinned ? 'Unpin note' : 'Pin note';
+  // populate notebook select
+  const ns = document.getElementById('noteNotebook');
+  ns.innerHTML = notebooks.map(nb => `<option value="${esc(nb)}" ${nb === note.notebook ? 'selected' : ''}>${esc(nb)}</option>`).join('');
+  // meta
+  document.getElementById('noteMetaInfo').textContent = fmtDate(note.updated);
+  setSaveStatus('');
+  renderNotesList();
+};
+
+function renderCurNoteTags(note) {
+  const el = document.getElementById('noteCurTags');
+  if (!el) return;
+  el.innerHTML = (note.tags || []).map((t, i) => `<span class="note-tag-chip">${esc(t)}<span onclick="removeNoteTag(${i})" style="opacity:.6;font-size:.8rem">×</span></span>`).join('');
+}
+
+window.removeNoteTag = function(i) {
+  const note = notes.find(n => n.id === currentNoteId);
+  if (!note) return;
+  note.tags.splice(i, 1);
+  note.updated = Date.now();
+  saveNotesToStorage();
+  renderCurNoteTags(note);
+  renderNotesTagFilter();
+  renderNotesList();
+};
+
+window.noteTagKey = function(e) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = e.target.value.trim().replace(/,/g, '').toLowerCase();
+    if (!val) return;
+    const note = notes.find(n => n.id === currentNoteId);
+    if (!note) return;
+    if (!note.tags.includes(val)) note.tags.push(val);
+    note.updated = Date.now();
+    saveNotesToStorage();
+    e.target.value = '';
+    renderCurNoteTags(note);
+    renderNotesTagFilter();
+    renderNotesList();
+  }
+};
+
+window.onNoteChange = function() {
+  setSaveStatus('Unsaved…');
+  clearTimeout(noteSaveTimer);
+  noteSaveTimer = setTimeout(autoSaveNote, 800);
+};
+
+function autoSaveNote() {
+  const note = notes.find(n => n.id === currentNoteId);
+  if (!note) return;
+  note.title = document.getElementById('noteTitleInput').value.trim();
+  note.body = document.getElementById('noteBody').innerHTML;
+  note.updated = Date.now();
+  // move to top (unless pinned notes at top)
+  const idx = notes.indexOf(note);
+  if (idx > 0 && !note.pinned) { notes.splice(idx, 1); notes.unshift(note); }
+  saveNotesToStorage();
+  setSaveStatus('Saved ✓');
+  document.getElementById('noteMetaInfo').textContent = fmtDate(note.updated);
+  renderNotesList();
+}
+
+function setSaveStatus(s) {
+  const el = document.getElementById('notesSaveStatus');
+  if (el) el.textContent = s;
+}
+
+window.pinNote = function() {
+  const note = notes.find(n => n.id === currentNoteId);
+  if (!note) return;
+  note.pinned = !note.pinned;
+  note.updated = Date.now();
+  saveNotesToStorage();
+  document.getElementById('notePinBtn').textContent = note.pinned ? '📌' : '📍';
+  renderNotesList();
+  toast(note.pinned ? '📌 Note pinned!' : '📍 Note unpinned');
+};
+
+window.deleteCurrentNote = function() {
+  if (!currentNoteId) return;
+  if (!confirm('Delete this note?')) return;
+  notes = notes.filter(n => n.id !== currentNoteId);
+  currentNoteId = null;
+  saveNotesToStorage();
+  document.getElementById('notesEmptyState').style.display = 'flex';
+  document.getElementById('notesEditorArea').style.display = 'none';
+  renderNotesList();
+  toast('🗑 Note deleted');
+};
+
+window.moveNoteToNotebook = function() {
+  const note = notes.find(n => n.id === currentNoteId);
+  if (!note) return;
+  note.notebook = document.getElementById('noteNotebook').value;
+  note.updated = Date.now();
+  saveNotesToStorage();
+  renderNotebooksList();
+  renderNotesList();
+};
+
+window.createNotebook = function() {
+  const name = prompt('New notebook name:');
+  if (!name || !name.trim()) return;
+  const nb = name.trim();
+  if (notebooks.includes(nb)) { toast('Notebook already exists'); return; }
+  notebooks.push(nb);
+  saveNotesToStorage();
+  renderNotebooksList();
+  toast('📓 Notebook created: ' + nb);
+};
+
+window.filterByNotebook = function(nb) {
+  activeNotebook = activeNotebook === nb ? null : nb;
+  activeNoteTag = null;
+  renderNotebooksList();
+  renderNotesTagFilter();
+  renderNotesList();
+};
+
+window.filterByNoteTag = function(tag) {
+  activeNoteTag = activeNoteTag === tag ? null : tag;
+  renderNotesTagFilter();
+  renderNotesList();
+};
+
+function getFilteredNotes() {
+  const q = (document.getElementById('notesSearch')?.value || '').toLowerCase();
+  let list = [...notes];
+  if (activeNotebook) list = list.filter(n => n.notebook === activeNotebook);
+  if (activeNoteTag) list = list.filter(n => n.tags.includes(activeNoteTag));
+  if (q) list = list.filter(n => n.title.toLowerCase().includes(q) || n.body.replace(/<[^>]+>/g, '').toLowerCase().includes(q) || n.tags.some(t => t.includes(q)));
+  // pinned first
+  list.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || b.updated - a.updated);
+  return list;
+}
+
+window.renderNotesList = function() {
+  const wrap = document.getElementById('notesListWrap');
+  if (!wrap) return;
+  const list = getFilteredNotes();
+  if (!list.length) {
+    wrap.innerHTML = `<div style="text-align:center;padding:24px 10px;color:var(--ink-dim);font-size:.78rem">No notes found.<br><span onclick="newNote()" style="color:var(--accent);cursor:pointer;font-weight:600">Create one →</span></div>`;
+    return;
+  }
+  wrap.innerHTML = list.map(n => {
+    const preview = n.body.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 80);
+    const isActive = n.id === currentNoteId;
+    return `<div class="note-item${isActive ? ' active' : ''}" onclick="openNote('${n.id}')">
+      <div class="note-item-title">${n.pinned ? '📌 ' : ''}${n.title || '<em style="opacity:.5">Untitled</em>'}</div>
+      ${preview ? `<div class="note-item-preview">${esc(preview)}</div>` : ''}
+      <div class="note-item-meta">
+        <span>${fmtDate(n.updated)}</span>
+        ${n.tags.length ? `<span>🏷 ${n.tags.slice(0,2).join(', ')}${n.tags.length > 2 ? '…' : ''}</span>` : ''}
+        <span style="margin-left:auto;opacity:.6">${esc(n.notebook)}</span>
+      </div>
+    </div>`;
+  }).join('');
+};
+
+function renderNotebooksList() {
+  const el = document.getElementById('notebooksList');
+  if (!el) return;
+  const allCounts = {};
+  notebooks.forEach(nb => allCounts[nb] = notes.filter(n => n.notebook === nb).length);
+  const allBtn = `<button class="nb-btn${!activeNotebook ? ' active' : ''}" onclick="filterByNotebook(null)">📓 All Notes <span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.65rem;opacity:.7">${notes.length}</span></button>`;
+  const nbBtns = notebooks.map(nb => `<button class="nb-btn${activeNotebook === nb ? ' active' : ''}" onclick="filterByNotebook('${esc(nb)}')" style="justify-content:space-between">
+    <span>📔 ${esc(nb)}</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:.65rem;opacity:.7">${allCounts[nb] || 0}</span>
+  </button>`).join('');
+  el.innerHTML = allBtn + nbBtns;
+}
+
+function renderNotesTagFilter() {
+  const el = document.getElementById('notesTagFilter');
+  if (!el) return;
+  const allTags = [...new Set(notes.flatMap(n => n.tags))].sort();
+  if (!allTags.length) { el.innerHTML = '<span style="font-size:.72rem;color:var(--ink-dim)">No tags yet</span>'; return; }
+  el.innerHTML = allTags.map(t => `<button class="note-tag-filter${activeNoteTag === t ? ' active' : ''}" onclick="filterByNoteTag('${esc(t)}')">${esc(t)}</button>`).join('');
+}
+
+// Formatting helpers
+window.noteFmt = function(cmd) {
+  document.getElementById('noteBody').focus();
+  document.execCommand(cmd, false, null);
+  onNoteChange();
+};
+window.noteFmtBlock = function(tag) {
+  document.getElementById('noteBody').focus();
+  document.execCommand('formatBlock', false, tag);
+  onNoteChange();
+};
+window.insertNoteCheckbox = function() {
+  document.getElementById('noteBody').focus();
+  document.execCommand('insertHTML', false, '<div><input type="checkbox"> <span></span></div>');
+  onNoteChange();
+};
+window.insertNoteHr = function() {
+  document.getElementById('noteBody').focus();
+  document.execCommand('insertHTML', false, '<hr><p><br></p>');
+  onNoteChange();
+};
+window.insertNoteCode = function() {
+  document.getElementById('noteBody').focus();
+  document.execCommand('insertHTML', false, '<pre><code></code></pre><p><br></p>');
+  onNoteChange();
+};
+
+// Render notes view when switching to it
+function renderNotesView() {
+  renderNotebooksList();
+  renderNotesTagFilter();
+  renderNotesList();
+  // Update notes badge
+  const nc=document.getElementById('notesCount');if(nc)nc.textContent=notes.length;
+  if (!currentNoteId) {
+    document.getElementById('notesEmptyState').style.display = 'flex';
+    document.getElementById('notesEditorArea').style.display = 'none';
+  }
+}
+
+// ══════════════════════════════════════════════
+// ── TEMPORARY BOARD MODULE ──
+// ══════════════════════════════════════════════
+let tempTasks = JSON.parse(localStorage.getItem('gf_tempboard') || '[]');
+
+function saveTempTasks() {
+  localStorage.setItem('gf_tempboard', JSON.stringify(tempTasks));
+}
+
+function tempUid() { return 'tmp' + Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+
+window.openTempBoard = function() {
+  document.getElementById('tempBoardOverlay').style.display = 'block';
+  document.getElementById('tempBoardPanel').style.display = 'flex';
+  // Restore saved purpose
+  const savedPurpose = localStorage.getItem('gf_tempboard_purpose') || '';
+  document.getElementById('tempBoardPurpose').value = savedPurpose;
+  renderTempBoard();
+  setTimeout(() => document.getElementById('tempTaskInput').focus(), 100);
+};
+
+window.closeTempBoard = function() {
+  document.getElementById('tempBoardOverlay').style.display = 'none';
+  document.getElementById('tempBoardPanel').style.display = 'none';
+  // Save purpose
+  localStorage.setItem('gf_tempboard_purpose', document.getElementById('tempBoardPurpose').value);
+};
+
+window.addTempTask = function() {
+  const inp = document.getElementById('tempTaskInput');
+  const title = inp.value.trim();
+  if (!title) return;
+  const priority = document.getElementById('tempTaskPriority').value;
+  tempTasks.push({ id: tempUid(), title, priority, done: false, ts: Date.now() });
+  saveTempTasks();
+  inp.value = '';
+  inp.focus();
+  renderTempBoard();
+};
+
+window.toggleTempTask = function(id) {
+  const t = tempTasks.find(x => x.id === id);
+  if (!t) return;
+  t.done = !t.done;
+  t.doneAt = t.done ? Date.now() : null;
+  saveTempTasks();
+  renderTempBoard();
+};
+
+window.deleteTempTask = function(id) {
+  tempTasks = tempTasks.filter(x => x.id !== id);
+  saveTempTasks();
+  renderTempBoard();
+};
+
+window.clearDoneTempTasks = function() {
+  const count = tempTasks.filter(x => x.done).length;
+  if (!count) { toast('No done tasks to clear'); return; }
+  tempTasks = tempTasks.filter(x => !x.done);
+  saveTempTasks();
+  renderTempBoard();
+  toast(`✓ Cleared ${count} done task${count > 1 ? 's' : ''} from Temp Board`);
+};
+
+window.clearTempBoard = function() {
+  if (!tempTasks.length) { toast('Temp Board is already empty'); return; }
+  if (!confirm(`Clear all ${tempTasks.length} tasks from the Temp Board? This cannot be undone.`)) return;
+  tempTasks = [];
+  localStorage.removeItem('gf_tempboard_purpose');
+  document.getElementById('tempBoardPurpose').value = '';
+  saveTempTasks();
+  renderTempBoard();
+  toast('🧹 Temp Board cleared!');
+};
+
+const TEMP_P = {
+  critical: { icon: '🔴', color: '#b91c1c', bg: '#fef2f2', border: '#fca5a5' },
+  high:     { icon: '🟠', color: '#c2410c', bg: '#fff7ed', border: '#fdba74' },
+  medium:   { icon: '🟡', color: '#b45309', bg: '#fffbeb', border: '#fcd34d' },
+  low:      { icon: '🟢', color: '#047857', bg: '#ecfdf5', border: '#6ee7b7' }
+};
+
+function renderTempBoard() {
+  const todo = tempTasks.filter(t => !t.done);
+  const done = tempTasks.filter(t => t.done);
+
+  document.getElementById('tempTodoCount').textContent = todo.length;
+  document.getElementById('tempDoneCount').textContent = done.length;
+
+  const cardHtml = (t) => {
+    const p = TEMP_P[t.priority] || TEMP_P.medium;
+    return `<div class="temp-card${t.done ? ' done-card' : ''}">
+      <div class="temp-card-actions">
+        <button class="temp-card-btn" onclick="toggleTempTask('${t.id}')" title="${t.done ? 'Reopen' : 'Mark done'}">${t.done ? '↩' : '✓'}</button>
+        <button class="temp-card-btn" onclick="deleteTempTask('${t.id}')" title="Remove" style="color:var(--red)">✕</button>
+      </div>
+      <div class="temp-card-title">${esc(t.title)}</div>
+      <div><span class="temp-card-priority" style="background:${p.bg};color:${p.color};border:1px solid ${p.border}">${p.icon} ${t.priority}</span></div>
+    </div>`;
+  };
+
+  document.getElementById('tempTodoList').innerHTML = todo.length
+    ? todo.map(cardHtml).join('')
+    : '<div style="text-align:center;padding:20px 10px;color:var(--ink-dim);font-size:.78rem;border:1.5px dashed var(--border);border-radius:var(--radius)">No tasks yet<br><span style="font-size:.7rem">Add one above ↑</span></div>';
+
+  document.getElementById('tempDoneList').innerHTML = done.length
+    ? done.map(cardHtml).join('')
+    : '<div style="text-align:center;padding:20px 10px;color:var(--ink-dim);font-size:.78rem;border:1.5px dashed var(--border);border-radius:var(--radius)">Nothing done yet</div>';
+
+  const total = tempTasks.length;
+  const pct = total ? Math.round((done.length / total) * 100) : 0;
+  document.getElementById('tempBoardStats').textContent = total
+    ? `${done.length}/${total} done · ${pct}% complete`
+    : 'Empty board';
+
+  // Update sidebar badge
+  const btn = document.getElementById('tempBoardBtn');
+  if (btn) {
+    btn.textContent = `🧲 Temp Board${total ? ` (${todo.length})` : ''}`;
+    btn.style.color = todo.length > 0 ? 'var(--amber)' : 'var(--green)';
+  }
+}
+
+// Init badge on load
+setTimeout(renderTempBoard, 500);
+
+// ── end TEMP BOARD MODULE ──
+
+// ══════════════════════════════════════════════
+// ── FIRST-TIME WELCOME MODAL ──
+// ══════════════════════════════════════════════
+function showWelcomeModal(){
+  const profile=currentUserProfile;
+  if(!profile)return;
+  const isAdm=profile.role==='admin';
+  const name=profile.name||'there';
+  const firstName=name.split(' ')[0];
+
+  // Avatar initials
+  const initials=name.split(' ').map(p=>p[0]).join('').toUpperCase().slice(0,2);
+  document.getElementById('welcomeAvatar').textContent=initials;
+  document.getElementById('welcomeAvatar').style.background=profile.color||'var(--grad-accent)';
+
+  // Greeting
+  const hour=new Date().getHours();
+  const greeting=hour<12?'Good morning':hour<17?'Good afternoon':'Good evening';
+  document.getElementById('welcomeName').textContent=`${greeting}, ${firstName}! 👋`;
+  document.getElementById('welcomeEmoji').textContent=isAdm?'🏆':'🎯';
+
+  // Role badge
+  const rb=document.getElementById('welcomeRoleBadge');
+  rb.textContent=isAdm?'Admin':'Member';
+  rb.className='role-badge '+(isAdm?'role-admin':'role-member');
+
+  // Subtitle & steps based on role
+  if(isAdm){
+    document.getElementById('welcomeSubtitle').textContent='You have admin access. Set up your team and start assigning tasks.';
+    document.getElementById('welcomeRoleDesc').textContent='Full access: manage team, compliance, reports & tasks';
+    document.getElementById('welcomePrimaryBtn').textContent='🏢 Go to Team Dashboard';
+    document.getElementById('welcomeSteps').innerHTML=`
+      <div class="welcome-step"><span class="welcome-step-num">1</span><div><div class="welcome-step-title">Invite team members</div><div class="welcome-step-sub">Go to Team tab → share the app URL so members can register</div></div></div>
+      <div class="welcome-step"><span class="welcome-step-num">2</span><div><div class="welcome-step-title">Create your first task</div><div class="welcome-step-sub">Click "+ New Task" and assign it to a team member</div></div></div>
+      <div class="welcome-step"><span class="welcome-step-num">3</span><div><div class="welcome-step-title">Set up Compliance records</div><div class="welcome-step-sub">Head to 🛡 Compliance tab to track filings & deadlines</div></div></div>
+      <div class="welcome-step"><span class="welcome-step-num">4</span><div><div class="welcome-step-title">View Reports & Analytics</div><div class="welcome-step-sub">Monitor team velocity, workload and task completion rates</div></div></div>
+    `;
+  } else {
+    document.getElementById('welcomeSubtitle').textContent='Your personal workspace is ready. Start organizing your tasks.';
+    document.getElementById('welcomeRoleDesc').textContent='Personal dashboard + team tasks assigned to you';
+    document.getElementById('welcomePrimaryBtn').textContent='👤 Go to Personal Dashboard';
+    document.getElementById('welcomeSteps').innerHTML=`
+      <div class="welcome-step"><span class="welcome-step-num">1</span><div><div class="welcome-step-title">Create a personal task</div><div class="welcome-step-sub">Click "+ Personal Task" on your Personal dashboard to add your first task</div></div></div>
+      <div class="welcome-step"><span class="welcome-step-num">2</span><div><div class="welcome-step-title">Check team tasks</div><div class="welcome-step-sub">Switch to Finance Team tab to see tasks assigned to you by admin</div></div></div>
+      <div class="welcome-step"><span class="welcome-step-num">3</span><div><div class="welcome-step-title">Use 📝 My Notes</div><div class="welcome-step-sub">Click "My Notes" button on Personal dashboard to jot down quick notes</div></div></div>
+      <div class="welcome-step"><span class="welcome-step-num">4</span><div><div class="welcome-step-title">Try the Temp Board</div><div class="welcome-step-sub">Use 🧲 Temp Board in the sidebar to park tasks temporarily</div></div></div>
+    `;
+  }
+
+  document.getElementById('welcomeModal').style.display='flex';
+}
+
+window.closeWelcome=function(goToDashboard){
+  document.getElementById('welcomeModal').style.display='none';
+  // Clear new-user flag
+  if(currentUser)localStorage.removeItem('gf_newuser_'+currentUser.uid);
+  localStorage.setItem('tf_toured','1');
+  if(goToDashboard){
+    const isAdm=currentUserProfile?.role==='admin';
+    switchView('tasks');
+    switchDashboard(isAdm?'team':'personal');
+  }
+};
+
+
+
+
+
 document.addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.isContentEditable)return;
-  if(e.key==='Escape'){closeTaskModal();closeDetail();closeCmdPalette();closeShortcuts();endTour();closeArchive();closeTemplates();closeComplianceModal();}
+  if(e.key==='Escape'){closeTaskModal();closeDetail();closeCmdPalette();closeShortcuts();endTour();closeArchive();closeTemplates();closeComplianceModal();closeTempBoard();if(currentView==='notes'&&noteSaveTimer){clearTimeout(noteSaveTimer);autoSaveNote();}}
   if(e.key==='n'||e.key==='N'){if(currentView==='tasks'){if(currentDashboard==='personal')openTaskModal(null,'personal');else if(isAdmin())openTaskModal();}}
   if(e.key==='/'||e.key==='f'){document.getElementById('searchInput')?.focus();}
   if(e.key==='b'||e.key==='B'){toggleSidebar();}
