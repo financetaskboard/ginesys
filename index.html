@@ -544,6 +544,84 @@ select option{background:var(--white);color:var(--ink)}
 .chart-card:hover{box-shadow:var(--shadow-md)}
 .chart-title{font-family:'Bricolage Grotesque',sans-serif;font-size:.97rem;font-weight:700;margin-bottom:16px;letter-spacing:-.02em}
 
+
+/* ── AUDIT TREE ROWS ── */
+.audit-parent-row{background:var(--surface2)!important}
+.audit-parent-row:hover{background:var(--bg2)!important}
+.audit-sub-row:hover{background:var(--bg)!important}
+
+
+/* ══ AUDIT WORK — ULTRA COMPACT TREE TABLE ══ */
+#auditTable{border-collapse:collapse;width:100%;table-layout:fixed}
+#auditTable thead th{
+  padding:6px 8px;font-family:'JetBrains Mono',monospace;font-size:.58rem;
+  text-transform:uppercase;letter-spacing:1.2px;color:var(--ink-dim);font-weight:700;
+  background:var(--bg);border-bottom:1.5px solid var(--border);white-space:nowrap;
+}
+.a-drag-handle{
+  width:16px;padding:0 3px 0 6px;cursor:grab;color:transparent;
+  font-size:.8rem;user-select:none;text-align:center;transition:color .1s;
+}
+.a-par-row:hover .a-drag-handle,
+.a-sub-row:hover .a-drag-handle{color:var(--border2)}
+/* parent row */
+.a-par-row{background:var(--surface2);border-top:1.5px solid var(--border2);border-bottom:1px solid var(--border)}
+.a-par-row:hover{background:var(--bg2)}
+.a-par-cell{padding:5px 8px 5px 2px}
+.a-par-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.86rem;color:var(--ink);letter-spacing:-.02em;white-space:nowrap}
+.a-tog-btn{
+  width:16px;height:16px;border:1.5px solid var(--border2);border-radius:3px;
+  background:var(--white);cursor:pointer;display:inline-flex;align-items:center;
+  justify-content:center;font-size:.5rem;flex-shrink:0;color:var(--ink-mid);
+  transition:all .12s;padding:0;line-height:1;
+}
+.a-tog-btn:hover{border-color:var(--accent);color:var(--accent)}
+.a-cnt-badge{font-family:'JetBrains Mono',monospace;font-size:.58rem;background:var(--bg2);border:1px solid var(--border);border-radius:99px;padding:0px 6px;color:var(--ink-dim);flex-shrink:0}
+.a-par-done-cell{width:70px;text-align:center;padding:5px 6px}
+.a-done-pill{font-size:.58rem;font-weight:700;color:var(--green);font-family:'JetBrains Mono',monospace}
+/* sub rows — ultra tight */
+.a-sub-row{border-bottom:1px solid var(--border);background:var(--white);transition:background .1s}
+.a-sub-row:hover{background:var(--bg)}
+.a-sub-done{opacity:.5}
+.a-sub-name-cell{padding:3px 4px 3px 0;max-width:220px;overflow:hidden}
+.a-sub-name{font-size:.8rem;color:var(--ink);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;max-width:200px}
+.a-strikethrough{text-decoration:line-through;color:var(--ink-dim)!important}
+.a-sub-td{padding:3px 8px;font-size:.78rem;vertical-align:middle}
+.a-check-td{text-align:center;width:52px}
+.a-chk{width:14px;height:14px;accent-color:var(--green);cursor:pointer;vertical-align:middle}
+.a-dim{color:var(--ink-dim);font-size:.7rem}
+.a-act-cell{width:80px;padding:2px 6px;white-space:nowrap;vertical-align:middle}
+.a-acts{display:flex;gap:2px;align-items:center;opacity:0;transition:opacity .1s}
+.a-par-row:hover .a-acts,.a-sub-row:hover .a-acts{opacity:1}
+.a-add-sub{color:var(--green)!important;border-color:var(--green-border)!important}
+.a-empty-row td{padding:3px 8px 3px 38px;font-size:.72rem;color:var(--ink-dim);font-style:italic;border-bottom:1px solid var(--border)}
+.a-folder-btn{
+  display:inline-flex;align-items:center;gap:3px;font-size:.7rem;font-weight:600;
+  color:var(--accent);text-decoration:none;background:var(--accent-light);
+  border:1px solid var(--accent-mid);border-radius:4px;padding:1px 7px;
+  transition:all .12s;white-space:nowrap;
+}
+.a-folder-btn:hover{background:var(--accent);color:#fff}
+/* tree lines */
+.a-tree-line{width:18px;height:100%;flex-shrink:0;position:relative;margin-right:4px;display:flex;flex-direction:column;align-items:flex-end}
+.a-tree-line::before{content:'';position:absolute;left:6px;top:-4px;bottom:50%;border-left:1.5px solid var(--border2)}
+.a-tree-line::after{content:'';position:absolute;left:6px;top:50%;width:9px;border-top:1.5px solid var(--border2)}
+/* drag states */
+.a-dragging{opacity:.35;background:var(--accent-light)!important}
+.a-drop-target{outline:2px dashed var(--accent);outline-offset:-2px;background:var(--accent-light)!important}
+
+#auditTable td{padding:3px 6px!important;vertical-align:middle}
+#auditTable .a-par-cell{padding:4px 8px 4px 2px!important}
+#auditTable .a-act-cell{padding:3px 6px!important}
+#auditTable .compliance-table th{padding:5px 8px!important}
+
+
+.flt-lbl{font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;font-weight:600}
+#auditTable thead th{padding:6px 8px;font-family:'JetBrains Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--ink-dim);font-weight:700;background:var(--bg);border-bottom:1.5px solid var(--border2);white-space:nowrap}
+#auditTable td{padding:3px 7px!important;vertical-align:middle}
+#auditTable .a-par-cell{padding:5px 8px 5px 2px!important}
+#auditTable .a-par-done-cell{padding:4px 8px!important}
+
 /* ═══ TOAST ═══ */
 .toast-wrap{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
 .toast{background:var(--ink);color:#fff;padding:12px 18px;border-radius:var(--radius);font-size:.83rem;font-weight:500;animation:toastin .3s cubic-bezier(.34,1.56,.64,1);max-width:340px;box-shadow:var(--shadow-xl);display:flex;align-items:center;gap:10px;pointer-events:all;letter-spacing:-.01em}
@@ -732,6 +810,7 @@ select option{background:var(--white);color:var(--ink)}
         <button class="tab" id="goalsTab" onclick="switchView('goals')">Goals</button>
         <button class="tab" id="reportTab" onclick="switchView('report')">Report</button>
         <button class="tab" id="complianceTab" onclick="switchView('compliance')" style="color:var(--amber)">🛡 Compliance</button>
+        <button class="tab" id="auditTab" onclick="switchView('audit')" style="color:var(--purple)">📋 Audit</button>
       </nav>
       <div class="h-divider"></div>
       <div style="position:relative">
@@ -988,7 +1067,7 @@ select option{background:var(--white);color:var(--ink)}
         <div class="team-page">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
             <div><div class="pg-title">Goals & OKRs</div><div class="pg-sub">Track team objectives and key results</div></div>
-            <button class="btn btn-primary btn-sm" onclick="openGoalModal()" style="width:auto">＋ New Goal</button>
+            <button class="btn btn-primary btn-sm" id="newGoalBtn" onclick="openGoalModal()" style="width:auto">＋ New Goal</button>
           </div>
           <div id="goalsGrid"></div>
         </div>
@@ -1036,6 +1115,7 @@ select option{background:var(--white);color:var(--ink)}
               <!-- Title -->
               <div style="flex-shrink:0">
                 <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;letter-spacing:-.03em;color:var(--ink)">🛡 Compliance Tracker</div>
+                <div style="font-size:.73rem;color:var(--ink-dim);margin-top:2px">Filings · Deadlines · Recurring schedules</div>
               </div>
               <div style="width:1px;height:28px;background:var(--border);flex-shrink:0"></div>
               <!-- Filters inline -->
@@ -1112,7 +1192,7 @@ select option{background:var(--white);color:var(--ink)}
               </table>
             </div>
             <!-- LIST VIEW -->
-            <div id="cViewList" class="c-list" style="display:none" id="complianceListBody"></div>
+            <div id="cViewList" class="c-list" style="display:none"></div>
             <!-- BOARD VIEW -->
             <div id="cViewBoard" class="c-board" style="display:none"></div>
           </div>
@@ -1120,221 +1200,249 @@ select option{background:var(--white);color:var(--ink)}
         </div>
       </div>
 
-      </div>
-
-
-    </main>
-
-    <div class="detail-panel-overlay" id="detailOverlay" style="display:none" onclick="if(event.target===this)closeDetail()"><div class="detail-panel" id="detailPanel"></div></div>
-  </div>
-</div>
-
-<!-- Toast container -->
-
-<!-- TEMP BOARD PANEL -->
-<div id="tempBoardOverlay" style="display:none;position:fixed;inset:0;z-index:800;background:rgba(10,15,30,.35);backdrop-filter:blur(2px)" onclick="if(event.target===this)closeTempBoard()"></div>
-<div id="tempBoardPanel" style="display:none;position:fixed;top:0;right:0;width:480px;max-width:100vw;height:100vh;background:var(--white);border-left:1.5px solid var(--border);box-shadow:var(--shadow-xl);z-index:801;flex-direction:column;overflow:hidden">
-  <!-- Header -->
-  <div style="padding:18px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fff8e6,#fffaf0)">
-    <div style="width:36px;height:36px;background:var(--amber-bg);border:1.5px solid var(--amber-border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem">🧲</div>
-    <div style="flex:1">
-      <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1rem;letter-spacing:-.02em;color:var(--ink)">Temporary Board</div>
-      <div style="font-size:.72rem;color:var(--ink-dim);margin-top:1px">Park tasks temporarily — clear when done</div>
-    </div>
-    <button onclick="closeTempBoard()" style="background:none;border:none;cursor:pointer;font-size:1rem;color:var(--ink-dim);padding:4px;border-radius:6px;transition:all .14s" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background='none'">✕</button>
-  </div>
-  <!-- Purpose label -->
-  <div style="padding:12px 20px;border-bottom:1px solid var(--border);background:var(--surface2);display:flex;align-items:center;gap:8px">
-    <span style="font-size:.75rem;font-weight:700;color:var(--ink-mid);white-space:nowrap">📌 Purpose:</span>
-    <input id="tempBoardPurpose" class="input" placeholder="e.g. Meeting prep, EOD review, Sprint…" style="font-size:.8rem;padding:6px 10px;flex:1;background:var(--white)">
-    <button onclick="clearTempBoard()" class="btn btn-danger btn-sm" style="white-space:nowrap" title="Clear all tasks from temp board">🗑 Clear All</button>
-  </div>
-  <!-- Add task row -->
-  <div style="padding:12px 20px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center">
-    <input id="tempTaskInput" class="input" placeholder="Add a task… (Enter to add)" style="flex:1;font-size:.85rem" onkeydown="if(event.key==='Enter')addTempTask()">
-    <select id="tempTaskPriority" class="input" style="width:auto;padding:8px 28px 8px 10px;font-size:.8rem">
-      <option value="medium">🟡 Medium</option>
-      <option value="critical">🔴 Critical</option>
-      <option value="high">🟠 High</option>
-      <option value="low">🟢 Low</option>
-    </select>
-    <button class="btn btn-primary btn-sm" onclick="addTempTask()" style="width:auto;white-space:nowrap">＋ Add</button>
-  </div>
-  <!-- Columns -->
-  <div style="flex:1;overflow-y:auto;padding:16px 20px;display:flex;gap:12px;align-items:flex-start">
-    <!-- Todo column -->
-    <div style="flex:1;min-width:0">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-dim);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px">
-        <span style="width:8px;height:8px;border-radius:50%;background:#94a3b8;display:inline-block"></span> To Do
-        <span id="tempTodoCount" style="margin-left:auto;background:var(--bg2);padding:1px 6px;border-radius:99px;font-size:.6rem">0</span>
-      </div>
-      <div id="tempTodoList" style="display:flex;flex-direction:column;gap:6px;min-height:60px"></div>
-    </div>
-    <!-- Done column -->
-    <div style="flex:1;min-width:0">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px">
-        <span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block"></span> Done
-        <span id="tempDoneCount" style="margin-left:auto;background:var(--green-bg);color:var(--green);padding:1px 6px;border-radius:99px;font-size:.6rem">0</span>
-      </div>
-      <div id="tempDoneList" style="display:flex;flex-direction:column;gap:6px;min-height:60px"></div>
-    </div>
-  </div>
-  <!-- Footer -->
-  <div style="padding:10px 20px;border-top:1px solid var(--border);background:var(--surface2);display:flex;align-items:center;justify-content:space-between">
-    <span id="tempBoardStats" style="font-size:.75rem;color:var(--ink-dim);font-family:'JetBrains Mono',monospace"></span>
-    <button onclick="clearDoneTempTasks()" class="btn btn-ghost btn-sm" style="font-size:.75rem">✓ Clear Done</button>
-  </div>
-</div>
-<div class="toast-wrap" id="toastWrap"></div>
-
-<!-- AUTOMATIONS MODAL -->
-<div class="overlay" id="automationModal" style="display:none" onclick="if(event.target===this)closeAutomations()">
-  <div class="modal modal-lg">
-    <div class="modal-header">
-      <div class="modal-title">⚡ Automations</div>
-      <button class="icon-btn" onclick="closeAutomations()">✕</button>
-    </div>
-    <div class="form-body">
-      <p style="font-size:.83rem;color:var(--ink-mid);margin-bottom:16px">Set up rules that run automatically when conditions are met.</p>
-      <div id="automationsList" style="margin-bottom:16px"></div>
-      <div style="background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px">
-        <div style="font-weight:700;font-size:.85rem;margin-bottom:12px">＋ Create New Rule</div>
-        <div class="form-row" style="margin-bottom:10px">
-          <div class="fg" style="margin:0"><label>When</label>
-            <select class="input" id="autoTrigger">
-              <option value="status_done">Task status → Done</option>
-              <option value="status_review">Task status → In Review</option>
-              <option value="status_in_progress">Task status → In Progress</option>
-              <option value="task_assigned">Task assigned</option>
-              <option value="due_today">Task due today</option>
-              <option value="task_overdue">Task becomes overdue</option>
-              <option value="comment_added">Comment added</option>
-            </select>
+      <!-- AUDIT WORK VIEW -->
+      <div id="auditView" style="display:none;flex:1;overflow:hidden">
+        <div class="compliance-page">
+          <!-- STICKY HEADER -->
+          <div class="c-sticky-header">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <div style="flex-shrink:0">
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;letter-spacing:-.03em;color:var(--ink)">📋 Audit Tracker</div>
+                <div style="font-size:.73rem;color:var(--ink-dim);margin-top:2px">Query log · Document status · Review tracking</div>
+              </div>
+              <!-- Audit Module Tabs -->
+              <div style="display:flex;gap:4px;background:var(--bg2);padding:3px;border-radius:var(--radius-sm);border:1px solid var(--border);flex-shrink:0">
+                <button id="auditModuleInternal" class="tab active" onclick="switchAuditModule('internal')" style="font-size:.78rem;padding:5px 14px;color:var(--accent)">🏢 Internal</button>
+                <button id="auditModuleStatutory" class="tab" onclick="switchAuditModule('statutory')" style="font-size:.78rem;padding:5px 14px">⚖️ Statutory</button>
+              </div>
+              <div style="width:1px;height:32px;background:var(--border);flex-shrink:0"></div>
+              <!-- Filters -->
+              <div class="compliance-filters" style="flex:1;flex-wrap:wrap;gap:8px">
+                <div class="fg" style="margin:0;min-width:170px">
+                  <label class="flt-lbl">Search</label>
+                  <div style="position:relative;margin-top:3px">
+                    <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:.72rem;opacity:.4">🔍</span>
+                    <input class="search-input" id="auditSearch" placeholder="Search task / area…" oninput="renderAuditWork()" style="width:100%;padding:5px 10px 5px 26px;font-size:.78rem">
+                  </div>
+                </div>
+                <div class="fg" style="margin:0;min-width:130px">
+                  <label class="flt-lbl">Department</label>
+                  <select class="input" id="auditFilterDept" onchange="renderAuditWork()" style="margin-top:3px;padding:5px 8px;font-size:.78rem">
+                    <option value="">All Depts</option>
+                    <option>Accounts</option><option>HR &amp; Payroll</option><option>Tax</option>
+                    <option>GST</option><option>IT</option><option>Legal</option><option>Operations</option>
+                  </select>
+                </div>
+                <div class="fg" style="margin:0;min-width:130px">
+                  <label class="flt-lbl">Status</label>
+                  <select class="input" id="auditFilterStatus" onchange="renderAuditWork()" style="margin-top:3px;padding:5px 8px;font-size:.78rem">
+                    <option value="">All Status</option>
+                    <option value="not_started">⬜ Not Started</option>
+                    <option value="gathering">🔄 Gathering</option>
+                    <option value="ready">📦 Ready</option>
+                    <option value="shared">📤 Shared</option>
+                    <option value="query_raised">❓ Query Raised</option>
+                    <option value="replied">💬 Replied</option>
+                    <option value="accepted">✅ Accepted</option>
+                  </select>
+                </div>
+                <div class="fg" style="margin:0;min-width:120px">
+                  <label class="flt-lbl">Priority</label>
+                  <select class="input" id="auditFilterPriority" onchange="renderAuditWork()" style="margin-top:3px;padding:5px 8px;font-size:.78rem">
+                    <option value="">All Priority</option>
+                    <option value="high">🔴 High</option>
+                    <option value="medium">🟡 Medium</option>
+                    <option value="low">🟢 Low</option>
+                  </select>
+                </div>
+                <div class="fg" style="margin:0;min-width:120px">
+                  <label class="flt-lbl">Assignee</label>
+                  <select class="input" id="auditFilterAssignee" onchange="renderAuditWork()" style="margin-top:3px;padding:5px 8px;font-size:.78rem">
+                    <option value="">All Assignees</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Actions -->
+              <div style="display:flex;gap:6px;align-items:center;flex-shrink:0">
+                <button class="btn btn-ghost btn-sm" onclick="exportAuditCSV()" style="width:auto">↓ CSV</button>
+                <button class="btn btn-primary btn-sm" id="auditAddBtn" onclick="openAuditParentModal()" style="width:auto;display:none">＋ Add Area</button>
+              </div>
+            </div>
+            <!-- Summary pills -->
+            <div id="auditSummaryBar" style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap"></div>
           </div>
-          <div class="fg" style="margin:0"><label>Then</label>
-            <select class="input" id="autoAction">
-              <option value="notify_assignee">Notify assignee</option>
-              <option value="notify_watchers">Notify all watchers</option>
-              <option value="notify_admin">Notify admin</option>
-              <option value="send_email">Send email notification</option>
-              <option value="log_activity">Log to activity feed</option>
-            </select>
-          </div>
-        </div>
-        <div class="fg" style="margin-bottom:10px"><label>Rule Name (optional)</label><input class="input" id="autoName" placeholder="e.g. Notify team when task done"></div>
-        <button class="btn btn-primary btn-sm" onclick="saveAutomation()" style="width:auto">Save Rule</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- GOAL MODAL -->
-<div class="overlay" id="goalModal" style="display:none" onclick="if(event.target===this)closeGoalModal()">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="goalModalTitle">New Goal</div>
-      <button class="icon-btn" onclick="closeGoalModal()">✕</button>
-    </div>
-    <div class="form-body">
-      <input type="hidden" id="editGoalId">
-      <div class="fg"><label>Goal Title *</label><input class="input" id="gTitle" placeholder="e.g. Q1 Revenue Target"></div>
-      <div class="fg"><label>Description</label><textarea class="input" id="gDesc" rows="2" placeholder="What does success look like?"></textarea></div>
-      <div class="form-row">
-        <div class="fg"><label>Target Value</label><input class="input" type="number" id="gTarget" placeholder="100" min="0"></div>
-        <div class="fg"><label>Current Value</label><input class="input" type="number" id="gCurrent" placeholder="0" min="0"></div>
-        <div class="fg"><label>Unit</label><input class="input" id="gUnit" placeholder="%, tasks, $…"></div>
-      </div>
-      <div class="form-row">
-        <div class="fg"><label>Deadline</label><input class="input" type="date" id="gDeadline"></div>
-        <div class="fg"><label>Owner</label><select class="input" id="gOwner"><option value="">— Any —</option></select></div>
-      </div>
-      <div class="fg"><label>Status</label>
-        <select class="input" id="gStatus">
-          <option value="on_track">🟢 On Track</option>
-          <option value="at_risk">🟡 At Risk</option>
-          <option value="off_track">🔴 Off Track</option>
-          <option value="achieved">✅ Achieved</option>
-        </select>
-      </div>
-      <div class="form-actions">
-        <button class="btn btn-ghost" onclick="closeGoalModal()">Cancel</button>
-        <button class="btn btn-primary" onclick="saveGoal()" style="width:auto">Save Goal →</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- TASK MODAL -->
-<div class="overlay" id="taskModal" style="display:none" onclick="if(event.target===this)closeTaskModal()">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="tmTitle">New Task</div>
-      <button class="icon-btn" onclick="closeTaskModal()">✕</button>
-    </div>
-    <div class="form-body">
-      <input type="hidden" id="editId"><input type="hidden" id="taskSource" value="team">
-      <div class="fg"><label>Title *</label><input class="input" id="tTitle" placeholder="What needs to be done?"></div>
-      <div class="fg"><label>Description</label>
-        <div style="position:relative">
-          <div class="richtext-area" id="tDesc" contenteditable="true" data-placeholder="Add context, links, or notes…"></div>
-          <div class="richtext-toolbar">
-            <button class="rt-btn" onclick="execFmt('bold')" title="Bold"><b>B</b></button>
-            <button class="rt-btn" onclick="execFmt('italic')" title="Italic"><i>I</i></button>
-            <button class="rt-btn" onclick="execFmt('underline')" title="Underline"><u>U</u></button>
-            <button class="rt-btn" onclick="execFmt('insertUnorderedList')" title="List">• List</button>
-            <button class="rt-btn" onclick="execFmt('insertOrderedList')" title="Numbered">1. List</button>
+          <!-- SCROLLABLE CONTENT -->
+          <div class="c-content-scroll">
+            <div style="background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:auto;flex:1;min-height:200px">
+              <table id="auditTable" style="width:100%;min-width:960px;border-collapse:collapse;table-layout:fixed">
+                <thead>
+                  <tr>
+                    <th style="width:14px"></th>
+                    <th style="width:240px;max-width:240px">Area / Document Request</th>
+                    <th style="width:80px">Dept</th>
+                    <th style="width:120px">Assignee</th>
+                    <th style="width:120px">Reviewer</th>
+                    <th style="width:80px">Due Date</th>
+                    <th style="width:130px">Status</th>
+                    <th style="width:60px">Priority</th>
+                    <th style="width:80px">Folder</th>
+                    <th style="width:70px">Query</th>
+                    <th style="width:60px"></th>
+                  </tr>
+                </thead>
+                <tbody id="auditTableBody">
+                  <tr><td colspan="11">
+                    <div class="compliance-empty">
+                      <div class="compliance-empty-icon">📋</div>
+                      <div class="compliance-empty-title">No audit items yet</div>
+                      <div class="compliance-empty-sub">Click "+ Add Area" to create your first audit area and start adding document requests.</div>
+                    </div>
+                  </td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-      <div class="form-row">
-        <div class="fg"><label>Status</label><select class="input" id="tStatus"><option value="todo">To Do</option><option value="in_progress">In Progress</option><option value="review">In Review</option><option value="done">Done</option></select></div>
-        <div class="fg"><label>Priority</label><select class="input" id="tPriority"><option value="critical">🔴 Critical</option><option value="high">🟠 High</option><option value="medium" selected>🟡 Medium</option><option value="low">🟢 Low</option></select></div>
-      </div>
-      <div class="form-row" id="assigneeRow">
-        <div class="fg"><label>Assign To</label><select class="input" id="tAssignee"><option value="">— Unassigned —</option></select></div>
-        <div class="fg"><label>Due Date</label><input class="input" type="date" id="tDue"></div>
-      </div>
-      <div class="form-row">
-        <div class="fg"><label>⏱ Estimated Time (hours)</label><input class="input" type="number" id="tEstimate" placeholder="e.g. 4" min="0" step="0.5"></div>
-        <div class="fg" style="display:flex;flex-direction:column;justify-content:flex-end"><div style="font-size:.72rem;color:var(--ink-dim);padding:4px 0">Used to track estimate vs. actual in reports</div></div>
-      </div>
-      <div class="fg"><label>Card Color</label>
-        <div id="colorPicker" style="display:flex;gap:7px;flex-wrap:wrap;padding:6px 0">
-          <button class="color-swatch" style="--c:transparent" onclick="selectColor('')" title="None">✕</button>
-        </div>
-      </div>
-      <div class="fg"><label>Tags</label>
-        <div class="tag-editor" id="tagEditor" onclick="document.getElementById('tagInput').focus()">
-          <div id="tagBadges" style="display:contents"></div>
-          <input class="tag-editor-input" id="tagInput" placeholder="Add tag, press Enter…" onkeydown="handleTagKey(event)">
-        </div>
-      </div>
-      <div class="fg"><label>Subtasks</label>
-        <div class="subtask-list" id="subtaskList"></div>
-        <div class="subtask-add">
-          <input class="subtask-input" id="subtaskInput" placeholder="Add a subtask…" onkeydown="if(event.key==='Enter'){event.preventDefault();addSubtask();}">
-          <button class="btn btn-ghost btn-sm" onclick="addSubtask()" type="button">+ Add</button>
-        </div>
-      </div>
-      <div class="fg"><label>🔗 Attachment / Ticket URL</label><input class="input" type="url" id="tLink" placeholder="https://… (airline ticket, file, doc link)"></div>
-      <div class="fg"><label>Recurring</label>
-        <div class="recur-opts" id="recurOpts">
-          <button class="recur-btn active" data-v="" onclick="selectRecur(this,'')">None</button>
-          <button class="recur-btn" data-v="daily" onclick="selectRecur(this,'daily')">Daily</button>
-          <button class="recur-btn" data-v="weekly" onclick="selectRecur(this,'weekly')">Weekly</button>
-          <button class="recur-btn" data-v="monthly" onclick="selectRecur(this,'monthly')">Monthly</button>
-        </div>
-      </div>
-      <div id="personalAssigneeNote" style="display:none" class="info-box">👤 This task will be assigned to <strong>you</strong> and only visible to you.</div>
-      <div class="fg"><label>📧 Email notification</label><div class="warn-box" id="emailNote">Configure EmailJS to enable email notifications.</div></div>
-      <div class="form-actions">
-        <button class="btn btn-ghost" onclick="closeTaskModal()">Cancel</button>
-        <button class="btn btn-primary" onclick="saveTask()" style="width:auto">Save Task →</button>
-      </div>
-    </div>
-  </div>
-</div>
 
+
+            <!-- AUDIT AREA MODAL (Add / Edit Audit Area / Main Group) -->
+      <div class="overlay" id="auditParentModal" style="display:none" onclick="if(event.target===this)closeAuditParentModal()">
+        <div class="modal" style="max-width:480px">
+          <div class="modal-header">
+            <div class="modal-title" id="auditParentModalTitle">New Audit Area</div>
+            <button class="icon-btn" onclick="closeAuditParentModal()">✕</button>
+          </div>
+          <div class="form-body">
+            <input type="hidden" id="editAuditParentId">
+            <!-- Module badge -->
+            <div id="aParentModuleBadge" style="display:inline-flex;align-items:center;gap:6px;border-radius:var(--radius-sm);padding:4px 12px;margin-bottom:14px;font-size:.78rem;font-weight:600"></div>
+            <div class="fg">
+              <label>Audit Area Name *</label>
+              <input class="input" id="aParentName" placeholder="e.g. Payroll, GST, Fixed Assets, Bank…">
+            </div>
+            <div class="fg">
+              <label>Financial Year / Period</label>
+              <input class="input" id="aParentFY" placeholder="e.g. FY 2024-25, Q3 2025">
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-ghost" onclick="closeAuditParentModal()">Cancel</button>
+              <button class="btn btn-primary" onclick="saveAuditParent()" style="width:auto">Save →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AUDIT ITEM MODAL (Add / Edit Document Request) -->
+      <div class="overlay" id="auditSubModal" style="display:none" onclick="if(event.target===this)closeAuditSubModal()">
+        <div class="modal" style="max-width:640px">
+          <div class="modal-header">
+            <div class="modal-title" id="auditSubModalTitle">Add Audit Item</div>
+            <button class="icon-btn" onclick="closeAuditSubModal()">✕</button>
+          </div>
+          <div class="form-body">
+            <input type="hidden" id="editAuditSubId">
+            <input type="hidden" id="aSubParentId">
+            <!-- Area badge -->
+            <div style="display:inline-flex;align-items:center;gap:6px;background:var(--purple-bg);border:1px solid var(--purple-border);border-radius:var(--radius-sm);padding:4px 12px;margin-bottom:14px;font-size:.78rem;color:var(--purple);font-weight:600">
+              <span>📁</span><span id="aSubParentLabel">Area</span>
+            </div>
+            <div class="form-row">
+              <div class="fg">
+                <label>Document / Task Description *</label>
+                <input class="input" id="aSubTask" placeholder="e.g. Trial Balance as on 31-Mar-2025">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="fg">
+                <label>Department</label>
+                <select class="input" id="aSubDept">
+                  <option value="">— Select —</option>
+                  <option>Accounts</option><option>HR &amp; Payroll</option><option>Tax</option>
+                  <option>GST</option><option>IT</option><option>Legal</option><option>Operations</option>
+                </select>
+              </div>
+              <div class="fg">
+                <label>Priority</label>
+                <select class="input" id="aSubPriority">
+                  <option value="high">🔴 High</option>
+                  <option value="medium" selected>🟡 Medium</option>
+                  <option value="low">🟢 Low</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="fg">
+                <label>Assignee (Preparer)</label>
+                <select class="input" id="aSubAssignee">
+                  <option value="">— Select —</option>
+                </select>
+              </div>
+              <div class="fg">
+                <label id="aSubReviewerLabel">Internal Reviewer</label>
+                <select class="input" id="aSubReviewer">
+                  <option value="">— Select —</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="fg">
+                <label>Due Date</label>
+                <input class="input" type="date" id="aSubDueDate">
+              </div>
+              <div class="fg">
+                <label id="aSubSubmittedLabel">Submitted On</label>
+                <input class="input" type="date" id="aSubSubmittedOn">
+              </div>
+            </div>
+            <div class="fg">
+              <label>Status</label>
+              <select class="input" id="aSubStatus">
+                <option value="not_started">⬜ Not Started</option>
+                <option value="gathering">🔄 Gathering</option>
+                <option value="ready">📦 Ready to Share</option>
+                <option value="shared" id="aSubStatusShared">📤 Shared</option>
+                <option value="query_raised" id="aSubStatusQuery">❓ Query Raised</option>
+                <option value="replied">💬 Replied</option>
+                <option value="accepted" id="aSubStatusAccepted">✅ Accepted</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>🔗 Folder / Document Link</label>
+              <input class="input" type="url" id="aSubFolderLink" placeholder="https://drive.google.com/…">
+            </div>
+            <div class="fg">
+              <label id="aSubQueryLabel">📝 Query / Observation</label>
+              <textarea class="input" id="aSubAuditQuery" rows="2" placeholder="Paste query or observation here…" style="resize:vertical"></textarea>
+            </div>
+            <div class="fg">
+              <label>💬 Our Response / Remarks</label>
+              <textarea class="input" id="aSubResponse" rows="2" placeholder="Your team's response or explanation…" style="resize:vertical"></textarea>
+            </div>
+            <div class="fg">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <input type="checkbox" id="aSubEscalate" style="width:15px;height:15px;accent-color:var(--red);cursor:pointer">
+                <span>🚨 Escalate to CFO / Director</span>
+              </label>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-ghost" onclick="closeAuditSubModal()">Cancel</button>
+              <button class="btn btn-primary" onclick="saveAuditSub()" style="width:auto">Save →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AUDIT QUERY DETAIL PANEL -->
+      <div class="overlay" id="auditQueryPanel" style="display:none" onclick="if(event.target===this)closeAuditQueryPanel()">
+        <div class="modal" style="max-width:560px">
+          <div class="modal-header">
+            <div class="modal-title">❓ Query Details</div>
+            <button class="icon-btn" onclick="closeAuditQueryPanel()">✕</button>
+          </div>
+          <div class="form-body" id="auditQueryPanelBody"></div>
+        </div>
+      </div>
 
       <!-- COMPLIANCE MODAL -->
       <div class="overlay" id="complianceModal" style="display:none" onclick="if(event.target===this)closeComplianceModal()">
@@ -1485,22 +1593,70 @@ select option{background:var(--white);color:var(--ink)}
 
 <!-- EMAIL MODAL -->
 <div class="overlay" id="emailModal" style="display:none" onclick="if(event.target===this)closeEmailModal()">
-  <div class="modal">
+  <div class="modal" style="max-width:560px">
     <div class="modal-header">
       <div class="modal-title">📧 Email Notification Setup</div>
       <button class="icon-btn" onclick="closeEmailModal()">✕</button>
     </div>
     <div class="form-body">
-      <div class="info-box"><strong>How to get your free EmailJS keys:</strong><br>1. Visit <strong>emailjs.com</strong> → Sign up free<br>2. Add Email Service → copy <strong>Service ID</strong><br>3. Create Template → copy <strong>Template ID</strong><br>4. Account → API Keys → copy <strong>Public Key</strong></div>
+
+      <!-- Step 1: Keys -->
+      <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;margin-bottom:8px">Step 1 — EmailJS Credentials</div>
+      <div class="info-box" style="margin-bottom:12px">
+        1. Visit <strong>emailjs.com</strong> → Sign up free<br>
+        2. Add an Email Service → copy <strong>Service ID</strong><br>
+        3. Create a Template → copy <strong>Template ID</strong><br>
+        4. Account → API Keys → copy <strong>Public Key</strong>
+      </div>
       <div class="fg"><label>Public Key</label><input class="input" id="ej_pubkey" placeholder="user_xxxxxxxxxx"></div>
       <div class="form-row">
         <div class="fg"><label>Service ID</label><input class="input" id="ej_service" placeholder="service_xxxxxxx"></div>
         <div class="fg"><label>Template ID</label><input class="input" id="ej_template" placeholder="template_xxxxxxx"></div>
       </div>
-      <div class="form-actions">
-        <button class="btn btn-ghost" onclick="closeEmailModal()">Cancel</button>
-        <button class="btn btn-primary" onclick="saveEmailConfig()" style="width:auto">Save</button>
+
+      <!-- Step 2: Template variables -->
+      <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;margin:16px 0 8px">Step 2 — Template Variables</div>
+      <div style="background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;font-size:.77rem;margin-bottom:12px">
+        <div style="margin-bottom:6px;color:var(--ink-mid)">Copy these variable names exactly into your EmailJS template:</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 18px">
+          ${[
+            ['{{to_name}}','Recipient\'s name'],
+            ['{{to_email}}','Recipient\'s email address'],
+            ['{{task_title}}','Task or compliance name'],
+            ['{{task_due}}','Due date'],
+            ['{{task_status}}','Current status'],
+            ['{{task_priority}}','Priority / type'],
+            ['{{assigned_by}}','Who assigned it'],
+            ['{{context}}','Reason for the email'],
+          ].map(([v,d])=>`<div style="display:contents">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--accent);background:var(--accent-light);padding:1px 6px;border-radius:4px;border:1px solid var(--accent-mid);white-space:nowrap">${v}</span>
+            <span style="color:var(--ink-mid);font-size:.72rem;align-self:center">${d}</span>
+          </div>`).join('')}
+        </div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:.71rem;color:var(--ink-dim)">
+          💡 In your EmailJS template, set <strong>To Email</strong> field to <code style="font-family:'JetBrains Mono',monospace;background:var(--bg);padding:1px 5px;border-radius:3px">{{to_email}}</code> and use the other variables in the subject/body.
+        </div>
       </div>
+
+      <!-- Step 3: Also notify admin -->
+      <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;margin-bottom:8px">Step 3 — Admin Copy (optional)</div>
+      <div class="form-row" style="align-items:flex-end;gap:10px;margin-bottom:4px">
+        <div class="fg" style="flex:1;margin:0">
+          <label>Also send a copy to</label>
+          <input class="input" id="ej_cc_email" type="email" placeholder="admin@company.com (optional)">
+        </div>
+      </div>
+      <div style="font-size:.71rem;color:var(--ink-dim);margin-bottom:14px">If set, every notification email will also be CC'd to this address.</div>
+
+      <!-- Test + Save -->
+      <div class="form-actions" style="justify-content:space-between">
+        <button class="btn btn-ghost" onclick="testComplianceEmail()" style="width:auto">🧪 Send Test Email</button>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-ghost" onclick="closeEmailModal()">Cancel</button>
+          <button class="btn btn-primary" onclick="saveEmailConfig()" style="width:auto">Save →</button>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -1608,8 +1764,8 @@ const _urlParams=new URLSearchParams(location.search);
 const _inviteToken=_urlParams.get('invite');
 const _inviteValid=_inviteToken===_INVITE_SECRET;
 
-// ── SESSION TIMEOUT (5 minutes) ──
-const SESSION_TIMEOUT_MS=5*60*1000;
+// ── SESSION TIMEOUT (30 minutes) ──
+const SESSION_TIMEOUT_MS=30*60*1000;
 let _sessionTimer=null;
 function resetSessionTimer(){
   if(!currentUser)return;
@@ -2022,6 +2178,8 @@ function subscribeAll(){
   });
   onValue(ref(db,'activity'),snap=>{const v=snap.val()||{};activity=Object.entries(v).map(([id,a])=>({id,...a})).sort((a,b)=>b.ts-a.ts).slice(0,300);renderActivity();});
   subscribeCompliance();
+  subscribeAudit();
+  subscribeGoals();
 }
 
 // ── RECURRING TASKS ──
@@ -2099,6 +2257,7 @@ function updateUserHeader(){
   document.getElementById('teamTab').style.display=isAdm?'':'none';
   document.getElementById('teamFilterSection').style.display=isAdm?'':'none';
   document.getElementById('reportTab').style.display=isAdm?'':'none';
+  // Goals tab visible to everyone
   // Hide admin-only sidebar actions from members
   const actSec=document.getElementById('adminActionsSection');
   if(actSec)actSec.style.display=isAdm?'block':'none';
@@ -2176,17 +2335,112 @@ const isAdmin=()=>currentUserProfile?.role==='admin';
 
 // ── EMAIL ──
 function getEmailConfig(){const s=localStorage.getItem('tf_email');return s?JSON.parse(s):null;}
-window.openEmailConfig=function(){document.getElementById('emailModal').style.display='flex';};
+window.openEmailConfig=function(){
+  const cfg=getEmailConfig();
+  if(cfg){
+    document.getElementById('ej_pubkey').value=cfg.pubkey||'';
+    document.getElementById('ej_service').value=cfg.service||'';
+    document.getElementById('ej_template').value=cfg.template||'';
+    document.getElementById('ej_cc_email').value=cfg.ccEmail||'';
+  }
+  document.getElementById('emailModal').style.display='flex';
+};
 window.closeEmailModal=function(){document.getElementById('emailModal').style.display='none';};
 window.saveEmailConfig=function(){
-  const cfg={pubkey:document.getElementById('ej_pubkey').value.trim(),service:document.getElementById('ej_service').value.trim(),template:document.getElementById('ej_template').value.trim()};
-  if(!cfg.pubkey||!cfg.service||!cfg.template){alert('Fill all fields.');return;}
+  const cfg={
+    pubkey:document.getElementById('ej_pubkey').value.trim(),
+    service:document.getElementById('ej_service').value.trim(),
+    template:document.getElementById('ej_template').value.trim(),
+    ccEmail:document.getElementById('ej_cc_email').value.trim()||null
+  };
+  if(!cfg.pubkey||!cfg.service||!cfg.template){alert('Please fill in Public Key, Service ID and Template ID.');return;}
   localStorage.setItem('tf_email',JSON.stringify(cfg));emailjs.init(cfg.pubkey);toast('✅ Email config saved!');closeEmailModal();
+};
+
+// ── Send a test email to verify setup ──
+window.testComplianceEmail=async function(){
+  const cfg=getEmailConfig();
+  if(!cfg||!cfg.pubkey||!cfg.service||!cfg.template){toast('⚠ Please fill in and save your EmailJS credentials first.');return;}
+  const me=currentUserProfile;if(!me?.email){toast('⚠ Your profile has no email address.');return;}
+  try{
+    emailjs.init(cfg.pubkey);
+    await emailjs.send(cfg.service,cfg.template,{
+      to_name:me.name,
+      to_email:me.email,
+      task_title:'[Test] GST Monthly Filing',
+      task_due:'31 Mar 2025',
+      task_status:'Pending',
+      task_priority:'Tax',
+      assigned_by:me.name,
+      context:'This is a test email from Ginesysone Finance Task Board to verify your EmailJS setup is working correctly.'
+    });
+    toast(`✅ Test email sent to ${me.email}!`);
+  }catch(e){toast('⚠ Test failed: '+(e.text||e.message));}
 };
 async function sendTaskEmail(task,assigneeMember){
   const cfg=getEmailConfig();if(!cfg||!assigneeMember?.email)return;
-  try{emailjs.init(cfg.pubkey);await emailjs.send(cfg.service,cfg.template,{to_email:assigneeMember.email,to_name:assigneeMember.name,task_title:task.title,task_priority:P[task.priority]?.label||task.priority,task_status:S[task.status]?.label||task.status,task_due:task.due||'No due date',assigned_by:currentUserProfile?.name||'Admin'});toast(`📧 Email sent to ${assigneeMember.name}!`);}
-  catch(e){toast('⚠ Email failed: '+(e.text||e.message));}
+  try{
+    emailjs.init(cfg.pubkey);
+    const params={
+      to_name:assigneeMember.name,
+      to_email:assigneeMember.email,
+      task_title:task.title,
+      task_priority:P[task.priority]?.label||task.priority||'',
+      task_status:S[task.status]?.label||task.status||'',
+      task_due:task.due||'No due date',
+      assigned_by:currentUserProfile?.name||'Admin',
+      context:'You have been assigned a new task.'
+    };
+    await emailjs.send(cfg.service,cfg.template,params);
+    // CC to admin if set and different from assignee
+    if(cfg.ccEmail&&cfg.ccEmail!==assigneeMember.email){
+      await emailjs.send(cfg.service,cfg.template,{...params,to_name:'Admin',to_email:cfg.ccEmail,context:`[CC] Task assigned to ${assigneeMember.name}.`});
+    }
+    toast(`📧 Email sent to ${assigneeMember.name}!`);
+  }catch(e){toast('⚠ Email failed: '+(e.text||e.message));}
+}
+
+// ── Custom subject/context email (used by automations) ──
+async function sendTaskEmailCustom(task,assigneeMember,context){
+  const cfg=getEmailConfig();if(!cfg||!assigneeMember?.email)return;
+  try{
+    emailjs.init(cfg.pubkey);
+    await emailjs.send(cfg.service,cfg.template,{
+      to_email:assigneeMember.email,
+      to_name:assigneeMember.name,
+      task_title:task.title,
+      task_priority:P[task.priority]?.label||task.priority||'',
+      task_status:S[task.status]?.label||task.status||'',
+      task_due:task.due||'No due date',
+      assigned_by:currentUserProfile?.name||'Admin',
+      context:context||''
+    });
+  }catch(e){console.warn('Email failed:',e.text||e.message);}
+}
+
+// ── Compliance reminder email ──
+async function sendComplianceEmail(c, assigneeMember, reason){
+  const cfg=getEmailConfig();if(!cfg||!assigneeMember?.email)return;
+  try{
+    emailjs.init(cfg.pubkey);
+    const dueDisplay=c.due?new Date(c.due+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'Not set';
+    const params={
+      to_name:  assigneeMember.name,
+      to_email: assigneeMember.email,
+      task_title:`[Compliance] ${c.name}`,
+      task_priority: c.type||'Compliance',
+      task_status:   c.status||'pending',
+      task_due:      dueDisplay,
+      assigned_by:   currentUserProfile?.name||'Admin',
+      context:       reason||'Compliance reminder'
+    };
+    await emailjs.send(cfg.service,cfg.template,params);
+    // CC to admin if set and different from assignee
+    if(cfg.ccEmail&&cfg.ccEmail!==assigneeMember.email){
+      await emailjs.send(cfg.service,cfg.template,{...params,to_name:'Admin',to_email:cfg.ccEmail,context:`[CC] ${reason||'Compliance reminder'} (assigned to ${assigneeMember.name})`});
+    }
+    toast(`📧 Compliance reminder sent to ${assigneeMember.name}!`);
+  }catch(e){toast('⚠ Compliance email failed: '+(e.text||e.message));}
 }
 async function log(tid,mid,detail){await push(ref(db,'activity'),{taskId:tid,memberId:mid,detail,ts:Date.now()});}
 
@@ -2756,16 +3010,16 @@ window.exportReportPDF=function(){
 
 window.switchView=function(view){
   currentView=view;
-  const vMap={tasks:'block',activity:'flex',team:'flex',goals:'flex',report:'flex',compliance:'flex'};
-  ['tasks','activity','team','goals','report','compliance'].forEach(v=>{const el=document.getElementById(v+'View');if(el)el.style.display=v===view?vMap[v]:'none';});
-  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['tasks','activity','team','goals','report','compliance'][i]===view));
-  // Hide sidebar for compliance (full-width), show for all other views
+  const vMap={tasks:'block',activity:'flex',team:'flex',goals:'flex',report:'flex',compliance:'flex',audit:'flex'};
+  ['tasks','activity','team','goals','report','compliance','audit'].forEach(v=>{const el=document.getElementById(v+'View');if(el)el.style.display=v===view?vMap[v]:'none';});
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['tasks','activity','team','goals','report','compliance','audit'][i]===view));
+  // Hide sidebar for compliance/audit (full-width), show for all other views
   const sb=document.getElementById('mainSidebar');
-  if(sb) sb.style.display=view==='compliance'?'none':'';
+  if(sb) sb.style.display=(view==='compliance'||view==='audit')?'none':'';
   // Notes shortcut visible on Tasks view for all users when on personal dashboard
   const notesShortcut=document.getElementById('notesShortcutWrap');
   if(notesShortcut)notesShortcut.style.display=(view==='tasks'&&currentDashboard==='personal')?'':'none';
-  if(view==='activity')renderActivity();if(view==='team')renderTeam();if(view==='tasks'){if(currentDashboard==='notes')switchDashboard('personal');else renderTasks();}if(view==='report')renderReport();if(view==='goals')renderGoals();if(view==='compliance')renderCompliance();
+  if(view==='activity')renderActivity();if(view==='team')renderTeam();if(view==='tasks'){if(currentDashboard==='notes')switchDashboard('personal');else renderTasks();}if(view==='report')renderReport();if(view==='goals')renderGoals();if(view==='compliance')renderCompliance();if(view==='audit')renderAuditWork();
 };
 
 // ══════════════════════════════════════════════
@@ -2895,13 +3149,53 @@ function checkOverdueNotifs(){
   });
 }
 
+// ── COMPLIANCE DUE DATE REMINDERS ──
+// Runs once per session on load, then every hour.
+// Sends email + in-app notification 3 days and 1 day before due.
+async function checkComplianceReminders(){
+  if(!currentUser||!isAdmin())return;
+  const today=new Date();today.setHours(0,0,0,0);
+  const REMIND_DAYS=[3,1]; // days before due to remind
+  for(const c of complianceItems){
+    if(!c.due||c.status==='completed'||c.status==='overdue')continue;
+    const dueDate=new Date(c.due+'T00:00:00');
+    const daysLeft=Math.round((dueDate-today)/86400000);
+    if(!REMIND_DAYS.includes(daysLeft))continue;
+    const assignee=c.assigneeId?members.find(m=>m.id===c.assigneeId):null;
+    const key=`tf_c_remind_${c.id}_${daysLeft}d_${today.toDateString()}`;
+    if(localStorage.getItem(key))continue; // already sent today
+    localStorage.setItem(key,'1');
+    // In-app notification
+    const msg=`"${c.name}" is due in ${daysLeft} day${daysLeft>1?'s':''}${c.due?' ('+new Date(c.due+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short'})+')':''}`;
+    addNotification(`⏰ Compliance Due Soon`,msg,null);
+    // Email to assignee if set
+    if(assignee){
+      await sendComplianceEmail(c,assignee,
+        `⏰ Reminder: This compliance task is due in ${daysLeft} day${daysLeft>1?'s':''}.`);
+    }
+  }
+}
+
 // ══════════════════════════════════════════════
 // ── GOALS & OKRs ──
 // ══════════════════════════════════════════════
-let goals=JSON.parse(localStorage.getItem('tf_goals')||'[]');
-function saveGoals(){localStorage.setItem('tf_goals',JSON.stringify(goals));}
+let goals=[];
+function saveGoals(){
+  // Persist all goals to Firebase under 'goals/'
+  const obj={};goals.forEach(g=>{obj[g.id]=g;});
+  set(ref(db,'goals'),obj).catch(()=>{});
+}
+function subscribeGoals(){
+  onValue(ref(db,'goals'),snap=>{
+    const v=snap.val()||{};
+    goals=Object.values(v).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+    if(currentView==='goals')renderGoals();
+  });
+}
 function renderGoals(){
   const grid=document.getElementById('goalsGrid');if(!grid)return;
+  const newGoalBtn=document.getElementById('newGoalBtn');
+  if(newGoalBtn)newGoalBtn.style.display=isAdmin()?'':'none';
   // populate owner dropdown
   const gOwner=document.getElementById('gOwner');if(gOwner)gOwner.innerHTML='<option value="">— Any —</option>'+members.map(m=>`<option value="${m.id}">${esc(m.name)}</option>`).join('');
   if(!goals.length){grid.innerHTML=`<div class="empty" style="margin-top:40px"><div class="empty-icon">🎯</div><div class="empty-title">No goals yet</div><div class="empty-sub">Create your first Goal or OKR to track team objectives.</div></div>`;return;}
@@ -2943,8 +3237,8 @@ window.saveGoal=function(){
   const title=document.getElementById('gTitle').value.trim();if(!title)return alert('Please enter a goal title!');
   const eid=document.getElementById('editGoalId').value;
   const goal={title,description:document.getElementById('gDesc').value,target:parseFloat(document.getElementById('gTarget').value)||0,current:parseFloat(document.getElementById('gCurrent').value)||0,unit:document.getElementById('gUnit').value,deadline:document.getElementById('gDeadline').value||null,ownerId:document.getElementById('gOwner').value||null,status:document.getElementById('gStatus').value,id:eid||uid(),createdAt:Date.now()};
-  if(eid){const idx=goals.findIndex(g=>g.id===eid);if(idx>=0)goals[idx]=goal;else goals.push(goal);}else goals.push(goal);
-  saveGoals();closeGoalModal();renderGoals();toast('🎯 Goal saved!');
+  set(ref(db,`goals/${goal.id}`),goal);
+  closeGoalModal();toast('🎯 Goal saved!');
 };
 window.editGoal=function(i){
   const g=goals[i];if(!g)return;
@@ -2957,12 +3251,13 @@ window.editGoal=function(i){
   const gOwner=document.getElementById('gOwner');if(gOwner){gOwner.innerHTML='<option value="">— Any —</option>'+members.map(m=>`<option value="${m.id}">${esc(m.name)}</option>`).join('');gOwner.value=g.ownerId||'';}
   document.getElementById('goalModal').style.display='flex';
 };
-window.deleteGoal=function(i){if(!confirm('Delete this goal?'))return;goals.splice(i,1);saveGoals();renderGoals();toast('🗑 Goal deleted');};
+window.deleteGoal=function(i){if(!confirm('Delete this goal?'))return;const g=goals[i];if(g)remove(ref(db,`goals/${g.id}`));toast('🗑 Goal deleted');};
 window.updateGoalProgress=function(i){
   const g=goals[i];const val=prompt(`Update progress for "${g.title}" (current: ${g.current}${g.unit?' '+g.unit:''}, target: ${g.target}${g.unit?' '+g.unit:''}):`,g.current);
   if(val===null)return;const n=parseFloat(val);if(isNaN(n))return;
-  goals[i].current=n;if(n>=goals[i].target)goals[i].status='achieved';
-  saveGoals();renderGoals();toast(`🎯 Progress updated to ${n}${g.unit?' '+g.unit:''}`);
+  const newStatus=n>=g.target?'achieved':g.status;
+  update(ref(db,`goals/${g.id}`),{current:n,status:newStatus});
+  toast(`🎯 Progress updated to ${n}${g.unit?' '+g.unit:''}`);
 };
 
 
@@ -3116,7 +3411,8 @@ function renderCompliance(){
   }
   function actionBtns(c,stop='event.stopPropagation()'){
     if(!isAdmin()) return `<div style="display:flex;gap:4px"><button class="btn-icon btn-xs" title="Fill Dates" onclick="${stop};openComplianceModal('${c.id}')">📅</button></div>`;
-    return`<div style="display:flex;gap:4px"><button class="btn-icon btn-xs" title="Edit" onclick="${stop};openComplianceModal('${c.id}')">✏</button><button class="btn-icon btn-xs" title="Delete" onclick="${stop};deleteCompliance('${c.id}')" style="color:var(--red)">🗑</button></div>`;
+    const hasAssignee=!!c.assigneeId;
+    return`<div style="display:flex;gap:4px"><button class="btn-icon btn-xs" title="Edit" onclick="${stop};openComplianceModal('${c.id}')">✏</button>${hasAssignee?`<button class="btn-icon btn-xs" title="Send Reminder Email" onclick="${stop};sendComplianceReminder('${c.id}')" style="color:var(--accent)">📧</button>`:''}<button class="btn-icon btn-xs" title="Delete" onclick="${stop};deleteCompliance('${c.id}')" style="color:var(--red)">🗑</button></div>`;
   }
   function dueStr(c){if(!c.due)return'';const isOD=c.due<today2&&c.status!=='completed';return`<span class="c-card-due${isOD?' overdue':''}">📅 ${new Date(c.due+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</span>`;}
   function monthStr(c){return c.month?`<span class="c-card-month">${new Date(c.month+'-01').toLocaleDateString('en-IN',{month:'short',year:'numeric'})}</span>`:'';}
@@ -3148,6 +3444,7 @@ function renderCompliance(){
         <td class="td-remarks" title="${esc(c.remarks||'')}">${esc(c.remarks||'—')}</td>
         <td onclick="event.stopPropagation()"><div class="compliance-row-actions">
           ${isAdmin()?`<button class="btn-icon btn-xs" title="Edit" onclick="openComplianceModal('${c.id}')">✏</button>
+          ${c.assigneeId?`<button class="btn-icon btn-xs" title="Send Reminder Email" onclick="event.stopPropagation();sendComplianceReminder('${c.id}')" style="color:var(--accent)">📧</button>`:''}
           <button class="btn-icon btn-xs" title="Delete" onclick="deleteCompliance('${c.id}')" style="color:var(--red)">🗑</button>`:`<button class="btn-icon btn-xs" title="Fill Dates" onclick="openComplianceModal('${c.id}')">📅</button>`}
         </div></td></tr>`;
     }).join('');
@@ -3362,14 +3659,31 @@ window.saveCompliance=async function(){
   };
 
   if(eid){
+    const prev=complianceItems.find(x=>x.id===eid);
+    const prevAssigneeId=prev?.assigneeId;
     await update(ref(db,`compliance/${eid}`),data);
     // if just completed a recurring item, spawn next cycle
     if(newStatus==='completed'&&prevStatus!=='completed'&&pendingCRecur){
       await spawnNextCycle({...data,id:eid,status:'completed'});
     }
+    // Email: assignee changed
+    if(assigneeId&&assigneeId!==prevAssigneeId){
+      const assignee=members.find(m=>m.id===assigneeId);
+      await sendComplianceEmail({...data,id:eid},assignee,'You have been assigned a compliance task.');
+    }
+    // Email: marked overdue
+    if(newStatus==='overdue'&&prevStatus!=='overdue'&&assigneeId){
+      const assignee=members.find(m=>m.id===assigneeId);
+      await sendComplianceEmail({...data,id:eid},assignee,'⚠️ This compliance item is now overdue.');
+    }
   } else {
     const newId=uid();
     await set(ref(db,`compliance/${newId}`),{...data,id:newId});
+    // Email: new compliance assigned
+    if(assigneeId){
+      const assignee=members.find(m=>m.id===assigneeId);
+      await sendComplianceEmail({...data,id:newId},assignee,'A new compliance task has been assigned to you.');
+    }
   }
   closeComplianceModal();
   toast(eid?'✅ Compliance updated!':'✅ Compliance added!');
@@ -3380,6 +3694,19 @@ window.deleteCompliance=async function(cid){
   if(!confirm('Delete this compliance record?'))return;
   await remove(ref(db,`compliance/${cid}`));
   toast('🗑 Compliance deleted');
+};
+
+window.sendComplianceReminder=async function(cid){
+  const c=complianceItems.find(x=>x.id===cid);if(!c)return;
+  const assignee=c.assigneeId?members.find(m=>m.id===c.assigneeId):null;
+  if(!assignee){toast('⚠ No assignee set for this compliance record.');return;}
+  const cfg=getEmailConfig();
+  if(!cfg){toast('⚠ Email not configured. Click 📧 in the header to set up EmailJS.');return;}
+  const daysLeft=c.due?Math.round((new Date(c.due+'T00:00:00')-new Date().setHours(0,0,0,0))/86400000):null;
+  const reason=daysLeft!=null
+    ?`Manual reminder: ${daysLeft>0?`Due in ${daysLeft} day${daysLeft!==1?'s':''}`:'Due today or overdue'}.`
+    :'Manual reminder from admin.';
+  await sendComplianceEmail(c,assignee,reason);
 };
 
 window.exportComplianceCSV=function(){
@@ -3395,6 +3722,454 @@ window.exportComplianceCSV=function(){
 };
 
 // ── end COMPLIANCE MODULE ──
+
+// ══════════════════════════════════════════════════════
+// ── AUDIT TRACKER MODULE  (Internal & Statutory) ──
+// ══════════════════════════════════════════════════════
+/*
+  Firebase:
+    auditWork/parentTasks/{id}  → {id,name,fy,module,ts,order,createdBy}
+    auditWork/subTasks/{id}     → {id,parentId,subTask,dept,priority,
+                                    assigneeId,reviewerId,dueDate,submittedOn,
+                                    status,folderLink,auditQuery,response,
+                                    escalate,ts,order,createdBy}
+*/
+let auditParents=[];
+let auditSubs=[];
+let auditCollapsed=JSON.parse(localStorage.getItem('audit_collapsed')||'{}');
+let auditDragSrc=null;
+let currentAuditModule='internal';
+
+window.switchAuditModule=function(mod){
+  currentAuditModule=mod;
+  document.getElementById('auditModuleInternal').classList.toggle('active',mod==='internal');
+  document.getElementById('auditModuleStatutory').classList.toggle('active',mod==='statutory');
+  document.getElementById('auditModuleInternal').style.color=mod==='internal'?'var(--accent)':'';
+  document.getElementById('auditModuleStatutory').style.color=mod==='statutory'?'var(--accent)':'';
+  renderAuditWork();
+};
+
+const AUDIT_STATUS={
+  not_started:{label:'Not Started',icon:'⬜',color:'var(--ink-dim)',bg:'var(--bg2)',border:'var(--border)'},
+  gathering:  {label:'Gathering',  icon:'🔄',color:'#c97300',bg:'var(--amber-bg)',border:'var(--amber-border)'},
+  ready:      {label:'Ready',      icon:'📦',color:'var(--blue)',bg:'var(--blue-bg)',border:'var(--blue-border)'},
+  shared:     {label:'Shared',     icon:'📤',color:'#6d28d9',bg:'var(--purple-bg)',border:'var(--purple-border)'},
+  query_raised:{label:'Query Raised',icon:'❓',color:'var(--red)',bg:'var(--red-bg)',border:'var(--red-border)'},
+  replied:    {label:'Replied',    icon:'💬',color:'#2056d8',bg:'var(--blue-bg)',border:'var(--blue-border)'},
+  accepted:   {label:'Accepted',   icon:'✅',color:'var(--green)',bg:'var(--green-bg)',border:'var(--green-border)'},
+};
+const AUDIT_PRIORITY={
+  high:  {label:'High',  icon:'🔴',color:'var(--red)',  bg:'var(--red-bg)',  border:'var(--red-border)'},
+  medium:{label:'Medium',icon:'🟡',color:'var(--amber)',bg:'var(--amber-bg)',border:'var(--amber-border)'},
+  low:   {label:'Low',   icon:'🟢',color:'var(--green)',bg:'var(--green-bg)',border:'var(--green-border)'},
+};
+
+function subscribeAudit(){
+  onValue(ref(db,'auditWork/parentTasks'),snap=>{
+    const v=snap.val()||{};
+    auditParents=Object.entries(v).map(([id,p])=>({id,...p})).sort((a,b)=>(a.order??a.ts)-(b.order??b.ts));
+    if(currentView==='audit') renderAuditWork();
+  });
+  onValue(ref(db,'auditWork/subTasks'),snap=>{
+    const v=snap.val()||{};
+    auditSubs=Object.entries(v).map(([id,s])=>({id,...s})).sort((a,b)=>(a.order??a.ts)-(b.order??b.ts));
+    if(currentView==='audit') renderAuditWork();
+  });
+}
+
+window.toggleAuditParent=function(pid){
+  auditCollapsed[pid]=!auditCollapsed[pid];
+  localStorage.setItem('audit_collapsed',JSON.stringify(auditCollapsed));
+  renderAuditWork();
+};
+
+/* ══ RENDER ══ */
+window.renderAuditWork=function(){
+  const addBtn=document.getElementById('auditAddBtn');
+  if(addBtn){
+    addBtn.style.display=isAdmin()?'':'none';
+    addBtn.textContent=`＋ ${currentAuditModule==='statutory'?'Statutory':'Internal'} Area`;
+  }
+
+  const tbody=document.getElementById('auditTableBody');
+  if(!tbody) return;
+
+  // Update module tab counts
+  const internalCount=auditParents.filter(p=>!p.module||p.module==='internal').length;
+  const statutoryCount=auditParents.filter(p=>p.module==='statutory').length;
+  const btnInt=document.getElementById('auditModuleInternal');
+  const btnStat=document.getElementById('auditModuleStatutory');
+  if(btnInt) btnInt.innerHTML=`🏢 Internal${internalCount?` <span style="background:var(--accent);color:#fff;border-radius:99px;padding:0 5px;font-size:.6rem;font-family:'JetBrains Mono',monospace">${internalCount}</span>`:''}`;
+  if(btnStat) btnStat.innerHTML=`⚖️ Statutory${statutoryCount?` <span style="background:var(--green);color:#fff;border-radius:99px;padding:0 5px;font-size:.6rem;font-family:'JetBrains Mono',monospace">${statutoryCount}</span>`:''}`;
+
+  // Populate assignee filter
+  const fSel=document.getElementById('auditFilterAssignee');
+  if(fSel){const cv=fSel.value;fSel.innerHTML='<option value="">All Assignees</option>'+members.map(m=>`<option value="${m.id}"${cv===m.id?' selected':''}>${esc(m.name)}</option>`).join('');}
+
+  const q=(document.getElementById('auditSearch')?.value||'').toLowerCase();
+  const fDept=document.getElementById('auditFilterDept')?.value||'';
+  const fStatus=document.getElementById('auditFilterStatus')?.value||'';
+  const fPri=document.getElementById('auditFilterPriority')?.value||'';
+  const fAssignee=document.getElementById('auditFilterAssignee')?.value||'';
+  const today=new Date().toISOString().split('T')[0];
+
+  // Summary bar
+  const total=auditSubs.length;
+  const byStatus={};
+  auditSubs.forEach(s=>{byStatus[s.status||'not_started']=(byStatus[s.status||'not_started']||0)+1;});
+  const summaryBar=document.getElementById('auditSummaryBar');
+  if(summaryBar){
+    const isStatutory=currentAuditModule==='statutory';
+    const modBadge=`<span style="display:inline-flex;align-items:center;gap:4px;font-size:.65rem;font-weight:700;padding:2px 9px;border-radius:99px;border:1px solid ${isStatutory?'var(--green-border)':'var(--blue-border)'};background:${isStatutory?'var(--green-bg)':'var(--blue-bg)'};color:${isStatutory?'var(--green)':'var(--blue)'};font-family:'JetBrains Mono',monospace">${isStatutory?'⚖️ Statutory':'🏢 Internal'}</span>`;
+    const pills=Object.entries(AUDIT_STATUS).map(([k,v])=>{
+      const cnt=byStatus[k]||0;
+      if(!cnt) return '';
+      return `<span style="display:inline-flex;align-items:center;gap:4px;font-size:.65rem;font-weight:700;padding:2px 9px;border-radius:99px;border:1px solid ${v.border};background:${v.bg};color:${v.color};font-family:'JetBrains Mono',monospace;cursor:pointer" onclick="document.getElementById('auditFilterStatus').value='${k}';renderAuditWork()">${v.icon} ${v.label} <span style="background:${v.color};color:#fff;border-radius:99px;padding:0 5px;font-size:.6rem">${cnt}</span></span>`;
+    }).join('');
+    const escalated=auditSubs.filter(s=>s.escalate).length;
+    summaryBar.innerHTML=modBadge+pills+(escalated?`<span style="display:inline-flex;align-items:center;gap:4px;font-size:.65rem;font-weight:700;padding:2px 9px;border-radius:99px;border:1px solid var(--red-border);background:var(--red-bg);color:var(--red);font-family:'JetBrains Mono',monospace">🚨 Escalated <span style="background:var(--red);color:#fff;border-radius:99px;padding:0 5px;font-size:.6rem">${escalated}</span></span>`:'');
+  }
+
+  let visibleParents=auditParents.filter(p=>{
+    if(p.module&&p.module!==currentAuditModule) return false;
+    if(!p.module&&currentAuditModule!=='internal') return false;
+    if(!isAdmin()) return auditSubs.some(s=>s.parentId===p.id&&(s.assigneeId===currentUser?.uid||s.reviewerId===currentUser?.uid));
+    if(q&&!p.name.toLowerCase().includes(q)){
+      return auditSubs.filter(s=>s.parentId===p.id).some(s=>
+        (s.subTask||'').toLowerCase().includes(q)||(s.dept||'').toLowerCase().includes(q)
+      );
+    }
+    return true;
+  });
+
+  if(!visibleParents.length){
+    tbody.innerHTML=`<tr><td colspan="11"><div class="compliance-empty"><div class="compliance-empty-icon">📋</div><div class="compliance-empty-title">No items found</div><div class="compliance-empty-sub">Try clearing filters or add a new audit area.</div></div></td></tr>`;
+    return;
+  }
+
+  let rows='';
+  visibleParents.forEach((p,pi)=>{
+    const collapsed=!!auditCollapsed[p.id];
+    const allSubs=auditSubs.filter(s=>s.parentId===p.id);
+    const subs=allSubs.filter(s=>{
+      if(!isAdmin()&&s.assigneeId!==currentUser?.uid&&s.reviewerId!==currentUser?.uid) return false;
+      if(fDept&&s.dept!==fDept) return false;
+      if(fStatus&&(s.status||'not_started')!==fStatus) return false;
+      if(fPri&&(s.priority||'medium')!==fPri) return false;
+      if(fAssignee&&s.assigneeId!==fAssignee) return false;
+      if(q&&!(p.name||'').toLowerCase().includes(q)&&!(s.subTask||'').toLowerCase().includes(q)) return false;
+      return true;
+    });
+
+    const accepted=allSubs.filter(s=>s.status==='accepted').length;
+    const queries=allSubs.filter(s=>s.status==='query_raised').length;
+    const pct=allSubs.length>0?Math.round((accepted/allSubs.length)*100):0;
+    const barColor=pct===100?'var(--green)':queries>0?'var(--red)':pct>50?'var(--blue)':'var(--amber)';
+
+    rows+=`<tr class="a-par-row"
+      draggable="true"
+      ondragstart="auditDragStartParent(event,'${p.id}')"
+      ondragover="auditDragOverParent(event,'${p.id}')"
+      ondrop="auditDropParent(event,'${p.id}')"
+      ondragleave="auditDragLeave(event)"
+      ondragend="auditDragEnd(event)"
+      id="ap_${p.id}">
+      <td class="a-drag-handle">⠿</td>
+      <td class="a-par-cell" colspan="9">
+        <div style="display:flex;align-items:center;gap:8px">
+          <button class="a-tog-btn" onclick="toggleAuditParent('${p.id}')">${collapsed?'▶':'▼'}</button>
+          <span class="a-par-name">${esc(p.name)}</span>
+          ${p.fy?`<span style="font-size:.62rem;font-family:'JetBrains Mono',monospace;background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue);border-radius:99px;padding:1px 7px">${esc(p.fy)}</span>`:''}
+          <span class="a-cnt-badge">${allSubs.length} item${allSubs.length!==1?'s':''}</span>
+          ${queries>0?`<span style="font-size:.6rem;font-weight:700;background:var(--red-bg);border:1px solid var(--red-border);color:var(--red);border-radius:99px;padding:1px 7px;font-family:'JetBrains Mono',monospace">❓ ${queries} open quer${queries>1?'ies':'y'}</span>`:''}
+          ${allSubs.length>0?`<div style="display:flex;align-items:center;gap:5px;margin-left:4px">
+            <div style="width:70px;height:4px;background:var(--border);border-radius:99px;overflow:hidden">
+              <div style="height:100%;width:${pct}%;background:${barColor};border-radius:99px;transition:width .3s"></div>
+            </div>
+            <span style="font-size:.6rem;font-family:'JetBrains Mono',monospace;color:${pct===100?'var(--green)':'var(--ink-dim)'}">${accepted}/${allSubs.length}</span>
+          </div>`:''}
+        </div>
+      </td>
+      <td class="a-par-done-cell" colspan="2">
+        <div class="a-acts">
+          ${isAdmin()?`
+          <button class="btn-icon btn-xs a-add-sub" title="Add Item" onclick="openAuditSubModal('${p.id}')">＋</button>
+          <button class="btn-icon btn-xs" title="Edit Area" onclick="openAuditParentModal('${p.id}')">✏</button>
+          <button class="btn-icon btn-xs" title="Delete Area" onclick="deleteAuditParent('${p.id}')" style="color:var(--red)">🗑</button>`:''}
+        </div>
+      </td>
+    </tr>`;
+
+    if(!collapsed){
+      if(!subs.length){
+        rows+=`<tr class="a-empty-row"><td></td><td colspan="10"><span>No items${fStatus||fDept||fPri?` matching filters`:''}${isAdmin()?' — click ＋ to add':''}</span></td></tr>`;
+      } else {
+        subs.forEach((s,si)=>{
+          const assignee=members.find(m=>m.id===s.assigneeId);
+          const reviewer=members.find(m=>m.id===s.reviewerId);
+          const st=AUDIT_STATUS[s.status||'not_started'];
+          const pr=AUDIT_PRIORITY[s.priority||'medium'];
+          const isOD=s.dueDate&&s.dueDate<today&&s.status!=='accepted';
+          const dueDisplay=s.dueDate?new Date(s.dueDate+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short'}):'-';
+          const hasQuery=!!(s.auditQuery||s.kpmgQuery||'').trim();
+          rows+=`<tr class="a-sub-row${s.status==='accepted'?' a-sub-done':''}"
+            draggable="true"
+            ondragstart="auditDragStartSub(event,'${s.id}','${p.id}')"
+            ondragover="auditDragOverSub(event,'${s.id}','${p.id}')"
+            ondrop="auditDropSub(event,'${s.id}','${p.id}')"
+            ondragleave="auditDragLeave(event)"
+            ondragend="auditDragEnd(event)"
+            id="as_${s.id}">
+            <td class="a-drag-handle a-sub-drag">⠿</td>
+            <td class="a-sub-name-cell">
+              <div style="display:flex;align-items:center;gap:5px;padding-left:2px">
+                <span style="color:var(--border2);font-size:.65rem;flex-shrink:0;opacity:.6;line-height:1">└</span>
+                <div style="min-width:0;overflow:hidden">
+                  <div class="a-sub-name${s.status==='accepted'?' a-strikethrough':''}" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(s.subTask||'—')}</div>
+                  ${s.escalate?`<span style="font-size:.6rem;font-weight:700;color:var(--red);font-family:'JetBrains Mono',monospace">🚨 Escalated</span>`:''}
+                </div>
+              </div>
+            </td>
+            <td class="a-sub-td" style="font-size:.72rem;color:var(--ink-mid)">${s.dept?esc(s.dept):'-'}</td>
+            <td class="a-sub-td">${assignee?`<div style="display:flex;align-items:center;gap:4px">${av(assignee,18)}<span style="font-size:.75rem">${esc(assignee.name)}</span></div>`:`<span class="a-dim">—</span>`}</td>
+            <td class="a-sub-td">${reviewer?`<div style="display:flex;align-items:center;gap:4px">${av(reviewer,18)}<span style="font-size:.75rem">${esc(reviewer.name)}</span></div>`:`<span class="a-dim">—</span>`}</td>
+            <td class="a-sub-td" style="${isOD?'color:var(--red);font-weight:700':'color:var(--ink-mid)'};font-family:'JetBrains Mono',monospace;font-size:.7rem">${isOD?'🔴 ':''}${dueDisplay}</td>
+            <td class="a-sub-td">
+              <span style="display:inline-flex;align-items:center;gap:3px;font-size:.67rem;font-weight:700;padding:2px 7px;border-radius:99px;border:1px solid ${st.border};background:${st.bg};color:${st.color};white-space:nowrap;cursor:pointer" onclick="cycleAuditStatus('${s.id}','${s.status||'not_started'}')">${st.icon} ${st.label}</span>
+            </td>
+            <td class="a-sub-td">
+              <span style="display:inline-flex;align-items:center;gap:3px;font-size:.65rem;font-weight:700;padding:1px 6px;border-radius:99px;border:1px solid ${pr.border};background:${pr.bg};color:${pr.color}">${pr.icon}</span>
+            </td>
+            <td class="a-sub-td" onclick="event.stopPropagation()">
+              ${s.folderLink?`<a href="${esc(s.folderLink)}" target="_blank" rel="noopener" class="a-folder-btn">📂 Open</a>`:`<span class="a-dim">—</span>`}
+            </td>
+            <td class="a-sub-td" onclick="event.stopPropagation()" style="text-align:center">
+              ${hasQuery?`<button onclick="openAuditQueryPanel('${s.id}')" style="font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:99px;border:1px solid var(--red-border);background:var(--red-bg);color:var(--red);cursor:pointer;white-space:nowrap">❓ View</button>`:`<span class="a-dim" style="font-size:.7rem">—</span>`}
+            </td>
+            <td class="a-act-cell" onclick="event.stopPropagation()">
+              <div class="a-acts">
+                <button class="btn-icon btn-xs" onclick="openAuditSubModal('${p.id}','${s.id}')">✏</button>
+                ${isAdmin()?`<button class="btn-icon btn-xs" onclick="deleteAuditSub('${s.id}')" style="color:var(--red)">🗑</button>`:''}
+              </div>
+            </td>
+          </tr>`;
+        });
+      }
+    }
+  });
+  tbody.innerHTML=rows;
+};
+
+/* ── Status cycle on click ── */
+window.cycleAuditStatus=async function(sid,current){
+  const order=['not_started','gathering','ready','shared','query_raised','replied','accepted'];
+  const next=order[(order.indexOf(current)+1)%order.length];
+  await update(ref(db,`auditWork/subTasks/${sid}`),{status:next,updatedAt:Date.now()});
+  toast(`${AUDIT_STATUS[next].icon} ${AUDIT_STATUS[next].label}`);
+};
+
+/* ── Query detail panel ── */
+window.openAuditQueryPanel=function(sid){
+  const s=auditSubs.find(x=>x.id===sid);
+  if(!s) return;
+  const p=auditParents.find(x=>x.id===s.parentId);
+  const assignee=members.find(m=>m.id===s.assigneeId);
+  const body=document.getElementById('auditQueryPanelBody');
+  body.innerHTML=`
+    <div style="margin-bottom:12px">
+      <div style="font-size:.72rem;color:var(--ink-dim);margin-bottom:2px">PBC Ref</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--purple)">${esc(s.pbcRef||'—')}</div>
+    </div>
+    <div style="margin-bottom:12px">
+      <div style="font-size:.72rem;color:var(--ink-dim);margin-bottom:2px">Document / Task</div>
+      <div style="font-weight:600;font-size:.88rem">${esc(s.subTask||'—')}</div>
+    </div>
+    <div style="background:var(--red-bg);border:1px solid var(--red-border);border-radius:var(--radius);padding:12px;margin-bottom:12px">
+      <div style="font-size:.7rem;font-weight:700;color:var(--red);margin-bottom:6px;font-family:'JetBrains Mono',monospace">❓ QUERY / OBSERVATION</div>
+      <div style="font-size:.83rem;color:var(--ink);white-space:pre-wrap">${esc(s.auditQuery||s.kpmgQuery||'No query noted.')}</div>
+    </div>
+    <div style="background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:var(--radius);padding:12px;margin-bottom:12px">
+      <div style="font-size:.7rem;font-weight:700;color:var(--blue);margin-bottom:6px;font-family:'JetBrains Mono',monospace">💬 OUR RESPONSE</div>
+      <div style="font-size:.83rem;color:var(--ink);white-space:pre-wrap">${esc(s.response||'No response yet.')}</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-primary btn-sm" onclick="openAuditSubModal('${s.parentId}','${s.id}');closeAuditQueryPanel()" style="width:auto">✏ Edit Response</button>
+      <button class="btn btn-ghost btn-sm" onclick="closeAuditQueryPanel()">Close</button>
+    </div>`;
+  document.getElementById('auditQueryPanel').style.display='flex';
+};
+window.closeAuditQueryPanel=function(){document.getElementById('auditQueryPanel').style.display='none';};
+
+/* ══ DRAG ══ */
+window.auditDragStartParent=function(e,pid){auditDragSrc={type:'parent',id:pid};e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',pid);setTimeout(()=>document.getElementById('ap_'+pid)?.classList.add('a-dragging'),0);};
+window.auditDragOverParent=function(e,pid){e.preventDefault();if(!auditDragSrc||auditDragSrc.type!=='parent'||auditDragSrc.id===pid)return;document.querySelectorAll('.a-par-row').forEach(r=>r.classList.remove('a-drop-target'));document.getElementById('ap_'+pid)?.classList.add('a-drop-target');};
+window.auditDropParent=async function(e,tpid){e.preventDefault();document.querySelectorAll('.a-par-row,.a-sub-row').forEach(r=>r.classList.remove('a-drop-target','a-dragging'));if(!auditDragSrc||auditDragSrc.type!=='parent'||auditDragSrc.id===tpid)return;const si2=auditParents.findIndex(p=>p.id===auditDragSrc.id),ti=auditParents.findIndex(p=>p.id===tpid);if(si2<0||ti<0)return;const r=[...auditParents];const[m]=r.splice(si2,1);r.splice(ti,0,m);const u={};r.forEach((p,i)=>{u[`auditWork/parentTasks/${p.id}/order`]=i*100;});await update(ref(db,'/'),u);auditDragSrc=null;};
+window.auditDragStartSub=function(e,sid,pid){auditDragSrc={type:'sub',id:sid,parentId:pid};e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',sid);setTimeout(()=>document.getElementById('as_'+sid)?.classList.add('a-dragging'),0);};
+window.auditDragOverSub=function(e,sid,pid){e.preventDefault();if(!auditDragSrc||auditDragSrc.type!=='sub'||auditDragSrc.id===sid)return;document.querySelectorAll('.a-sub-row').forEach(r=>r.classList.remove('a-drop-target'));document.getElementById('as_'+sid)?.classList.add('a-drop-target');};
+window.auditDropSub=async function(e,tsid,tpid){e.preventDefault();document.querySelectorAll('.a-par-row,.a-sub-row').forEach(r=>r.classList.remove('a-drop-target','a-dragging'));if(!auditDragSrc||auditDragSrc.type!=='sub'||auditDragSrc.id===tsid)return;const siblings=auditSubs.filter(s=>s.parentId===auditDragSrc.parentId).sort((a,b)=>(a.order??a.ts)-(b.order??b.ts));const si2=siblings.findIndex(s=>s.id===auditDragSrc.id),ti=siblings.findIndex(s=>s.id===tsid);if(si2<0||ti<0)return;const r=[...siblings];const[m]=r.splice(si2,1);r.splice(ti,0,m);const u={};r.forEach((s,i)=>{u[`auditWork/subTasks/${s.id}/order`]=i*100;});if(auditDragSrc.parentId!==tpid)u[`auditWork/subTasks/${auditDragSrc.id}/parentId`]=tpid;await update(ref(db,'/'),u);auditDragSrc=null;};
+window.auditDragLeave=function(e){e.currentTarget?.classList.remove('a-drop-target');};
+window.auditDragEnd=function(){document.querySelectorAll('.a-par-row,.a-sub-row').forEach(r=>r.classList.remove('a-drop-target','a-dragging'));auditDragSrc=null;};
+
+/* ── Parent modal ── */
+window.openAuditParentModal=function(pid){
+  const p=pid?auditParents.find(x=>x.id===pid):null;
+  document.getElementById('auditParentModalTitle').textContent=p?'Edit Audit Area':'New Audit Area';
+  document.getElementById('editAuditParentId').value=pid||'';
+  document.getElementById('aParentName').value=p?.name||'';
+  document.getElementById('aParentFY').value=p?.fy||'';
+  // Module badge
+  const mod=p?.module||currentAuditModule;
+  const isStatutory=mod==='statutory';
+  const badge=document.getElementById('aParentModuleBadge');
+  badge.style.background=isStatutory?'var(--green-bg)':'var(--blue-bg)';
+  badge.style.border=`1px solid ${isStatutory?'var(--green-border)':'var(--blue-border)'}`;
+  badge.style.color=isStatutory?'var(--green)':'var(--blue)';
+  badge.innerHTML=(isStatutory?'⚖️ Statutory Audit':'🏢 Internal Audit')+' Module';
+  document.getElementById('auditParentModal').style.display='flex';
+  setTimeout(()=>document.getElementById('aParentName').focus(),50);
+};
+window.closeAuditParentModal=function(){document.getElementById('auditParentModal').style.display='none';};
+window.saveAuditParent=async function(){
+  if(!isAdmin()){toast('Only admins can add audit areas.');return;}
+  const name=document.getElementById('aParentName').value.trim();
+  if(!name){alert('Please enter an area name!');return;}
+  const eid=document.getElementById('editAuditParentId').value;
+  const fy=document.getElementById('aParentFY').value.trim();
+  if(eid){
+    await update(ref(db,`auditWork/parentTasks/${eid}`),{name,fy,updatedAt:Date.now()});
+    toast('✅ Area updated!');
+  } else {
+    const newId=uid();
+    await set(ref(db,`auditWork/parentTasks/${newId}`),{id:newId,name,fy,module:currentAuditModule,ts:Date.now(),order:auditParents.length*100,createdBy:currentUser?.uid||null});
+    toast('✅ Audit area created!');
+  }
+  closeAuditParentModal();
+};
+window.deleteAuditParent=async function(pid){
+  if(!isAdmin())return;
+  if(!confirm('Delete this area and ALL its audit items?'))return;
+  for(const s of auditSubs.filter(s=>s.parentId===pid)) await remove(ref(db,`auditWork/subTasks/${s.id}`));
+  await remove(ref(db,`auditWork/parentTasks/${pid}`));
+  toast('🗑 Area deleted');
+};
+
+/* ── PBC Item modal ── */
+window.openAuditSubModal=function(parentId,sid){
+  const s=sid?auditSubs.find(x=>x.id===sid):null;
+  if(!isAdmin()&&s&&s.assigneeId!==currentUser?.uid&&s.reviewerId!==currentUser?.uid){toast('You can only edit items assigned to you.');return;}
+  document.getElementById('auditSubModalTitle').textContent=s?'Edit Audit Item':'Add Audit Item';
+  document.getElementById('editAuditSubId').value=sid||'';
+  document.getElementById('aSubParentId').value=parentId||s?.parentId||'';
+  document.getElementById('aSubTask').value=s?.subTask||'';
+  // Set module-aware labels
+  const parent=auditParents.find(p=>p.id===(parentId||s?.parentId));
+  const mod=parent?.module||currentAuditModule||'internal';
+  const isStatutory=mod==='statutory';
+  const auditorName=isStatutory?'Auditor':'Reviewer';
+  document.getElementById('aSubSubmittedLabel').textContent=isStatutory?'Submitted to Auditor On':'Submitted for Review On';
+  document.getElementById('aSubQueryLabel').textContent=isStatutory?'📝 Auditor Query / Observation':'📝 Review Query / Observation';
+  document.getElementById('aSubStatusShared').textContent=isStatutory?'📤 Shared with Auditor':'📤 Shared for Review';
+  document.getElementById('aSubStatusQuery').textContent=isStatutory?'❓ Query Raised by Auditor':'❓ Query Raised';
+  document.getElementById('aSubStatusAccepted').textContent=isStatutory?'✅ Accepted by Auditor':'✅ Accepted';
+  document.getElementById('aSubAuditQuery').placeholder=isStatutory?'Paste auditor\'s query or observation here…':'Paste review query or observation here…';
+  document.getElementById('aSubReviewerLabel').textContent=isStatutory?'External Auditor':'Internal Reviewer';
+  document.getElementById('aSubDept').value=s?.dept||'';
+  document.getElementById('aSubPriority').value=s?.priority||'medium';
+  document.getElementById('aSubDueDate').value=s?.dueDate||'';
+  document.getElementById('aSubSubmittedOn').value=s?.submittedOn||'';
+  document.getElementById('aSubStatus').value=s?.status||'not_started';
+  document.getElementById('aSubFolderLink').value=s?.folderLink||'';
+  document.getElementById('aSubAuditQuery').value=s?.auditQuery||s?.kpmgQuery||'';
+  document.getElementById('aSubResponse').value=s?.response||'';
+  document.getElementById('aSubEscalate').checked=!!s?.escalate;
+  const asel=document.getElementById('aSubAssignee');
+  const rsel=document.getElementById('aSubReviewer');
+  const opts=`<option value="">— Select —</option>`+members.map(m=>`<option value="${m.id}">${esc(m.name)}</option>`).join('');
+  asel.innerHTML=opts; rsel.innerHTML=opts;
+  if(s?.assigneeId) asel.value=s.assigneeId;
+  if(s?.reviewerId) rsel.value=s.reviewerId;
+  if(!isAdmin()){asel.disabled=true;rsel.disabled=true;}else{asel.disabled=false;rsel.disabled=false;}
+  document.getElementById('aSubParentLabel').textContent=parent?parent.name:'Area';
+  document.getElementById('auditSubModal').style.display='flex';
+  setTimeout(()=>document.getElementById('aSubTask').focus(),50);
+};
+window.closeAuditSubModal=function(){document.getElementById('auditSubModal').style.display='none';};
+window.saveAuditSub=async function(){
+  const eid=document.getElementById('editAuditSubId').value;
+  if(!isAdmin()&&!eid){toast('Only admins can add audit items.');return;}
+  const subTask=document.getElementById('aSubTask').value.trim();
+  if(!subTask){alert('Please enter a document/task description!');return;}
+  const parentId=document.getElementById('aSubParentId').value;
+  const data={
+    parentId,
+    subTask,
+    dept:document.getElementById('aSubDept').value||'',
+    priority:document.getElementById('aSubPriority').value||'medium',
+    assigneeId:document.getElementById('aSubAssignee').value||null,
+    reviewerId:document.getElementById('aSubReviewer').value||null,
+    dueDate:document.getElementById('aSubDueDate').value||null,
+    submittedOn:document.getElementById('aSubSubmittedOn').value||null,
+    status:document.getElementById('aSubStatus').value||'not_started',
+    folderLink:document.getElementById('aSubFolderLink').value.trim()||null,
+    auditQuery:document.getElementById('aSubAuditQuery').value.trim()||'',
+    response:document.getElementById('aSubResponse').value.trim()||'',
+    escalate:document.getElementById('aSubEscalate').checked,
+    updatedAt:Date.now(),
+    ts:eid?(auditSubs.find(x=>x.id===eid)?.ts||Date.now()):Date.now(),
+    order:eid?(auditSubs.find(x=>x.id===eid)?.order??Date.now()):auditSubs.filter(s=>s.parentId===parentId).length*100,
+    createdBy:currentUser?.uid||null
+  };
+  if(eid){
+    await update(ref(db,`auditWork/subTasks/${eid}`),data);
+    toast('✅ Audit item updated!');
+  } else {
+    const newId=uid();
+    await set(ref(db,`auditWork/subTasks/${newId}`),{...data,id:newId});
+    auditCollapsed[parentId]=false;
+    localStorage.setItem('audit_collapsed',JSON.stringify(auditCollapsed));
+    toast('✅ Audit item added!');
+  }
+  closeAuditSubModal();
+};
+window.deleteAuditSub=async function(sid){
+  if(!isAdmin())return;
+  if(!confirm('Delete this audit item?'))return;
+  await remove(ref(db,`auditWork/subTasks/${sid}`));
+  toast('🗑 Audit item deleted');
+};
+
+/* ── CSV export ── */
+window.exportAuditCSV=function(){
+  const headers=['Module','Area','FY','Document/Task','Department','Priority','Assignee','Reviewer','Due Date','Submitted On','Status','Folder Link','Query','Our Response','Escalated'];
+  const rows=[];
+  const moduleParents=auditParents.filter(p=>(p.module||'internal')===currentAuditModule);
+  moduleParents.forEach(p=>{
+    const subs=auditSubs.filter(s=>s.parentId===p.id);
+    if(!subs.length){rows.push([p.module||'internal',`"${p.name}"`,p.fy||'','-','-','-','-','-','-','-','-','-','-','-','No']);}
+    else subs.forEach(s=>{
+      const assignee=members.find(m=>m.id===s.assigneeId);
+      const reviewer=members.find(m=>m.id===s.reviewerId);
+      const st=AUDIT_STATUS[s.status||'not_started'];
+      rows.push([
+        p.module||'internal',`"${p.name}"`,p.fy||'',`"${(s.subTask||'').replace(/"/g,'""')}"`,
+        s.dept||'',s.priority||'',
+        assignee?`"${assignee.name}"`:'',reviewer?`"${reviewer.name}"`:'',
+        s.dueDate||'',s.submittedOn||'',st.label,s.folderLink||'',
+        `"${(s.auditQuery||s.kpmgQuery||'').replace(/"/g,'""')}"`,
+        `"${(s.response||'').replace(/"/g,'""')}"`,
+        s.escalate?'Yes':'No'
+      ]);
+    });
+  });
+  const csv=[headers.join(','),...rows.map(r=>r.join(','))].join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=`audit-export-${new Date().toISOString().slice(0,10)}.csv`;a.click();
+  URL.revokeObjectURL(url);toast('✅ Audit CSV exported!');
+};
+// ── end AUDIT WORK MODULE ──
+
+
+
 
 
 
@@ -3866,7 +4641,7 @@ window.closeWelcome=function(goToDashboard){
 
 document.addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.isContentEditable)return;
-  if(e.key==='Escape'){closeTaskModal();closeDetail();closeCmdPalette();closeShortcuts();endTour();closeArchive();closeTemplates();closeComplianceModal();closeTempBoard();if(currentView==='notes'&&noteSaveTimer){clearTimeout(noteSaveTimer);autoSaveNote();}}
+  if(e.key==='Escape'){closeTaskModal();closeDetail();closeCmdPalette();closeShortcuts();endTour();closeArchive();closeTemplates();closeComplianceModal();closeAuditParentModal();closeAuditSubModal();closeAuditQueryPanel();closeTempBoard();if(currentView==='notes'&&noteSaveTimer){clearTimeout(noteSaveTimer);autoSaveNote();}}
   if(e.key==='n'||e.key==='N'){if(currentView==='tasks'){if(currentDashboard==='personal')openTaskModal(null,'personal');else if(isAdmin())openTaskModal();}}
   if(e.key==='/'||e.key==='f'){document.getElementById('searchInput')?.focus();}
   if(e.key==='b'||e.key==='B'){toggleSidebar();}
@@ -3916,10 +4691,14 @@ window.openEmailConfig=openEmailConfig;
 setTimeout(requestNotificationPermission, 2000);
 // Init notification badge on load
 setTimeout(()=>{renderNotifBadge();renderNotifList();checkOverdueNotifs();},3000);
+// Compliance due date reminders — run after data loads (5s delay) then every hour
+setTimeout(()=>checkComplianceReminders(),5000);
 // Auto-switch to compliance view if opened via #compliance link
 if(location.hash==='#compliance'){setTimeout(()=>switchView('compliance'),500);}
 // Check overdue every hour
 setInterval(checkOverdueNotifs,3600000);
+// Check compliance reminders every hour
+setInterval(checkComplianceReminders,3600000);
 </script>
 </body>
 </html>
