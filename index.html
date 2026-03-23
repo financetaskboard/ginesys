@@ -29,7 +29,7 @@
   --shadow-md: 0 8px 24px rgba(10,15,30,.10),0 4px 8px rgba(10,15,30,.05);
   --shadow-lg: 0 16px 40px rgba(10,15,30,.12),0 6px 12px rgba(10,15,30,.06);
   --shadow-xl: 0 32px 64px rgba(10,15,30,.16),0 8px 16px rgba(10,15,30,.08);
-  --sidebar-w: 216px; --header-h: 58px;
+  --sidebar-w: 180px; --header-h: 58px;
   --grad-accent: linear-gradient(135deg,#2056d8 0%,#6d28d9 100%);
   --grad-green: linear-gradient(135deg,#0a9060,#059669);
 }
@@ -380,20 +380,20 @@ select option{background:var(--white);color:var(--ink)}
 
 /* ═══ COMPLIANCE ═══ */
 .compliance-page{flex:1;overflow:hidden;display:flex;flex-direction:column;height:100%;min-height:0}
-.c-sticky-header{background:var(--bg);border-bottom:1.5px solid var(--border);padding:12px 20px;flex-shrink:0;display:flex;flex-direction:column;gap:10px;z-index:10}
-.c-content-scroll{flex:1;overflow:hidden;padding:16px 20px;display:flex;flex-direction:column;min-height:0}
+.c-sticky-header{background:var(--bg);border-bottom:1.5px solid var(--border);padding:14px 20px;flex-shrink:0;display:flex;flex-direction:column;gap:10px;z-index:10}
+.c-content-scroll{flex:1;overflow:hidden;padding:14px 18px;display:flex;flex-direction:column;min-height:0}
 
 .compliance-filters{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
-.compliance-table-wrap{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:auto;flex:1;min-height:200px}
-.compliance-table{width:100%;border-collapse:collapse}
-.compliance-table thead{position:sticky;top:0;z-index:2}
-.compliance-table thead tr{background:var(--bg);border-bottom:2px solid var(--border)}
-.compliance-table th{padding:10px 14px;text-align:left;font-size:.62rem;text-transform:uppercase;letter-spacing:1.5px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--ink-dim);white-space:nowrap}
+.compliance-table-wrap{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:auto;flex:1;min-height:200px;position:relative}
+.compliance-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.compliance-table thead{position:sticky;top:0;z-index:5;background:var(--surface)}
+.compliance-table thead tr{border-bottom:1.5px solid var(--border);box-shadow:0 2px 0 var(--border);background:var(--surface)}
+.compliance-table th{padding:10px 12px;text-align:left;font-size:.62rem;text-transform:uppercase;letter-spacing:1px;font-family:'JetBrains Mono',monospace;font-weight:700;white-space:nowrap;background:var(--surface)}
 .compliance-table tbody tr{border-bottom:1px solid var(--border);transition:background .12s;cursor:pointer}
 .compliance-table tbody tr:last-child{border-bottom:none}
 .compliance-table tbody tr:hover{background:var(--bg)}
-.compliance-table td{padding:12px 14px;font-size:.83rem;color:var(--ink);vertical-align:middle}
-.compliance-table td.td-name{font-weight:500;color:var(--ink);font-family:'Figtree',sans-serif;font-size:.78rem;letter-spacing:normal}
+.compliance-table td{padding:12px 11px;font-size:.8rem;color:var(--ink);vertical-align:middle}
+.compliance-table td.td-name{font-weight:600;color:var(--ink);font-family:'Figtree',sans-serif;font-size:.84rem;letter-spacing:normal;overflow:hidden;text-overflow:ellipsis}
 .compliance-table td.td-type span{display:inline-block;padding:3px 9px;border-radius:99px;font-size:.7rem;font-weight:700;font-family:'JetBrains Mono',monospace}
 .compliance-table td.td-task a{color:var(--accent);text-decoration:none;font-weight:600;font-size:.8rem;cursor:pointer}
 .compliance-table td.td-task a:hover{text-decoration:underline}
@@ -409,6 +409,7 @@ select option{background:var(--white);color:var(--ink)}
 .compliance-empty-sub{font-size:.82rem;text-align:center;max-width:280px;line-height:1.6}
 .compliance-row-actions{display:flex;gap:5px;opacity:0;transition:opacity .14s}
 .compliance-table tbody tr:hover .compliance-row-actions{opacity:1}
+.compliance-table tbody tr td{line-height:1.5}
 
 /* compliance view toggle */
 .c-view-toggle{display:flex;gap:1px;background:var(--bg2);padding:2px;border-radius:var(--radius-sm);border:1px solid var(--border)}
@@ -553,10 +554,21 @@ select option{background:var(--white);color:var(--ink)}
 
 /* ══ AUDIT WORK — ULTRA COMPACT TREE TABLE ══ */
 #auditTable{border-collapse:collapse;width:100%;table-layout:fixed}
+/* ── AUDIT TABLE FROZEN HEADER — single authoritative rule ── */
 #auditTable thead th{
-  padding:6px 8px;font-family:'JetBrains Mono',monospace;font-size:.58rem;
-  text-transform:uppercase;letter-spacing:1.2px;color:var(--ink-dim);font-weight:700;
-  background:var(--bg);border-bottom:1.5px solid var(--border);white-space:nowrap;
+  position:sticky;
+  top:0;
+  z-index:6;
+  padding:11px 11px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.62rem;
+  text-transform:uppercase;
+  letter-spacing:1.1px;
+  font-weight:700;
+  background:var(--surface)!important;
+  border-bottom:2px solid var(--border2);
+  white-space:nowrap;
+  box-shadow:0 2px 0 var(--border);
 }
 .a-drag-handle{
   width:16px;padding:0 3px 0 6px;cursor:grab;color:transparent;
@@ -567,8 +579,8 @@ select option{background:var(--white);color:var(--ink)}
 /* parent row */
 .a-par-row{background:var(--surface2);border-top:1.5px solid var(--border2);border-bottom:1px solid var(--border)}
 .a-par-row:hover{background:var(--bg2)}
-.a-par-cell{padding:5px 8px 5px 2px}
-.a-par-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.86rem;color:var(--ink);letter-spacing:-.02em;white-space:nowrap}
+.a-par-cell{padding:12px 10px 12px 4px}
+.a-par-name{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:.9rem;color:var(--ink);letter-spacing:-.02em;white-space:nowrap}
 .a-tog-btn{
   width:16px;height:16px;border:1.5px solid var(--border2);border-radius:3px;
   background:var(--white);cursor:pointer;display:inline-flex;align-items:center;
@@ -579,22 +591,21 @@ select option{background:var(--white);color:var(--ink)}
 .a-cnt-badge{font-family:'JetBrains Mono',monospace;font-size:.58rem;background:var(--bg2);border:1px solid var(--border);border-radius:99px;padding:0px 6px;color:var(--ink-dim);flex-shrink:0}
 .a-par-done-cell{width:70px;text-align:center;padding:5px 6px}
 .a-done-pill{font-size:.58rem;font-weight:700;color:var(--green);font-family:'JetBrains Mono',monospace}
-/* sub rows — ultra tight */
+/* sub rows */
 .a-sub-row{border-bottom:1px solid var(--border);background:var(--white);transition:background .1s}
 .a-sub-row:hover{background:var(--bg)}
 .a-sub-done{opacity:.5}
-.a-sub-name-cell{padding:3px 4px 3px 0;max-width:220px;overflow:hidden}
-.a-sub-name{font-size:.8rem;color:var(--ink);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;max-width:200px}
+.a-sub-name-cell{padding:10px 8px 10px 0;max-width:none;overflow:hidden}
+.a-sub-name{font-size:.84rem;color:var(--ink);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;max-width:320px}
 .a-strikethrough{text-decoration:line-through;color:var(--ink-dim)!important}
-.a-sub-td{padding:3px 8px;font-size:.78rem;vertical-align:middle}
+.a-sub-td{padding:10px 8px;font-size:.78rem;vertical-align:middle}
 .a-check-td{text-align:center;width:52px}
 .a-chk{width:14px;height:14px;accent-color:var(--green);cursor:pointer;vertical-align:middle}
-.a-dim{color:var(--ink-dim);font-size:.7rem}
-.a-act-cell{width:80px;padding:2px 6px;white-space:nowrap;vertical-align:middle}
-.a-acts{display:flex;gap:2px;align-items:center;opacity:0;transition:opacity .1s}
+.a-dim{color:var(--ink-dim);font-size:.74rem}
+.a-act-cell{width:90px;padding:8px 8px;white-space:nowrap;vertical-align:middle}
+.a-acts{display:flex;gap:4px;align-items:center;opacity:0;transition:opacity .15s}
 .a-par-row:hover .a-acts,.a-sub-row:hover .a-acts{opacity:1}
-.a-add-sub{color:var(--green)!important;border-color:var(--green-border)!important}
-.a-empty-row td{padding:3px 8px 3px 38px;font-size:.72rem;color:var(--ink-dim);font-style:italic;border-bottom:1px solid var(--border)}
+.a-empty-row td{padding:10px 12px 10px 42px;font-size:.76rem;color:var(--ink-dim);font-style:italic;border-bottom:1px solid var(--border)}
 .a-folder-btn{
   display:inline-flex;align-items:center;gap:3px;font-size:.7rem;font-weight:600;
   color:var(--accent);text-decoration:none;background:var(--accent-light);
@@ -610,17 +621,17 @@ select option{background:var(--white);color:var(--ink)}
 .a-dragging{opacity:.35;background:var(--accent-light)!important}
 .a-drop-target{outline:2px dashed var(--accent);outline-offset:-2px;background:var(--accent-light)!important}
 
-#auditTable td{padding:3px 6px!important;vertical-align:middle}
-#auditTable .a-par-cell{padding:4px 8px 4px 2px!important}
-#auditTable .a-act-cell{padding:3px 6px!important}
-#auditTable .compliance-table th{padding:5px 8px!important}
+#auditTable td{padding:10px 8px!important;vertical-align:middle}
+#auditTable .a-par-cell{padding:12px 10px 12px 4px!important}
+#auditTable .a-act-cell{padding:8px 8px!important}
+
 
 
 .flt-lbl{font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;font-weight:600}
-#auditTable thead th{padding:6px 8px;font-family:'JetBrains Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--ink-dim);font-weight:700;background:var(--bg);border-bottom:1.5px solid var(--border2);white-space:nowrap}
-#auditTable td{padding:3px 7px!important;vertical-align:middle}
-#auditTable .a-par-cell{padding:5px 8px 5px 2px!important}
-#auditTable .a-par-done-cell{padding:4px 8px!important}
+
+
+
+#auditTable .a-par-done-cell{padding:10px 10px!important}
 
 /* ═══ TOAST ═══ */
 .toast-wrap{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
@@ -803,16 +814,7 @@ select option{background:var(--white);color:var(--ink)}
       <div class="global-search-results" id="globalResults"></div>
     </div>
     <div class="header-right">
-      <nav class="nav-tabs">
-        <button class="tab active" onclick="switchView('tasks')" title="T">Tasks</button>
-        <button class="tab" onclick="switchView('activity')" title="A">Activity</button>
-        <button class="tab" id="teamTab" onclick="switchView('team')">Team</button>
-        <button class="tab" id="goalsTab" onclick="switchView('goals')">Goals</button>
-        <button class="tab" id="reportTab" onclick="switchView('report')">Report</button>
-        <button class="tab" id="complianceTab" onclick="switchView('compliance')" style="color:var(--amber)">🛡 Compliance</button>
-        <button class="tab" id="auditTab" onclick="switchView('audit')" style="color:var(--purple)">📋 Audit</button>
-      </nav>
-      <div class="h-divider"></div>
+
       <div style="position:relative">
         <button class="btn-icon" id="notifBell" onclick="toggleNotifPanel()" title="Notifications" style="position:relative">🔔<span id="notifBadge" style="display:none;position:absolute;top:-3px;right:-3px;width:16px;height:16px;background:var(--red);border-radius:50%;font-size:.55rem;font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;line-height:1" id="notifBadgeInner">0</span></button>
         <div id="notifPanel" style="display:none;position:absolute;top:calc(100% + 8px);right:0;width:340px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);z-index:999;max-height:420px;overflow:hidden;display:none;flex-direction:column">
@@ -850,40 +852,114 @@ select option{background:var(--white);color:var(--ink)}
   </div>
 
   <div class="app-body">
-    <aside class="sidebar" id="mainSidebar">
+    <aside class="sidebar lp-sidebar" id="mainSidebar">
       <div class="sidebar-toggle" onclick="toggleSidebar()">‹</div>
-      <div class="sidebar-section">
-        <div class="sidebar-label">Overview</div>
-        <div class="stat-grid" id="statsGrid"></div>
+
+      <!-- ── ADD NEW button ── -->
+      <button id="sidebarAddNew2" onclick="openNewTaskBtn()" class="lp-add-btn">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Add New
+      </button>
+
+      <!-- ── MAIN NAV ── -->
+      <div class="lp-section">
+        <button class="lp-nav-item lp-active" id="nav_tasks" onclick="switchView('tasks')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity=".9"/><rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity=".5"/><rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".5"/><rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".3"/></svg>
+          Dashboard
+        </button>
+        <button class="lp-nav-item" id="nav_activity" onclick="switchView('activity')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="2.5" rx="1.25" fill="currentColor" opacity=".5"/><rect x="1" y="6.5" width="10" height="2.5" rx="1.25" fill="currentColor" opacity=".5"/><rect x="1" y="11" width="12" height="2.5" rx="1.25" fill="currentColor" opacity=".5"/></svg>
+          Activity
+        </button>
+        <button class="lp-nav-item" id="nav_team" onclick="switchView('team')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="5.5" cy="5" r="3" fill="currentColor" opacity=".7"/><circle cx="11" cy="5" r="2.2" fill="currentColor" opacity=".4"/><path d="M1 13c0-2.5 2-4 4.5-4s4.5 1.5 4.5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".7"/><path d="M11 9c1.5 0 3 1 3 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".4"/></svg>
+          Teams
+        </button>
+        <button class="lp-nav-item" id="nav_goals" onclick="switchView('goals')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.5" opacity=".5"/><circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.5" opacity=".7"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></svg>
+          Goals
+        </button>
+        <button class="lp-nav-item" id="nav_report" onclick="switchView('report')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="8" width="3" height="7" rx="1" fill="currentColor" opacity=".4"/><rect x="6" y="5" width="3" height="10" rx="1" fill="currentColor" opacity=".6"/><rect x="11" y="2" width="3" height="13" rx="1" fill="currentColor" opacity=".9"/></svg>
+          Analytics
+        </button>
+        <button class="lp-nav-item" id="nav_compliance" onclick="switchView('compliance')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2 4v4c0 3 2.5 5.5 6 6 3.5-.5 6-3 6-6V4L8 1.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" opacity=".8"/><path d="M5.5 8l2 2 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Compliance
+        </button>
+        <button class="lp-nav-item" id="nav_audit" onclick="switchView('audit')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="9" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5" opacity=".6"/><path d="M5 5h5M5 8h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".8"/><circle cx="12" cy="12" r="3" fill="currentColor" opacity=".3"/><path d="M11 12h2M12 11v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Audit
+        </button>
       </div>
-      <div class="sidebar-section">
-        <div class="sidebar-label" id="breakdownLabel">Priority</div>
-        <div class="stat-grid" id="priorityGrid"></div>
+
+      <!-- ── DIVIDER ── -->
+      <div class="lp-divider"></div>
+
+      <!-- ── OVERVIEW STATS (only on tasks view) ── -->
+      <div class="lp-section" id="lp-stats-section">
+        <div class="lp-section-label">Overview</div>
+        <!-- Single summary row: total active + overdue -->
+        <div id="statsGrid" style="display:flex;flex-direction:column;gap:5px">
+          <!-- JS fills this with compact rows -->
+        </div>
       </div>
-      <div class="sidebar-section">
-        <div class="sidebar-label">Status</div>
-        <button class="filter-btn" id="fb_todo" onclick="tf('status','todo')"><span class="fdot" style="background:#94a3b8"></span>To Do<span class="fcount" id="fc_todo">0</span></button>
-        <button class="filter-btn" id="fb_ip" onclick="tf('status','in_progress')"><span class="fdot" style="background:#2563eb"></span>In Progress<span class="fcount" id="fc_ip">0</span></button>
-        <button class="filter-btn" id="fb_rev" onclick="tf('status','review')"><span class="fdot" style="background:#7c3aed"></span>In Review<span class="fcount" id="fc_rev">0</span></button>
-        <button class="filter-btn" id="fb_done" onclick="tf('status','done')"><span class="fdot" style="background:#059669"></span>Done<span class="fcount" id="fc_done">0</span></button>
+
+      <!-- ── STATUS FILTERS ── -->
+      <div class="lp-section" id="lp-status-section">
+        <div class="lp-section-label">Status</div>
+        <button class="lp-filter-item" id="fb_todo" onclick="tf('status','todo')">
+          <span class="lp-dot" style="background:#94a3b8"></span>To Do<span class="fcount" id="fc_todo">0</span>
+        </button>
+        <button class="lp-filter-item" id="fb_ip" onclick="tf('status','in_progress')">
+          <span class="lp-dot" style="background:#3B82F6"></span>In Progress<span class="fcount" id="fc_ip">0</span>
+        </button>
+        <button class="lp-filter-item" id="fb_rev" onclick="tf('status','review')">
+          <span class="lp-dot" style="background:#8B5CF6"></span>In Review<span class="fcount" id="fc_rev">0</span>
+        </button>
+        <button class="lp-filter-item" id="fb_done" onclick="tf('status','done')">
+          <span class="lp-dot" style="background:#10B981"></span>Done<span class="fcount" id="fc_done">0</span>
+        </button>
       </div>
-      <div class="sidebar-section">
-        <div class="sidebar-label">Due Date</div>
-        <button class="due-filter-btn" id="duf_today" onclick="tfDue('today')">📅 Today</button>
-        <button class="due-filter-btn" id="duf_week" onclick="tfDue('week')">📆 This Week</button>
-        <button class="due-filter-btn" id="duf_overdue" onclick="tfDue('overdue')">🔴 Overdue</button>
+
+      <!-- ── DUE DATE FILTERS ── -->
+      <div class="lp-section" id="lp-due-section">
+        <div class="lp-section-label">Due Date</div>
+        <button class="lp-filter-item" id="duf_today" onclick="tfDue('today')">
+          <span class="lp-dot" style="background:#F59E0B"></span>Today
+        </button>
+        <button class="lp-filter-item" id="duf_week" onclick="tfDue('week')">
+          <span class="lp-dot" style="background:#3B82F6"></span>This Week
+        </button>
+        <button class="lp-filter-item" id="duf_overdue" onclick="tfDue('overdue')">
+          <span class="lp-dot" style="background:#EF4444"></span>Overdue
+        </button>
       </div>
-      <div class="sidebar-section" id="teamFilterSection">
-        <div class="sidebar-label">Team Member</div>
+
+      <!-- ── TEAM FILTERS ── -->
+      <div class="lp-section" id="teamFilterSection" style="display:none">
+        <div class="lp-section-label">Team Member</div>
         <div id="teamFilters"></div>
       </div>
-      <div class="sidebar-section" id="adminActionsSection" style="display:none">
-        <div class="sidebar-label">Actions</div>
-        <button class="filter-btn" onclick="openArchiveView()">📦 Archive</button>
-        <button class="filter-btn" onclick="openAutomations()">⚡ Automations</button>
-        <button class="filter-btn" onclick="startTour()">🎓 Tour</button>
-        <button class="filter-btn" onclick="openTempBoard()" id="tempBoardBtn" style="color:var(--amber);font-weight:600">🧲 Temp Board</button>
-        <button class="filter-btn" onclick="openGmailPanel()" style="color:#ea4335;font-weight:600">✉️ Gmail Tasks</button>
+
+      <!-- ── ADMIN ACTIONS ── -->
+      <div class="lp-section" id="adminActionsSection" style="display:none">
+        <div class="lp-section-label">Tools</div>
+        <button class="lp-filter-item" onclick="openArchiveView()">
+          <span style="font-size:.8rem">📦</span>Archive
+        </button>
+        <button class="lp-filter-item" onclick="openAutomations()">
+          <span style="font-size:.8rem">⚡</span>Automations
+        </button>
+        <button class="lp-filter-item" onclick="startTour()">
+          <span style="font-size:.8rem">🎓</span>Tour
+        </button>
+        <button class="lp-filter-item" onclick="openTempBoard()" id="tempBoardBtn" style="color:var(--amber)">
+          <span style="font-size:.8rem">🧲</span>Temp Board
+        </button>
+        <button class="lp-filter-item" onclick="openGmailPanel()" style="color:#ea4335">
+          <span style="font-size:.8rem">✉️</span>Gmail Tasks
+        </button>
       </div>
     </aside>
 
@@ -908,27 +984,60 @@ select option{background:var(--white);color:var(--ink)}
             </button>
           </div>
         </div>
-        <div class="toolbar">
-          <div class="view-toggle">
-            <button class="view-btn active" id="vb_board" onclick="setViewMode('board')"><span>⊞</span><span>Board</span></button>
-            <button class="view-btn" id="vb_list" onclick="setViewMode('list')"><span>☰</span><span>List</span></button>
+        <!-- ── STAT BAR ── -->
+        <div id="taskStatBar" style="display:flex;align-items:stretch;gap:0;background:var(--surface);border-bottom:1.5px solid var(--border);padding:0 4px;flex-shrink:0;min-height:56px">
+          <div class="tstat-card" id="tstat_total" onclick="clearFilters()">
+            <span class="tstat-num" style="color:var(--ink)" id="tstat_total_n">0</span>
+            <span class="tstat-lbl">Total</span>
+          </div>
+          <div class="tstat-divider"></div>
+          <div class="tstat-card" id="tstat_done" onclick="tf('status','done')">
+            <span class="tstat-num" style="color:var(--green)" id="tstat_done_n">0</span>
+            <span class="tstat-lbl">Done</span>
+          </div>
+          <div class="tstat-divider"></div>
+          <div class="tstat-card" id="tstat_inprogress" onclick="tf('status','in_progress')">
+            <span class="tstat-num" style="color:var(--blue)" id="tstat_inprogress_n">0</span>
+            <span class="tstat-lbl">In Progress</span>
+          </div>
+          <div class="tstat-divider"></div>
+          <div class="tstat-card" id="tstat_overdue" onclick="tfDue('overdue')">
+            <span class="tstat-num" style="color:var(--red)" id="tstat_overdue_n">0</span>
+            <span class="tstat-lbl">Overdue</span>
+          </div>
+          <div class="tstat-divider"></div>
+          <div class="tstat-card" id="tstat_pending" onclick="tf('status','todo')">
+            <span class="tstat-num" style="color:var(--amber)" id="tstat_pending_n">0</span>
+            <span class="tstat-lbl">Pending</span>
+          </div>
+        </div>
+
+        <div class="toolbar" style="display:flex;align-items:center;gap:8px;padding:10px 18px;flex-wrap:nowrap">
+          <!-- Task count badge -->
+          <span id="taskCount" style="font-size:.76rem;font-weight:700;color:var(--ink-mid);font-family:'JetBrains Mono',monospace;padding:5px 12px;background:var(--bg);border:1.5px solid var(--border);border-radius:99px;white-space:nowrap;flex-shrink:0"></span>
+          <div class="h-divider" style="height:18px;flex-shrink:0"></div>
+          <!-- View toggles -->
+          <div class="view-toggle" style="flex-shrink:0">
+            <button class="view-btn" id="vb_board" onclick="setViewMode('board')"><span>⊞</span><span>Board</span></button>
+            <button class="view-btn active" id="vb_list" onclick="setViewMode('list')"><span>☰</span><span>List</span></button>
             <button class="view-btn" id="vb_calendar" onclick="setViewMode('calendar')"><span>📅</span><span>Calendar</span></button>
             <button class="view-btn" id="vb_workload" onclick="setViewMode('workload')"><span>📊</span><span>Workload</span></button>
           </div>
-          <div class="h-divider" style="height:16px"></div>
-          <div class="search-wrap"><span class="si">🔍</span><input class="search-input" id="searchInput" placeholder="Search tasks…" oninput="renderTasks()"></div>
-          <select class="input" id="sortSelect" onchange="renderTasks()" style="width:auto;padding:7px 28px 7px 10px;font-size:.78rem">
+          <div class="h-divider" style="height:18px;flex-shrink:0"></div>
+          <!-- Search -->
+          <div class="search-wrap" style="flex:1;max-width:280px"><span class="si">🔍</span><input class="search-input" id="searchInput" placeholder="Search tasks…" oninput="renderTasks()"></div>
+          <!-- Sort -->
+          <select class="input" id="sortSelect" onchange="renderTasks()" style="width:auto;padding:6px 28px 6px 10px;font-size:.77rem;flex-shrink:0">
             <option value="priority">Sort: Priority</option>
             <option value="due">Sort: Due Date</option>
             <option value="created">Sort: Created</option>
             <option value="title">Sort: Title</option>
             <option value="time">Sort: Time Logged</option>
           </select>
-          <button class="btn btn-ghost btn-sm" id="cfBtn" onclick="clearFilters()" style="display:none">✕ Clear</button>
-          <span class="tc" id="taskCount"></span>
-          <button class="btn-new-task" id="newPersonalTaskBtn" onclick="openTaskModal(null,'personal')" style="margin-left:auto;display:none">＋ Task</button>
-          <button class="btn-new-task" id="newTaskBtn" onclick="openTaskModal()" style="display:none">＋ New Task</button>
-          <button class="btn btn-ghost btn-sm" id="tplBtn" onclick="openTemplates()" style="display:none" title="Task templates">📋 Template</button>
+          <button class="btn btn-ghost btn-sm" id="cfBtn" onclick="clearFilters()" style="display:none;flex-shrink:0">✕ Clear</button>
+          <!-- New task button right -->
+          <button class="btn-new-task" id="newTaskMainBtn" onclick="openNewTaskBtn()" style="margin-left:auto;display:none;flex-shrink:0">＋ Task</button>
+          <button class="btn btn-ghost btn-sm" id="tplBtn" onclick="openTemplates()" style="display:none;flex-shrink:0" title="Task templates">📋 Template</button>
         </div>
 
         <div id="tasksGridWrap" class="grid-wrap">
@@ -1109,51 +1218,49 @@ select option{background:var(--white);color:var(--ink)}
       <div id="complianceView" style="display:none;flex:1;overflow:hidden">
         <div class="compliance-page">
           <!-- STICKY HEADER: filters row + title/actions row side by side -->
-          <div class="c-sticky-header">
-            <!-- Row 1: Title + filters + actions all on one line -->
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <div class="c-sticky-header" style="padding:8px 14px">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:nowrap">
               <!-- Title -->
-              <div style="flex-shrink:0">
-                <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;letter-spacing:-.03em;color:var(--ink)">🛡 Compliance Tracker</div>
-                <div style="font-size:.73rem;color:var(--ink-dim);margin-top:2px">Filings · Deadlines · Recurring schedules</div>
+              <div style="flex-shrink:0;min-width:170px">
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:800;letter-spacing:-.03em;color:var(--ink)">🛡 Compliance Tracker</div>
+                <div style="font-size:.68rem;color:var(--ink-dim);margin-top:1px">Filings · Deadlines · Recurring schedules</div>
               </div>
-              <div style="width:1px;height:28px;background:var(--border);flex-shrink:0"></div>
-              <!-- Filters inline -->
-              <div class="compliance-filters" style="flex:1">
-                <div class="fg" style="margin:0;min-width:120px">
-                  <label style="font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;font-weight:600">Month</label>
-                  <input class="input" type="month" id="cfMonth" onchange="renderCompliance()" style="margin-top:4px;padding:6px 10px;font-size:.8rem">
+              <div style="width:1px;height:30px;background:var(--border);flex-shrink:0"></div>
+              <!-- Filters — all inline, no stacked labels -->
+              <div style="display:flex;align-items:center;gap:6px;flex:1;flex-wrap:nowrap">
+                <div style="display:flex;flex-direction:column;gap:2px;min-width:130px">
+                  <span class="flt-lbl">Month</span>
+                  <input class="input ct-filter-input" type="month" id="cfMonth" onchange="renderCompliance()">
                 </div>
-                <div class="fg" style="margin:0;min-width:120px">
-                  <label style="font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;font-weight:600">Type</label>
-                  <select class="input" id="cfType" onchange="renderCompliance()" style="margin-top:4px;padding:6px 10px;font-size:.8rem">
+                <div style="display:flex;flex-direction:column;gap:2px;min-width:110px">
+                  <span class="flt-lbl">Type</span>
+                  <select class="input ct-filter-input" id="cfType" onchange="renderCompliance()">
                     <option value="">All Types</option>
-                    <option value="Tax">Tax</option>
-                    <option value="Audit">Audit</option>
-                    <option value="Legal">Legal</option>
-                    <option value="HR">HR</option>
-                    <option value="Finance">Finance</option>
-                    <option value="Regulatory">Regulatory</option>
+                    <option value="Tax">Tax</option><option value="Audit">Audit</option>
+                    <option value="Legal">Legal</option><option value="HR">HR</option>
+                    <option value="Finance">Finance</option><option value="Regulatory">Regulatory</option>
                     <option value="Other">Other</option>
                   </select>
                 </div>
-                <div class="fg" style="margin:0;min-width:120px">
-                  <label style="font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;font-weight:600">Status</label>
-                  <select class="input" id="cfStatus" onchange="renderCompliance()" style="margin-top:4px;padding:6px 10px;font-size:.8rem">
+                <div style="display:flex;flex-direction:column;gap:2px;min-width:110px">
+                  <span class="flt-lbl">Status</span>
+                  <select class="input ct-filter-input" id="cfStatus" onchange="renderCompliance()">
                     <option value="">All Status</option>
-                    <option value="pending">Pending</option>
-                    <option value="in_progress">In Progress</option>
-                    <option value="completed">Completed</option>
-                    <option value="overdue">Overdue</option>
+                    <option value="pending">Pending</option><option value="in_progress">In Progress</option>
+                    <option value="completed">Completed</option><option value="overdue">Overdue</option>
                   </select>
                 </div>
-                <div class="fg" style="margin:0;width:180px;flex-shrink:0">
-                  <label style="font-size:.58rem;text-transform:uppercase;letter-spacing:1px;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;font-weight:600">Search</label>
-                  <div style="position:relative;margin-top:4px"><span class="si" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:.72rem;opacity:.4;z-index:1">🔍</span><input class="search-input" id="cfSearch" placeholder="Search…" oninput="renderCompliance()" style="width:100%;padding:6px 26px 6px 28px;font-size:.8rem"><button onclick="clearComplianceFilters()" title="Clear filters" style="position:absolute;right:7px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:.75rem;color:var(--ink-dim);padding:2px;transition:color .14s;line-height:1" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--ink-dim)'">✕</button></div>
+                <div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:140px;max-width:200px">
+                  <span class="flt-lbl">Search</span>
+                  <div style="position:relative">
+                    <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:.7rem;opacity:.4">🔍</span>
+                    <input class="search-input ct-filter-input" id="cfSearch" placeholder="Search…" oninput="renderCompliance()" style="width:100%;padding:5px 26px 5px 26px">
+                    <button onclick="clearComplianceFilters()" style="position:absolute;right:7px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:.72rem;color:var(--ink-dim);padding:2px" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--ink-dim)'">✕</button>
+                  </div>
                 </div>
               </div>
               <!-- Actions -->
-              <div style="display:flex;gap:6px;align-items:center;flex-shrink:0">
+              <div style="display:flex;gap:6px;align-items:flex-end;flex-shrink:0">
                 <div class="c-view-toggle">
                   <button class="c-view-btn active" id="cvBtn-table" onclick="setCView('table')">☰ Table</button>
                   <button class="c-view-btn" id="cvBtn-list" onclick="setCView('list')">≡ List</button>
@@ -1162,6 +1269,33 @@ select option{background:var(--white);color:var(--ink)}
                 <button class="btn btn-ghost btn-sm" onclick="exportComplianceCSV()" style="width:auto">↓ CSV</button>
                 <button class="btn btn-primary btn-sm" id="cAddBtn" onclick="openComplianceModal()" style="width:auto">＋ Add</button>
               </div>
+            </div>
+          </div>
+          <!-- COMPLIANCE STAT BAR -->
+          <div id="compStatBar" style="display:flex;align-items:stretch;gap:0;background:var(--surface);border-bottom:1.5px solid var(--border);flex-shrink:0;min-height:56px">
+            <div class="tstat-card" onclick="document.getElementById('cfStatus').value='';renderCompliance()">
+              <span class="tstat-num" style="color:var(--ink)" id="cstat_total_n">0</span>
+              <span class="tstat-lbl">Total</span>
+            </div>
+            <div class="tstat-divider"></div>
+            <div class="tstat-card" onclick="document.getElementById('cfStatus').value='completed';renderCompliance()">
+              <span class="tstat-num" style="color:var(--green)" id="cstat_done_n">0</span>
+              <span class="tstat-lbl">Completed</span>
+            </div>
+            <div class="tstat-divider"></div>
+            <div class="tstat-card" onclick="document.getElementById('cfStatus').value='in_progress';renderCompliance()">
+              <span class="tstat-num" style="color:var(--blue)" id="cstat_inprogress_n">0</span>
+              <span class="tstat-lbl">In Progress</span>
+            </div>
+            <div class="tstat-divider"></div>
+            <div class="tstat-card" onclick="document.getElementById('cfStatus').value='overdue';renderCompliance()">
+              <span class="tstat-num" style="color:var(--red)" id="cstat_overdue_n">0</span>
+              <span class="tstat-lbl">Overdue</span>
+            </div>
+            <div class="tstat-divider"></div>
+            <div class="tstat-card" onclick="document.getElementById('cfStatus').value='pending';renderCompliance()">
+              <span class="tstat-num" style="color:var(--amber)" id="cstat_pending_n">0</span>
+              <span class="tstat-lbl">Pending</span>
             </div>
           </div>
           <!-- SCROLLABLE CONTENT -->
@@ -1173,21 +1307,21 @@ select option{background:var(--white);color:var(--ink)}
               <table class="compliance-table">
                 <thead>
                   <tr>
-                    <th style="width:30px">#</th>
-                    <th>Compliance Name</th>
-                    <th>Month</th>
-                    <th>Type</th>
-                    <th>Assigned To</th>
-                    <th>Due Date</th>
-                    <th>Submit Date</th>
-                    <th>Filing Date</th>
-                    <th>Status</th>
-                    <th>Remarks</th>
-                    <th style="width:90px"></th>
+                    <th style="width:26px;color:#64748b;background:rgba(100,116,139,.06)">#</th>
+                    <th style="width:220px;color:#0F766E;background:rgba(15,118,110,.07)">Compliance Name</th>
+                    <th style="width:60px;color:#1D4ED8;background:rgba(29,78,216,.07)">Month</th>
+                    <th style="width:90px;color:#7C3AED;background:rgba(124,58,237,.07)">Frequency</th>
+                    <th style="width:80px;color:#6D28D9;background:rgba(109,40,217,.07)">Type</th>
+                    <th style="width:130px;color:#0369A1;background:rgba(3,105,161,.07)">Assigned To</th>
+                    <th style="width:80px;color:#B45309;background:rgba(180,83,9,.07)">Due Date</th>
+                    <th style="width:70px;color:#0F766E;background:rgba(15,118,110,.05)">Submit</th>
+                    <th style="width:70px;color:#0F766E;background:rgba(15,118,110,.05)">Filed</th>
+                    <th style="width:120px;color:#BE185D;background:rgba(190,24,93,.07)">Status</th>
+                    <th style="width:60px;background:rgba(100,116,139,.04)"></th>
                   </tr>
                 </thead>
                 <tbody id="complianceTableBody">
-                  <tr><td colspan="10"><div class="compliance-empty"><div class="compliance-empty-icon">🛡</div><div class="compliance-empty-title">No compliance records</div><div class="compliance-empty-sub">Click "+ Add Compliance" to add your first record.</div></div></td></tr>
+                  <tr><td colspan="11"><div class="compliance-empty"><div class="compliance-empty-icon">🛡</div><div class="compliance-empty-title">No compliance records</div><div class="compliance-empty-sub">Click "+ Add Compliance" to add your first record.</div></div></td></tr>
                 </tbody>
               </table>
             </div>
@@ -1204,94 +1338,122 @@ select option{background:var(--white);color:var(--ink)}
       <div id="auditView" style="display:none;flex:1;overflow:hidden">
         <div class="compliance-page">
           <!-- STICKY HEADER -->
-          <div class="c-sticky-header">
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-              <div style="flex-shrink:0">
-                <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem;font-weight:800;letter-spacing:-.03em;color:var(--ink)">📋 Audit Tracker</div>
-                <div style="font-size:.73rem;color:var(--ink-dim);margin-top:2px">Query log · Document status · Review tracking</div>
+          <div class="c-sticky-header" style="padding:8px 14px">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:nowrap">
+              <!-- Title -->
+              <div style="flex-shrink:0;min-width:160px">
+                <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1rem;font-weight:800;letter-spacing:-.03em;color:var(--ink)">📋 Audit Tracker</div>
+                <div style="font-size:.68rem;color:var(--ink-dim);margin-top:1px">Query log · Document status · Review tracking</div>
               </div>
-              <!-- Audit Module Tabs -->
-              <div style="display:flex;gap:4px;background:var(--bg2);padding:3px;border-radius:var(--radius-sm);border:1px solid var(--border);flex-shrink:0">
-                <button id="auditModuleInternal" class="tab active" onclick="switchAuditModule('internal')" style="font-size:.78rem;padding:5px 14px;color:var(--accent)">🏢 Internal</button>
-                <button id="auditModuleStatutory" class="tab" onclick="switchAuditModule('statutory')" style="font-size:.78rem;padding:5px 14px">⚖️ Statutory</button>
+              <!-- Module tabs -->
+              <div style="display:flex;gap:3px;background:var(--bg2);padding:3px;border-radius:var(--radius-sm);border:1px solid var(--border);flex-shrink:0">
+                <button id="auditModuleInternal" class="tab active" onclick="switchAuditModule('internal')" style="font-size:.75rem;padding:4px 12px;color:var(--accent)">🏢 Internal</button>
+                <button id="auditModuleStatutory" class="tab" onclick="switchAuditModule('statutory')" style="font-size:.75rem;padding:4px 12px">⚖️ Statutory</button>
               </div>
-              <div style="width:1px;height:32px;background:var(--border);flex-shrink:0"></div>
-              <!-- Filters -->
-              <div class="compliance-filters" style="flex:1;flex-wrap:wrap;gap:8px">
-                <div class="fg" style="margin:0;min-width:170px">
-                  <label class="flt-lbl">Search</label>
-                  <div style="position:relative;margin-top:3px">
-                    <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:.72rem;opacity:.4">🔍</span>
-                    <input class="search-input" id="auditSearch" placeholder="Search task / area…" oninput="renderAuditWork()" style="width:100%;padding:5px 10px 5px 26px;font-size:.78rem">
+              <div style="width:1px;height:30px;background:var(--border);flex-shrink:0"></div>
+              <!-- Filters — compact inline with labels above -->
+              <div style="display:flex;align-items:flex-end;gap:6px;flex:1;flex-wrap:nowrap;min-width:0">
+                <div style="display:flex;flex-direction:column;gap:2px;flex:1.4;min-width:0">
+                  <span class="flt-lbl">Search</span>
+                  <div style="position:relative">
+                    <span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:.7rem;opacity:.4">🔍</span>
+                    <input class="search-input ct-filter-input" id="auditSearch" placeholder="Search task / area…" oninput="renderAuditWork()" style="width:100%;padding:5px 10px 5px 26px">
                   </div>
                 </div>
-                <div class="fg" style="margin:0;min-width:130px">
-                  <label class="flt-lbl">Department</label>
-                  <select class="input" id="auditFilterDept" onchange="renderAuditWork()" style="margin-top:3px;padding:5px 8px;font-size:.78rem">
+                <div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0">
+                  <span class="flt-lbl">Department</span>
+                  <select class="input ct-filter-input" id="auditFilterDept" onchange="renderAuditWork()" style="width:100%">
                     <option value="">All Depts</option>
                     <option>Accounts</option><option>HR &amp; Payroll</option><option>Tax</option>
                     <option>GST</option><option>IT</option><option>Legal</option><option>Operations</option>
                   </select>
                 </div>
-                <div class="fg" style="margin:0;min-width:130px">
-                  <label class="flt-lbl">Status</label>
-                  <select class="input" id="auditFilterStatus" onchange="renderAuditWork()" style="margin-top:3px;padding:5px 8px;font-size:.78rem">
+                <div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0">
+                  <span class="flt-lbl">Status</span>
+                  <select class="input ct-filter-input" id="auditFilterStatus" onchange="renderAuditWork()" style="width:100%">
                     <option value="">All Status</option>
-                    <option value="not_started">⬜ Not Started</option>
-                    <option value="gathering">🔄 Gathering</option>
-                    <option value="ready">📦 Ready</option>
-                    <option value="shared">📤 Shared</option>
-                    <option value="query_raised">❓ Query Raised</option>
-                    <option value="replied">💬 Replied</option>
-                    <option value="accepted">✅ Accepted</option>
+                    <option value="not_started">Not Started</option>
+                    <option value="gathering">Gathering</option>
+                    <option value="ready">Ready</option>
+                    <option value="shared">Shared</option>
+                    <option value="query_raised">Query Raised</option>
+                    <option value="replied">Replied</option>
+                    <option value="accepted">Accepted</option>
                   </select>
                 </div>
-                <div class="fg" style="margin:0;min-width:120px">
-                  <label class="flt-lbl">Priority</label>
-                  <select class="input" id="auditFilterPriority" onchange="renderAuditWork()" style="margin-top:3px;padding:5px 8px;font-size:.78rem">
+                <div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0">
+                  <span class="flt-lbl">Priority</span>
+                  <select class="input ct-filter-input" id="auditFilterPriority" onchange="renderAuditWork()" style="width:100%">
                     <option value="">All Priority</option>
-                    <option value="high">🔴 High</option>
-                    <option value="medium">🟡 Medium</option>
-                    <option value="low">🟢 Low</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
                   </select>
                 </div>
-                <div class="fg" style="margin:0;min-width:120px">
-                  <label class="flt-lbl">Assignee</label>
-                  <select class="input" id="auditFilterAssignee" onchange="renderAuditWork()" style="margin-top:3px;padding:5px 8px;font-size:.78rem">
+                <div style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0">
+                  <span class="flt-lbl">Assignee</span>
+                  <select class="input ct-filter-input" id="auditFilterAssignee" onchange="renderAuditWork()" style="width:100%">
                     <option value="">All Assignees</option>
                   </select>
                 </div>
               </div>
               <!-- Actions -->
-              <div style="display:flex;gap:6px;align-items:center;flex-shrink:0">
+              <div style="display:flex;gap:6px;align-items:flex-end;flex-shrink:0">
                 <button class="btn btn-ghost btn-sm" onclick="exportAuditCSV()" style="width:auto">↓ CSV</button>
-                <button class="btn btn-primary btn-sm" id="auditAddBtn" onclick="openAuditParentModal()" style="width:auto;display:none">＋ Add Area</button>
+                <button class="btn btn-ghost btn-sm" id="auditAddTaskBtn" onclick="openAuditSubModalFromHeader()" style="width:auto;display:none;color:var(--green);border-color:var(--green-border)">＋ Add Task</button>
+                <button class="btn btn-primary btn-sm" id="auditAddBtn" onclick="openAuditParentModal()" style="width:auto">＋ Internal Area</button>
               </div>
             </div>
-            <!-- Summary pills -->
-            <div id="auditSummaryBar" style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap"></div>
+          </div>
+          <!-- Summary pills (module status overview) -->
+          <div id="auditSummaryBar" style="display:flex;gap:5px;padding:6px 14px;flex-wrap:wrap;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0"></div>
+          <!-- AUDIT STAT BAR -->
+          <div id="auditStatBar" style="display:flex;align-items:stretch;gap:0;background:var(--surface);border-bottom:1.5px solid var(--border);flex-shrink:0;min-height:56px">
+            <div class="tstat-card">
+              <span class="tstat-num" style="color:var(--ink)" id="astat_total_n">0</span>
+              <span class="tstat-lbl">Total Items</span>
+            </div>
+            <div class="tstat-divider"></div>
+            <div class="tstat-card" onclick="document.getElementById('auditFilterStatus').value='accepted';renderAuditWork()">
+              <span class="tstat-num" style="color:var(--green)" id="astat_accepted_n">0</span>
+              <span class="tstat-lbl">Accepted</span>
+            </div>
+            <div class="tstat-divider"></div>
+            <div class="tstat-card" onclick="document.getElementById('auditFilterStatus').value='gathering';renderAuditWork()">
+              <span class="tstat-num" style="color:var(--blue)" id="astat_inprogress_n">0</span>
+              <span class="tstat-lbl">In Progress</span>
+            </div>
+            <div class="tstat-divider"></div>
+            <div class="tstat-card" onclick="document.getElementById('auditFilterStatus').value='query_raised';renderAuditWork()">
+              <span class="tstat-num" style="color:var(--red)" id="astat_query_n">0</span>
+              <span class="tstat-lbl">Query Raised</span>
+            </div>
+            <div class="tstat-divider"></div>
+            <div class="tstat-card" onclick="document.getElementById('auditFilterStatus').value='not_started';renderAuditWork()">
+              <span class="tstat-num" style="color:var(--amber)" id="astat_notstarted_n">0</span>
+              <span class="tstat-lbl">Not Started</span>
+            </div>
           </div>
           <!-- SCROLLABLE CONTENT -->
           <div class="c-content-scroll">
             <div style="background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:auto;flex:1;min-height:200px">
-              <table id="auditTable" style="width:100%;min-width:960px;border-collapse:collapse;table-layout:fixed">
+              <table id="auditTable" style="width:100%;min-width:0;border-collapse:collapse;table-layout:fixed">
                 <thead>
                   <tr>
-                    <th style="width:14px"></th>
-                    <th style="width:240px;max-width:240px">Area / Document Request</th>
-                    <th style="width:80px">Dept</th>
-                    <th style="width:120px">Assignee</th>
-                    <th style="width:120px">Reviewer</th>
-                    <th style="width:80px">Due Date</th>
-                    <th style="width:130px">Status</th>
-                    <th style="width:60px">Priority</th>
-                    <th style="width:80px">Folder</th>
-                    <th style="width:70px">Query</th>
-                    <th style="width:60px"></th>
+                    <th style="width:12px;background:rgba(100,116,139,.04)"></th>
+                    <th style="color:#0F766E;background:rgba(15,118,110,.06)">Area / Document Request</th>
+                    <th style="width:65px;color:#6D28D9;background:rgba(109,40,217,.06)">Dept</th>
+                    <th style="width:105px;color:#0369A1;background:rgba(3,105,161,.06)">Assignee</th>
+                    <th style="width:105px;color:#1D4ED8;background:rgba(29,78,216,.06)">Reviewer</th>
+                    <th style="width:68px;color:#B45309;background:rgba(180,83,9,.06)">Due</th>
+                    <th style="width:110px;color:#BE185D;background:rgba(190,24,93,.06)">Status</th>
+                    <th style="width:60px;color:#B91C1C;background:rgba(185,28,28,.06)">Priority</th>
+                    <th style="width:80px;color:#0F766E;background:rgba(15,118,110,.05);padding-left:12px">Folder</th>
+                    <th style="width:52px;background:rgba(100,116,139,.04)"></th>
                   </tr>
                 </thead>
                 <tbody id="auditTableBody">
-                  <tr><td colspan="11">
+                  <tr><td colspan="10">
                     <div class="compliance-empty">
                       <div class="compliance-empty-icon">📋</div>
                       <div class="compliance-empty-title">No audit items yet</div>
@@ -1343,9 +1505,16 @@ select option{background:var(--white);color:var(--ink)}
           <div class="form-body">
             <input type="hidden" id="editAuditSubId">
             <input type="hidden" id="aSubParentId">
-            <!-- Area badge -->
-            <div style="display:inline-flex;align-items:center;gap:6px;background:var(--purple-bg);border:1px solid var(--purple-border);border-radius:var(--radius-sm);padding:4px 12px;margin-bottom:14px;font-size:.78rem;color:var(--purple);font-weight:600">
+            <!-- Area badge (shown when parentId pre-set) -->
+            <div id="aSubAreaBadge" style="display:inline-flex;align-items:center;gap:6px;background:var(--purple-bg);border:1px solid var(--purple-border);border-radius:var(--radius-sm);padding:4px 12px;margin-bottom:14px;font-size:.78rem;color:var(--purple);font-weight:600">
               <span>📁</span><span id="aSubParentLabel">Area</span>
+            </div>
+            <!-- Area select (shown when opened from header with no pre-set parent) -->
+            <div id="aSubAreaSelectWrap" class="fg" style="display:none;margin-bottom:14px">
+              <label>Audit Area *</label>
+              <select class="input" id="aSubAreaSelect">
+                <option value="">— Select Area —</option>
+              </select>
             </div>
             <div class="form-row">
               <div class="fg">
@@ -1850,7 +2019,7 @@ function fmtDate(ts){if(!ts)return null;return new Date(ts).toLocaleDateString('
 
 let members=[],tasks=[],activity=[],currentUser=null,currentUserProfile=null;
 let filters={status:'',priority:'',assignee:'',dueFilter:''},currentView='tasks',openDetailId=null,currentDashboard='personal';
-let currentViewMode='board',selectedTasks=new Set();
+let currentViewMode='list',selectedTasks=new Set();
 let pendingTags=[],pendingSubtasks=[],pendingColor='',pendingRecur='';
 let calYear=new Date().getFullYear(),calMonth=new Date().getMonth();
 let dragSrcId=null;
@@ -2356,9 +2525,11 @@ function updateUserHeader(){
   document.getElementById('userName').textContent=m.name.split(' ')[0];
   const rb=document.getElementById('userRoleBadge');rb.textContent=m.role==='admin'?'Admin':'Member';rb.className='role-badge '+(m.role==='admin'?'role-admin':'role-member');
   const isAdm=m.role==='admin';
-  document.getElementById('teamTab').style.display=isAdm?'':'none';
-  document.getElementById('teamFilterSection').style.display=isAdm?'':'none';
-  document.getElementById('reportTab').style.display=isAdm?'':'none';
+  const _tfs=document.getElementById('teamFilterSection');if(_tfs)_tfs.style.display=isAdm?'':'none';
+  const navReport=document.getElementById('nav_report');
+  if(navReport)navReport.style.display=isAdm?'':'none';
+  const navTeam=document.getElementById('nav_team');
+  if(navTeam)navTeam.style.display=isAdm?'':'none';
   // Goals tab visible to everyone
   // Hide admin-only sidebar actions from members
   const actSec=document.getElementById('adminActionsSection');
@@ -2380,11 +2551,19 @@ function updateUserHeader(){
 }
 function updateDashboardButtons(){
   const isAdm=isAdmin();
-  const nb=document.getElementById('newTaskBtn');const pb=document.getElementById('newPersonalTaskBtn');const tb=document.getElementById('tplBtn');
-  if(nb)nb.style.display=(currentDashboard==='team'&&isAdm)?'inline-flex':'none';
-  if(pb)pb.style.display=currentDashboard==='personal'?'':'none';
+  const mb=document.getElementById('newTaskMainBtn');
+  const tb=document.getElementById('tplBtn');
+  if(mb){
+    const show=(currentDashboard==='personal')||(currentDashboard==='team'&&isAdm);
+    mb.style.display=show?'inline-flex':'none';
+    mb.textContent=currentDashboard==='team'?'＋ New Task':'＋ Task';
+  }
   if(tb)tb.style.display=isAdm?'inline-flex':'none';
 }
+window.openNewTaskBtn=function(){
+  const src=currentDashboard==='team'?'team':'personal';
+  openTaskModal(null,src);
+};
 window.switchDashboard=function(dash){
   currentDashboard=dash;
   document.getElementById('dashPersonalBtn').className='dash-tab personal'+(dash==='personal'?' active':'');
@@ -2406,6 +2585,8 @@ window.switchDashboard=function(dash){
   if(calWrap)calWrap.style.display=isNotes?'none':(currentViewMode==='calendar'?'block':'none');
   if(wlWrap)wlWrap.style.display=isNotes?'none':(currentViewMode==='workload'?'block':'none');
   if(toolbar)toolbar.style.display=isNotes?'none':'';
+  const statBar=document.getElementById('taskStatBar');
+  if(statBar)statBar.style.display=isNotes?'none':'flex';
 
   // Hide sidebar when in notes mode
   const sb=document.getElementById('mainSidebar');
@@ -2427,8 +2608,8 @@ window.openNotesPanel=function(){
   switchDashboard('notes');
 };
 function updateDashboardCounts(){
-  const pt=tasks.filter(t=>(t.source||'team')==='personal'&&t.createdBy===currentUser?.uid&&!t.archived);
-  const tt=tasks.filter(t=>(t.source||'team')!=='personal'&&!t.archived);
+  const pt=tasks.filter(t=>(t.source||'team')==='personal'&&t.createdBy===currentUser?.uid&&!t.archived&&t.status!=='done');
+  const tt=tasks.filter(t=>(t.source||'team')!=='personal'&&!t.archived&&t.status!=='done');
   const mt=isAdmin()?tt:tt.filter(t=>!t.assigneeId||t.assigneeId===currentUser?.uid);
   const pc=document.getElementById('personalCount');const tc=document.getElementById('teamCount');const nc=document.getElementById('notesCount');
   if(pc)pc.textContent=pt.length;if(tc)tc.textContent=mt.length;if(nc)nc.textContent=notes.length;
@@ -2550,8 +2731,6 @@ function renderAll(){updateDashboardCounts();renderSidebar();if(currentViewMode=
 
 // ── SIDEBAR ──
 function renderSidebar(){
-  if(document.getElementById('dashTeamBtn')?.classList.contains('active'))currentDashboard='team';
-  else if(document.getElementById('dashPersonalBtn')?.classList.contains('active'))currentDashboard='personal';
   let st;
   if(currentDashboard==='personal'){st=tasks.filter(t=>(t.source||'team')==='personal'&&t.createdBy===currentUser?.uid&&!t.archived);}
   else{const tt=tasks.filter(t=>(t.source||'team')!=='personal'&&!t.archived);st=isAdmin()?tt:tt.filter(t=>!t.assigneeId||t.assigneeId===currentUser?.uid);}
@@ -2559,20 +2738,34 @@ function renderSidebar(){
   const pCounts={};Object.keys(P).forEach(p=>pCounts[p]=0);st.forEach(t=>pCounts[t.priority]=(pCounts[t.priority]||0)+1);
   const overdue=st.filter(t=>t.due&&new Date(t.due+'T00:00:00')<new Date()&&t.status!=='done').length;
   const lbl=currentDashboard==='personal'?'My Tasks':(isAdmin()?'Total':'My Tasks');
-  let h=`<div class="stat-card" onclick="clearFilters()"><div class="stat-num">${st.filter(t=>t.status!=='done').length}</div><div class="stat-lbl">${lbl}</div></div>`;
-  Object.entries(S).forEach(([k,v])=>h+=`<div class="stat-card" onclick="tf('status','${k}')"><div class="stat-num" style="color:${v.color}">${counts[k]||0}</div><div class="stat-lbl">${v.label}</div></div>`);
-  if(overdue>0)h+=`<div class="stat-card" style="grid-column:span 2;border-color:var(--red-border);background:var(--red-bg)"><div class="stat-num" style="color:var(--red)">${overdue}</div><div class="stat-lbl">Overdue</div></div>`;
+  const activeCount=st.filter(t=>t.status!=='done').length;
+  // Update top stat bar — Total = active non-done tasks (matches what's visible by default)
+  const setN=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
+  const activeCount2=st.filter(t=>t.status!=='done').length;
+  setN('tstat_total_n',st.length); // show total including done for reference
+  setN('tstat_done_n',counts['done']||0);
+  setN('tstat_inprogress_n',counts['in_progress']||0);
+  setN('tstat_overdue_n',overdue);
+  setN('tstat_pending_n',counts['todo']||0);
+  // Highlight active stat card
+  const _statMap={done:'tstat_done',in_progress:'tstat_inprogress',todo:'tstat_pending'};
+  ['tstat_total','tstat_done','tstat_inprogress','tstat_overdue','tstat_pending'].forEach(id=>{const el=document.getElementById(id);if(el){el.style.background='';el.style.borderBottom='';}});
+  if(filters.status&&_statMap[filters.status]){const el=document.getElementById(_statMap[filters.status]);if(el)el.style.borderBottom='2px solid currentColor';}
+  else if(filters.dueFilter==='overdue'){const el=document.getElementById('tstat_overdue');if(el)el.style.borderBottom='2px solid var(--red)';}
+  // Sidebar overview: compact active + overdue
+  let h=`<div style="background:var(--accent-light);border:1.5px solid var(--accent-mid);border-radius:10px;padding:10px 12px;cursor:pointer;transition:all .18s" onclick="clearFilters()">
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:1.6rem;font-weight:800;line-height:1;letter-spacing:-.04em;color:var(--accent)">${activeCount}</div>
+    <div style="font-size:.58rem;color:var(--accent);margin-top:3px;text-transform:uppercase;letter-spacing:1px;font-family:'JetBrains Mono',monospace;font-weight:600;opacity:.8">${lbl} Active</div>
+  </div>`;
+  if(overdue>0)h+=`<div style="background:var(--red-bg);border:1.5px solid var(--red-border);border-radius:10px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between">
+    <span style="font-size:.75rem;font-weight:600;color:var(--red)">🔴 Overdue</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:800;color:var(--red)">${overdue}</span>
+  </div>`;
   document.getElementById('statsGrid').innerHTML=h;
   const ids={todo:'fc_todo',in_progress:'fc_ip',review:'fc_rev',done:'fc_done'};
   Object.entries(ids).forEach(([k,id])=>{const el=document.getElementById(id);if(el)el.textContent=counts[k]||0;});
-  ['fb_todo','fb_ip','fb_rev','fb_done'].forEach((id,i)=>{const key=['todo','in_progress','review','done'][i];document.getElementById(id)?.classList.toggle('active',filters.status===key);});
-  if(isAdmin()&&currentDashboard==='team'){
-    document.getElementById('breakdownLabel').textContent='Priority';
-    document.getElementById('priorityGrid').innerHTML=Object.entries(P).map(([k,v])=>`<div class="stat-card" onclick="tf('priority','${k}')"><div class="stat-num" style="color:${v.color}">${pCounts[k]||0}</div><div class="stat-lbl">${v.icon} ${v.label}</div></div>`).join('');
-  } else {
-    document.getElementById('breakdownLabel').textContent='Status';
-    document.getElementById('priorityGrid').innerHTML=Object.entries(S).map(([k,v])=>`<div class="stat-card" onclick="tf('status','${k}')"><div class="stat-num" style="color:${v.color}">${counts[k]||0}</div><div class="stat-lbl">${v.label}</div></div>`).join('');
-  }
+  ['fb_todo','fb_ip','fb_rev','fb_done'].forEach((id,i)=>{const key=['todo','in_progress','review','done'][i];const el=document.getElementById(id);if(el){el.classList.toggle('active',filters.status===key);}});
+
   const tfs=document.getElementById('teamFilterSection');if(tfs)tfs.style.display=(isAdmin()&&currentDashboard==='team')?'':'none';
   if(isAdmin()&&currentDashboard==='team'){document.getElementById('teamFilters').innerHTML=members.map(m=>`<button class="filter-btn ${filters.assignee===m.id?'active':''}" onclick="tf('assignee','${m.id}')">${av(m,16)}<span>${esc(m.name)}</span></button>`).join('');}
 }
@@ -2608,7 +2801,6 @@ function getFiltered(){
 function taskCardHtml(t,isPersonal=false,groupBy='priority'){
   const p=P[t.priority]||P.medium,s_=S[t.status]||S.todo,assignee=members.find(m=>m.id===t.assigneeId),due=fd(t.due);
   const cmtCount=t.comments&&typeof t.comments==='object'?Object.keys(t.comments).length:0;
-  const assignedDate=t.assignedAt?fmtDate(t.assignedAt):t.assigneeId&&t.ts?fmtDate(t.ts):null;
   const isDone=t.status==='done';const tags=t.tags||[];const subtasks=t.subtasks||[];
   const doneSubtasks=subtasks.filter(s=>s.done).length;
   const progress=subtasks.length?Math.round((doneSubtasks/subtasks.length)*100):(isDone?100:0);
@@ -2616,37 +2808,51 @@ function taskCardHtml(t,isPersonal=false,groupBy='priority'){
   const canEdit=isAdmin()||(t.source==='personal'&&t.createdBy===currentUser?.uid);
   const isSelected=selectedTasks.has(t.id);
   const timer=timers[t.id];const isTimerRunning=timer?.start;
-  const cardStyle=t.color?`border-left:4px solid ${t.color};`:'';
-  return`<div class="task-card${isSelected?' selected':''}" id="tc_${t.id}" style="${cardStyle}" onclick="openDetail('${t.id}')" ondblclick="event.stopPropagation();openTaskModal('${t.id}')"
+  const leftBorder=t.color?`border-left:4px solid ${t.color};`:'';
+  const statusBadge=groupBy==='status'
+    ?`<span class="badge" style="color:${p.color};background:${p.bg};border-color:${p.border}">${p.icon} ${p.label}</span>`
+    :`<span class="badge" style="color:${s_.color};background:${s_.bg};border-color:${s_.border}">${s_.label}</span>`;
+  const assigneeHtml=isPersonal
+    ?`<span style="display:inline-flex;align-items:center;gap:5px;font-size:.71rem;color:var(--accent);font-weight:700;background:var(--accent-light);padding:2px 8px;border-radius:99px;border:1.5px solid var(--accent-mid)">👤 Personal</span>`
+    :(assignee
+      ?`<div style="display:flex;align-items:center;gap:6px">${av(assignee,22)}<span style="font-size:.73rem;color:var(--ink-mid);font-weight:500">${esc(assignee.name)}</span></div>`
+      :`<span style="font-size:.71rem;color:var(--ink-dim);font-style:italic">Unassigned</span>`);
+  const dueHtml=due?`<span style="font-size:.68rem;color:${due.cls==='overdue'?'var(--red)':due.cls==='warning'?'var(--amber)':'var(--ink-dim)'};font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:3px">📅 ${due.text}</span>`:'';
+  const priorityFlag=`<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 9px;border-radius:99px;font-size:.66rem;font-weight:700;border:1.5px solid;color:${p.color};background:${p.bg};border-color:${p.border};white-space:nowrap">${p.icon} ${p.label}</span>`;
+  return`<div class="task-card${isSelected?' selected':''}" id="tc_${t.id}" style="${leftBorder}" onclick="openDetail('${t.id}')" ondblclick="event.stopPropagation();openTaskModal('${t.id}')"
     draggable="true" ondragstart="onDragStart(event,'${t.id}')" ondragend="onDragEnd(event,'${t.id}')">
     <button class="card-select-btn" title="Select task" onclick="toggleSelectTask(event,'${t.id}')"></button>
-    <button class="card-menu-btn" onclick="openCardMenu(event,'${t.id}')">⋯</button>
-    <div class="card-dropdown" id="cd_${t.id}">
-      ${canEdit?`<button class="card-menu-item" onclick="event.stopPropagation();document.getElementById('cd_${t.id}').classList.remove('open');openTaskModal('${t.id}')">✏ Edit</button>`:''}
-      <button class="card-menu-item" onclick="event.stopPropagation();document.getElementById('cd_${t.id}').classList.remove('open');toggleTaskDone(event,'${t.id}')">${isDone?'↩ Reopen':'✓ Complete'}</button>
-      <button class="card-menu-item" onclick="event.stopPropagation();document.getElementById('cd_${t.id}').classList.remove('open');startTimer('${t.id}')">${isTimerRunning?'⏹ Stop Timer':'⏱ Start Timer'}</button>
-      ${canEdit?`<button class="card-menu-item" onclick="event.stopPropagation();document.getElementById('cd_${t.id}').classList.remove('open');archiveTask('${t.id}')">📦 Archive</button>`:''}
-      ${canEdit?`<button class="card-menu-item danger" onclick="event.stopPropagation();document.getElementById('cd_${t.id}').classList.remove('open');deleteTask('${t.id}')">🗑 Delete</button>`:''}
-    </div>
-    <div class="ct">
-      <button class="checkbox-btn ${isDone?'checked':''}" title="${isDone?'Mark as To Do':'Mark as Done'}" onclick="toggleTaskDone(event,'${t.id}')"></button>
-      ${groupBy==='status'?`<span class="badge" style="color:${p.color};background:${p.bg};border-color:${p.border}">${p.icon} ${p.label}</span>`:`<span class="badge" style="color:${s_.color};background:${s_.bg};border-color:${s_.border}">${s_.label}</span>`}
-      ${t.recur?`<span class="badge" style="color:var(--accent);background:var(--accent-light);border-color:var(--accent-mid)">🔄 ${t.recur}</span>`:''}
-    </div>
-    <div class="card-title${isDone?' done-title':''}">${esc(t.title)}</div>
-    ${t.description?`<div class="card-desc">${t.description.replace(/<[^>]+>/g,' ').trim()}</div>`:''}
-    ${tags.length?`<div class="card-tags">${tags.map(tag=>{const tc=tagColor(tag);return`<span class="tag" style="background:${tc.bg};border-color:${tc.border};color:${tc.color}">${esc(tag)}</span>`;}).join('')}</div>`:''}
-    ${showProgress?`<div class="card-progress"><div class="card-progress-label">${subtasks.length?`${doneSubtasks}/${subtasks.length} subtasks`:'Completed'}</div><div class="card-progress-bar"><div class="card-progress-fill" style="width:${progress}%"></div></div></div>`:''}
-    <div class="cb">
-      ${isPersonal?`<span style="font-size:.7rem;color:var(--accent);font-weight:700;background:var(--accent-light);padding:2px 8px;border-radius:99px;border:1px solid var(--accent-mid)">👤 Personal</span>`:(assignee?`<div style="display:flex;align-items:center;gap:6px;font-size:.74rem;color:var(--ink-mid);font-weight:500">${av(assignee,19)}<span>${esc(assignee.name)}</span></div>`:`<span style="font-size:.72rem;color:var(--ink-dim);font-style:italic">Unassigned</span>`)}
-      <div class="card-meta-icons">
-        ${isTimerRunning?`<span class="time-badge active">⏱ Running</span>`:t.timeLogged>0?`<span class="time-badge">⏱ ${fmtTime(t.timeLogged)}</span>`:''}
-        ${t.link?`<span class="meta-icon" title="Has attachment/link" onclick="event.stopPropagation();openLink('${t.id}')">🔗</span>`:''}
-        ${cmtCount>0?`<span class="meta-icon">💬 ${cmtCount}</span>`:''}
-        ${due?`<span class="meta-icon" style="color:${due.cls==='overdue'?'var(--red)':due.cls==='warning'?'var(--amber)':'var(--ink-dim)'}">${due.text}</span>`:''}
+    <!-- TOP ROW: status badge + menu -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;position:relative">
+      <div style="display:flex;align-items:center;gap:5px">${statusBadge}${t.recur?`<span class="badge" style="color:var(--accent);background:var(--accent-light);border-color:var(--accent-mid)">🔄 ${t.recur}</span>`:''}</div>
+      <button class="card-menu-btn" onclick="openCardMenu(event,'${t.id}')">⋯</button>
+      <div class="card-dropdown" id="cd_${t.id}">
+        ${canEdit?`<button class="card-menu-item" onclick="event.stopPropagation();document.getElementById('cd_${t.id}').classList.remove('open');openTaskModal('${t.id}')">✏ Edit</button>`:''}
+        <button class="card-menu-item" onclick="event.stopPropagation();document.getElementById('cd_${t.id}').classList.remove('open');toggleTaskDone(event,'${t.id}')">${isDone?'↩ Reopen':'✓ Complete'}</button>
+        <button class="card-menu-item" onclick="event.stopPropagation();document.getElementById('cd_${t.id}').classList.remove('open');startTimer('${t.id}')">${isTimerRunning?'⏹ Stop Timer':'⏱ Start Timer'}</button>
+        ${canEdit?`<button class="card-menu-item" onclick="event.stopPropagation();document.getElementById('cd_${t.id}').classList.remove('open');archiveTask('${t.id}')">📦 Archive</button>`:''}
+        ${canEdit?`<button class="card-menu-item danger" onclick="event.stopPropagation();document.getElementById('cd_${t.id}').classList.remove('open');deleteTask('${t.id}')">🗑 Delete</button>`:''}
       </div>
     </div>
-    ${assignedDate&&!isPersonal?`<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);display:flex;align-items:center;gap:5px"><span style="font-size:.61rem;color:var(--ink-dim);font-family:'JetBrains Mono',monospace">Assigned ${assignedDate}</span></div>`:''}
+    <!-- TITLE ROW: checkbox + title -->
+    <div style="display:flex;gap:9px;align-items:flex-start;margin-bottom:${t.description?'6px':'10px'}">
+      <button class="checkbox-btn ${isDone?'checked':''}" title="${isDone?'Mark as To Do':'Mark as Done'}" onclick="toggleTaskDone(event,'${t.id}')" style="margin-top:2px;flex-shrink:0"></button>
+      <div class="card-title${isDone?' done-title':''}">${esc(t.title)}</div>
+    </div>
+    ${t.description?`<div class="card-desc" style="margin-left:25px;margin-bottom:8px">${t.description.replace(/<[^>]+>/g,' ').trim()}</div>`:''}
+    ${tags.length?`<div class="card-tags" style="margin-left:25px;margin-bottom:8px">${tags.map(tag=>{const tc=tagColor(tag);return`<span class="tag" style="background:${tc.bg};border-color:${tc.border};color:${tc.color}">${esc(tag)}</span>`;}).join('')}</div>`:''}
+    ${showProgress?`<div class="card-progress" style="margin-left:25px;margin-bottom:8px"><div class="card-progress-label">${subtasks.length?`${doneSubtasks}/${subtasks.length} subtasks`:'Completed'}</div><div class="card-progress-bar"><div class="card-progress-fill" style="width:${progress}%"></div></div></div>`:''}
+    <!-- FOOTER: assignee+date left | priority flag right -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1.5px solid var(--border);gap:6px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        ${assigneeHtml}
+        ${dueHtml}
+        ${isTimerRunning?`<span class="time-badge active" style="font-size:.67rem">⏱</span>`:t.timeLogged>0?`<span class="time-badge" style="font-size:.67rem">⏱ ${fmtTime(t.timeLogged)}</span>`:''}
+        ${cmtCount>0?`<span style="font-size:.68rem;color:var(--ink-dim)">💬 ${cmtCount}</span>`:''}
+        ${t.link?`<span style="font-size:.7rem;color:var(--ink-dim);cursor:pointer" onclick="event.stopPropagation();openLink('${t.id}')">🔗</span>`:''}
+      </div>
+      ${priorityFlag}
+    </div>
   </div>`;
 }
 
@@ -2665,11 +2871,53 @@ function taskListRowHtml(t,isPersonal=false){
   </tr>`;
 }
 
+// ── SPREADSHEET ROW ──
+function taskSpreadsheetRowHtml(t, isPersonal=false){
+  const p=P[t.priority]||P.medium, s_=S[t.status]||S.todo;
+  const assignee=members.find(m=>m.id===t.assigneeId);
+  const due=fd(t.due); const isDone=t.status==='done';
+  const subtasks=t.subtasks||[];
+  const doneSubtasks=subtasks.filter(s=>s.done).length;
+  const progress=subtasks.length?Math.round((doneSubtasks/subtasks.length)*100):(isDone?100:0);
+  const canEdit=isAdmin()||(t.source==='personal'&&t.createdBy===currentUser?.uid);
+  const desc=(t.description||'').replace(/<[^>]+>/g,' ').trim();
+  const dueColor=due?.cls==='overdue'?'var(--red)':due?.cls==='warning'?'var(--amber)':'var(--ink-mid)';
+  const statusBadge=`<span style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-size:.67rem;font-weight:700;border:1.5px solid;color:${s_.color};background:${s_.bg};border-color:${s_.border};white-space:nowrap">${s_.label}</span>`;
+  return`<tr class="ap-row${isDone?' ap-row-done':''}" onclick="openDetail('${t.id}')">
+    <td class="ap-td-check" onclick="event.stopPropagation()">
+      <button class="checkbox-btn ${isDone?'checked':''}" onclick="toggleTaskDone(event,'${t.id}')"></button>
+    </td>
+    <td class="ap-td-status">${statusBadge}</td>
+    <td class="ap-td-task">
+      <div style="display:flex;align-items:center;gap:7px">
+        <span class="ap-task-name${isDone?' ap-done-text':''}">${esc(t.title)}</span>
+        ${subtasks.length?`<span style="font-size:.62rem;color:var(--ink-dim);background:var(--bg2);border:1px solid var(--border);border-radius:99px;padding:1px 6px;font-family:'JetBrains Mono',monospace">${subtasks.length}</span>`:''}
+        ${t.tags&&t.tags.length?t.tags.slice(0,2).map(tag=>{const tc=tagColor(tag);return`<span class="tag" style="background:${tc.bg};border-color:${tc.border};color:${tc.color}">${esc(tag)}</span>`;}).join(''):''}
+      </div>
+    </td>
+    <td class="ap-td-assignee">
+      ${isPersonal?`<span style="font-size:.72rem;color:var(--accent);font-weight:600">👤 Me</span>`:
+        assignee?`<div style="display:flex;align-items:center;gap:6px">${av(assignee,24)}<span style="font-size:.78rem;font-weight:500;color:var(--ink)">${esc(assignee.name)}</span></div>`:
+        '<span style="color:var(--border2);font-size:.75rem">Unassigned</span>'}
+    </td>
+    <td class="ap-td-due" style="color:${dueColor};font-size:.78rem;font-family:'JetBrains Mono',monospace;white-space:nowrap">
+      ${due?`📅 ${due.text}`:'<span style="color:var(--border2)">—</span>'}
+    </td>
+    <td class="ap-td-priority">
+      <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-size:.67rem;font-weight:700;border:1.5px solid;color:${p.color};background:${p.bg};border-color:${p.border}">${p.icon} ${p.label}</span>
+    </td>
+    <td class="ap-td-actions" onclick="event.stopPropagation()">
+      <div style="display:flex;gap:2px;opacity:0;transition:opacity .15s" class="ap-row-actions">
+        ${canEdit?`<button class="btn-icon" style="width:24px;height:24px;font-size:.7rem" onclick="openTaskModal('${t.id}')">✏</button>`:''}
+        ${canEdit?`<button class="btn-icon" style="width:24px;height:24px;font-size:.7rem;border-color:var(--red-border);color:var(--red)" onclick="deleteTask('${t.id}')">🗑</button>`:''}
+      </div>
+    </td>
+  </tr>`;
+}
+
 // ── RENDER TASKS ──
 function renderTasks(){
   if(currentView!=='tasks')return;
-  if(document.getElementById('dashTeamBtn')?.classList.contains('active'))currentDashboard='team';
-  else if(document.getElementById('dashPersonalBtn')?.classList.contains('active'))currentDashboard='personal';
   if(currentViewMode==='calendar'){renderCalendar();return;}if(currentViewMode==='workload'){renderWorkload();return;}
   const f=getFiltered();
   document.getElementById('cfBtn').style.display=hasActiveFilters()?'':'none';
@@ -2679,7 +2927,15 @@ function renderTasks(){
   if(currentViewMode==='list'){
     if(f.length===0){grouped.innerHTML='';empty.style.display='flex';empty.innerHTML=getEmptyHtml();return;}
     empty.style.display='none';grouped.style.cssText='display:block;min-width:0;height:auto;width:100%';
-    grouped.innerHTML=`<table class="list-view-table"><thead><tr><th></th><th>Task</th><th>Status</th><th>Priority</th><th>Assignee</th><th>Time</th><th>Due</th></tr></thead><tbody>${f.map(t=>taskListRowHtml(t,currentDashboard==='personal')).join('')}</tbody></table>`;return;
+    grouped.innerHTML=`<table class="list-view-table ap-spreadsheet"><thead><tr>
+      <th style="width:36px"></th>
+      <th style="width:120px;color:#5B4FE9;background:rgba(91,79,233,.07)">Status</th>
+      <th style="color:#0F766E;background:rgba(15,118,110,.06)">Task</th>
+      <th style="color:#1D4ED8;background:rgba(29,78,216,.06)">Assignee</th>
+      <th style="color:#B45309;background:rgba(180,83,9,.06)">Due Date</th>
+      <th style="color:#BE185D;background:rgba(190,24,93,.06)">Priority</th>
+      <th style="width:40px"></th>
+    </tr></thead><tbody>${f.map(t=>taskSpreadsheetRowHtml(t,currentDashboard==='personal')).join('')}</tbody></table>`;return;
   }
   // Board
   grouped.style.cssText='display:flex;gap:14px;align-items:flex-start;min-width:max-content;height:100%';
@@ -2924,7 +3180,7 @@ window.unarchiveTask=async function(tid){await update(ref(db,`tasks/${tid}`),{ar
 
 // ── COMMAND PALETTE ──
 const CMD_ACTIONS=[
-  {icon:'＋',title:'New Task',sub:'Create a new team task',fn:()=>openTaskModal(),kbd:'N'},
+  {icon:'＋',title:'New Task',sub:'Create a new team task',fn:()=>openTaskModal(null,'team'),kbd:'N'},
   {icon:'👤',title:'New Personal Task',sub:'Create a personal task',fn:()=>openTaskModal(null,'personal')},
   {icon:'🌙',title:'Toggle Dark Mode',sub:'Switch light/dark theme',fn:()=>toggleTheme(),kbd:'D'},
   {icon:'⊞',title:'Board View',sub:'Switch to Kanban board',fn:()=>setViewMode('board'),kbd:'1'},
@@ -2977,7 +3233,7 @@ const TOUR_STEPS=[
   {target:'.logo',title:'Welcome to Ginesysone Finance Task Board! 👋',desc:'Your all-in-one task management platform for finance teams. Let\'s take a quick tour of the key features.',pos:'bottom'},
   {target:'#mainSidebar',title:'Sidebar Overview',desc:'Quick stats, status filters, and due date shortcuts. Click any stat card to filter tasks instantly.',pos:'right'},
   {target:'.view-toggle',title:'Multiple Views',desc:'Switch between Board (Kanban), List, Calendar, and Workload views to see your tasks the way you like.',pos:'bottom'},
-  {target:'#newTaskBtn,#newPersonalTaskBtn',title:'Create Tasks',desc:'Click here to create a new task. You can add subtasks, tags, attach color labels, set recurring intervals, and more.',pos:'bottom'},
+  {target:'#newTaskMainBtn',title:'Create Tasks',desc:'Click here to create a new task. You can add subtasks, tags, attach color labels, set recurring intervals, and more.',pos:'bottom'},
   {target:'#globalSearch',title:'Global Search',desc:'Search across all tasks instantly. Press ⌘K anywhere to open the command palette for quick actions.',pos:'bottom'},
   {target:'.theme-toggle',title:'Dark Mode',desc:'Toggle between light and dark mode. Your preference is saved automatically.',pos:'bottom'},
 ];
@@ -3120,9 +3376,19 @@ window.switchView=function(view){
   const vMap={tasks:'block',activity:'flex',team:'flex',goals:'flex',report:'flex',compliance:'flex',audit:'flex'};
   ['tasks','activity','team','goals','report','compliance','audit'].forEach(v=>{const el=document.getElementById(v+'View');if(el)el.style.display=v===view?vMap[v]:'none';});
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['tasks','activity','team','goals','report','compliance','audit'][i]===view));
+  // Update left panel nav active state
+  ['tasks','activity','team','goals','report','compliance','audit'].forEach(v=>{
+    const el=document.getElementById('nav_'+v);
+    if(el){el.classList.toggle('lp-active',v===view);}
+  });
+  // Show/hide stats & filters only on tasks view
+  const isTasksView=view==='tasks';
+  ['lp-stats-section','lp-status-section','lp-due-section'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.style.display=isTasksView?'':'none';
+  });
   // Hide sidebar for compliance/audit (full-width), show for all other views
   const sb=document.getElementById('mainSidebar');
-  if(sb) sb.style.display=(view==='compliance'||view==='audit')?'none':'';
+  // sidebar always visible regardless of view
   // Notes shortcut visible on Tasks view for all users when on personal dashboard
   const notesShortcut=document.getElementById('notesShortcutWrap');
   if(notesShortcut)notesShortcut.style.display=(view==='tasks'&&currentDashboard==='personal')?'':'none';
@@ -3476,6 +3742,8 @@ async function spawnNextCycle(c){
     name:c.name, month:nextMonth, type:c.type,
     due:nextDue, status:'pending', recur:c.recur,
     remarks:'', createdBy:c.createdBy||null,
+    assigneeId:c.assigneeId||null,  // carry over assignee to next cycle
+    submitDate:null, filingDate:null, // fresh dates for next cycle
     taskId:null,  // fresh task for next cycle
     ts:Date.now(), updatedAt:Date.now(), id:newId,
     spawnedFrom:c.id
@@ -3510,6 +3778,21 @@ function renderCompliance(){
 
   const today2=new Date().toISOString().split('T')[0];
 
+  // Update compliance stat bar — filtered by current month/type/search (but NOT status, so counts show across all statuses)
+  const allC=complianceItems.filter(c=>{
+    if(!isAdmin()&&c.assigneeId!==(currentUser&&currentUser.uid)) return false;
+    if(month &&c.month!==month)  return false;
+    if(type  &&c.type!==type)    return false;
+    if(q&&!c.name.toLowerCase().includes(q)&&!(c.remarks||'').toLowerCase().includes(q)&&!(c.type||'').toLowerCase().includes(q)) return false;
+    return true;
+  });
+  const setCS=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
+  setCS('cstat_total_n', allC.length);
+  setCS('cstat_done_n',  allC.filter(c=>c.status==='completed').length);
+  setCS('cstat_inprogress_n', allC.filter(c=>c.status==='in_progress').length);
+  setCS('cstat_overdue_n', allC.filter(c=>c.status==='overdue'||(c.due&&c.due<today2&&c.status!=='completed')).length);
+  setCS('cstat_pending_n', allC.filter(c=>c.status==='pending'||!c.status).length);
+
   // shared helpers
   function typeChip(type){const tc=COMPLIANCE_TYPES[type]||COMPLIANCE_TYPES['Other'];return`<span class="c-card-type" style="background:${tc.bg};color:${tc.color};border:1px solid ${tc.border}">${esc(type||'—')}</span>`;}
   function statusSelect(c,stopProp='event.stopPropagation()'){
@@ -3533,22 +3816,22 @@ function renderCompliance(){
     if(!items.length){tbody.innerHTML=`<tr><td colspan="11">${emptyHTML}</td></tr>`;return;}
     tbody.innerHTML=items.map((c,i)=>{
       const dueColor=c.due&&c.due<today2&&c.status!=='completed'?'color:var(--red);font-weight:700':'';
-      const dueDisplay=c.due?new Date(c.due+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'—';
-      const monthDisplay=c.month?new Date(c.month+'-01').toLocaleDateString('en-IN',{month:'short',year:'numeric'}):'—';
-      const rb=c.recur?`<div style="margin-top:4px"><span class="recur-badge">🔁 ${CRECUR_LABELS[c.recur]||c.recur}</span></div>`:'';
+      const dueDisplay=c.due?new Date(c.due+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'2-digit'}):'—';
+      const monthDisplay=c.month?new Date(c.month+'-01').toLocaleDateString('en-IN',{month:'short',year:'2-digit'}):'—';
+      const freqCell=c.recur?`<span style="display:inline-flex;align-items:center;gap:2px;padding:2px 8px;border-radius:99px;font-size:.58rem;font-weight:700;font-family:'JetBrains Mono',monospace;background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-mid);white-space:nowrap">🔁 ${CRECUR_LABELS[c.recur]||c.recur}</span>`:`<span style="font-size:.72rem;color:var(--ink-dim)">—</span>`;
       const assignee=members.find(m=>m.id===c.assigneeId);
-      const assigneeCell=assignee?`<div style="display:flex;align-items:center;gap:6px">${av(assignee,20)}<span style="font-size:.78rem;font-weight:500">${esc(assignee.name)}</span></div>`:`<span style="font-size:.72rem;color:var(--ink-dim)">—</span>`;
+      const assigneeCell=assignee?`<div style="display:flex;align-items:center;gap:5px;overflow:hidden">${av(assignee,20)}<span style="font-size:.72rem;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(assignee.name)}</span></div>`:`<span style="font-size:.72rem;color:var(--ink-dim)">—</span>`;
       return`<tr onclick="openComplianceModal('${c.id}')">
         <td style="color:var(--ink-dim);font-size:.75rem;font-family:'JetBrains Mono',monospace">${i+1}</td>
-        <td class="td-name"><div>${esc(c.name)}</div>${rb}</td>
-        <td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-mid)">${monthDisplay}</td>
+        <td class="td-name" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:0">${esc(c.name)}</td>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:.73rem;color:var(--ink-mid);white-space:nowrap">${monthDisplay}</td>
+        <td style="white-space:nowrap">${freqCell}</td>
         <td class="td-type">${typeChip(c.type)}</td>
         <td onclick="event.stopPropagation()">${assigneeCell}</td>
-        <td style="${dueColor}">${dueDisplay}</td>
-        <td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-mid)">${c.submitDate?new Date(c.submitDate+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'—'}</td>
-        <td style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-mid)">${c.filingDate?new Date(c.filingDate+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'—'}</td>
+        <td style="${dueColor};white-space:nowrap;font-size:.73rem;font-family:'JetBrains Mono',monospace">${dueDisplay}</td>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-mid);white-space:nowrap">${c.submitDate?new Date(c.submitDate+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'2-digit'}):'—'}</td>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-mid);white-space:nowrap">${c.filingDate?new Date(c.filingDate+'T00:00:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'2-digit'}):'—'}</td>
         <td>${statusSelect(c)}</td>
-        <td class="td-remarks" title="${esc(c.remarks||'')}">${esc(c.remarks||'—')}</td>
         <td onclick="event.stopPropagation()"><div class="compliance-row-actions">
           ${isAdmin()?`<button class="btn-icon btn-xs" title="Edit" onclick="openComplianceModal('${c.id}')">✏</button>
           ${c.assigneeId?`<button class="btn-icon btn-xs" title="Send Reminder Email" onclick="event.stopPropagation();sendComplianceReminder('${c.id}')" style="color:var(--accent)">📧</button>`:''}
@@ -3647,7 +3930,8 @@ window.quickUpdateComplianceStatus=async function(cid,newStatus){
   await update(ref(db,`compliance/${cid}`),{status:newStatus,updatedAt:Date.now()});
   // trigger next cycle when completing a recurring item
   if(newStatus==='completed'&&prev!=='completed'&&c.recur){
-    await spawnNextCycle({...c,status:'completed'});
+    // pass full object including assigneeId
+    await spawnNextCycle({...c, status:'completed', assigneeId:c.assigneeId||null});
   }
   toast(newStatus==='completed'?'✅ Marked completed!':'🔄 Status updated');
 };
@@ -3898,6 +4182,11 @@ window.renderAuditWork=function(){
     addBtn.style.display=isAdmin()?'':'none';
     addBtn.textContent=`＋ ${currentAuditModule==='statutory'?'Statutory':'Internal'} Area`;
   }
+  const addTaskBtn=document.getElementById('auditAddTaskBtn');
+  if(addTaskBtn){
+    const hasAreas=auditParents.filter(p=>(p.module||'internal')===currentAuditModule).length>0;
+    addTaskBtn.style.display=(isAdmin()&&hasAreas)?'':'none';
+  }
 
   const tbody=document.getElementById('auditTableBody');
   if(!tbody) return;
@@ -3925,6 +4214,14 @@ window.renderAuditWork=function(){
   const total=auditSubs.length;
   const byStatus={};
   auditSubs.forEach(s=>{byStatus[s.status||'not_started']=(byStatus[s.status||'not_started']||0)+1;});
+  // Update audit stat bar
+  const setAS=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
+  setAS('astat_total_n', auditSubs.length);
+  setAS('astat_accepted_n', byStatus['accepted']||0);
+  setAS('astat_inprogress_n', (byStatus['gathering']||0)+(byStatus['ready']||0)+(byStatus['shared']||0)+(byStatus['replied']||0));
+  setAS('astat_query_n', byStatus['query_raised']||0);
+  setAS('astat_notstarted_n', byStatus['not_started']||0);
+
   const summaryBar=document.getElementById('auditSummaryBar');
   if(summaryBar){
     const isStatutory=currentAuditModule==='statutory';
@@ -3951,7 +4248,7 @@ window.renderAuditWork=function(){
   });
 
   if(!visibleParents.length){
-    tbody.innerHTML=`<tr><td colspan="11"><div class="compliance-empty"><div class="compliance-empty-icon">📋</div><div class="compliance-empty-title">No items found</div><div class="compliance-empty-sub">Try clearing filters or add a new audit area.</div></div></td></tr>`;
+    tbody.innerHTML=`<tr><td colspan="10"><div class="compliance-empty"><div class="compliance-empty-icon">📋</div><div class="compliance-empty-title">No items found</div><div class="compliance-empty-sub">Try clearing filters or add a new audit area.</div></div></td></tr>`;
     return;
   }
 
@@ -4001,7 +4298,6 @@ window.renderAuditWork=function(){
       <td class="a-par-done-cell" colspan="2">
         <div class="a-acts">
           ${isAdmin()?`
-          <button class="btn-icon btn-xs a-add-sub" title="Add Item" onclick="openAuditSubModal('${p.id}')">＋</button>
           <button class="btn-icon btn-xs" title="Edit Area" onclick="openAuditParentModal('${p.id}')">✏</button>
           <button class="btn-icon btn-xs" title="Delete Area" onclick="deleteAuditParent('${p.id}')" style="color:var(--red)">🗑</button>`:''}
         </div>
@@ -4050,9 +4346,6 @@ window.renderAuditWork=function(){
             </td>
             <td class="a-sub-td" onclick="event.stopPropagation()">
               ${s.folderLink?`<a href="${esc(s.folderLink)}" target="_blank" rel="noopener" class="a-folder-btn">📂 Open</a>`:`<span class="a-dim">—</span>`}
-            </td>
-            <td class="a-sub-td" onclick="event.stopPropagation()" style="text-align:center">
-              ${hasQuery?`<button onclick="openAuditQueryPanel('${s.id}')" style="font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:99px;border:1px solid var(--red-border);background:var(--red-bg);color:var(--red);cursor:pointer;white-space:nowrap">❓ View</button>`:`<span class="a-dim" style="font-size:.7rem">—</span>`}
             </td>
             <td class="a-act-cell" onclick="event.stopPropagation()">
               <div class="a-acts">
@@ -4198,16 +4491,61 @@ window.openAuditSubModal=function(parentId,sid){
   if(s?.reviewerId) rsel.value=s.reviewerId;
   if(!isAdmin()){asel.disabled=true;rsel.disabled=true;}else{asel.disabled=false;rsel.disabled=false;}
   document.getElementById('aSubParentLabel').textContent=parent?parent.name:'Area';
+  // When opened from a specific row, show area badge and hide select
+  document.getElementById('aSubAreaBadge').style.display='';
+  document.getElementById('aSubAreaSelectWrap').style.display='none';
   document.getElementById('auditSubModal').style.display='flex';
   setTimeout(()=>document.getElementById('aSubTask').focus(),50);
 };
 window.closeAuditSubModal=function(){document.getElementById('auditSubModal').style.display='none';};
+
+/* Open Add Task from header — shows area selector in modal */
+window.openAuditSubModalFromHeader=function(){
+  const mod=currentAuditModule||'internal';
+  const areas=auditParents.filter(p=>(p.module||'internal')===mod);
+  if(!areas.length){toast('Please create an audit area first.');return;}
+  // populate area select
+  const sel=document.getElementById('aSubAreaSelect');
+  if(sel){
+    sel.innerHTML='<option value="">— Select Area —</option>'+areas.map(p=>`<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('');
+    // if only one area, pre-select it
+    if(areas.length===1) sel.value=areas[0].id;
+  }
+  // show area select, hide badge
+  document.getElementById('aSubAreaSelectWrap').style.display='';
+  document.getElementById('aSubAreaBadge').style.display='none';
+  document.getElementById('aSubParentId').value='';
+  // clear form
+  document.getElementById('editAuditSubId').value='';
+  document.getElementById('aSubTask').value='';
+  document.getElementById('aSubDept').value='';
+  document.getElementById('aSubPriority').value='medium';
+  document.getElementById('aSubDueDate').value='';
+  document.getElementById('aSubSubmittedOn').value='';
+  document.getElementById('aSubStatus').value='not_started';
+  document.getElementById('aSubFolderLink').value='';
+  document.getElementById('aSubAuditQuery').value='';
+  document.getElementById('aSubResponse').value='';
+  document.getElementById('aSubEscalate').checked=false;
+  const opts=`<option value="">— Select —</option>`+members.map(m=>`<option value="${m.id}">${esc(m.name)}</option>`).join('');
+  document.getElementById('aSubAssignee').innerHTML=opts;
+  document.getElementById('aSubReviewer').innerHTML=opts;
+  document.getElementById('auditSubModalTitle').textContent='Add Audit Task';
+  document.getElementById('auditSubModal').style.display='flex';
+  setTimeout(()=>{ if(sel&&!sel.value) sel.focus(); else document.getElementById('aSubTask').focus(); },50);
+};
 window.saveAuditSub=async function(){
   const eid=document.getElementById('editAuditSubId').value;
   if(!isAdmin()&&!eid){toast('Only admins can add audit items.');return;}
   const subTask=document.getElementById('aSubTask').value.trim();
   if(!subTask){alert('Please enter a document/task description!');return;}
-  const parentId=document.getElementById('aSubParentId').value;
+  let parentId=document.getElementById('aSubParentId').value;
+  // If no parentId (opened from header), read from area select
+  if(!parentId){
+    const sel=document.getElementById('aSubAreaSelect');
+    parentId=sel?sel.value:'';
+  }
+  if(!parentId){alert('Please select an audit area!');return;}
   const data={
     parentId,
     subTask,
@@ -4750,7 +5088,7 @@ window.closeWelcome=function(goToDashboard){
 document.addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.isContentEditable)return;
   if(e.key==='Escape'){closeTaskModal();closeDetail();closeCmdPalette();closeShortcuts();endTour();closeArchive();closeTemplates();closeComplianceModal();closeAuditParentModal();closeAuditSubModal();closeAuditQueryPanel();closeTempBoard();if(currentView==='notes'&&noteSaveTimer){clearTimeout(noteSaveTimer);autoSaveNote();}}
-  if(e.key==='n'||e.key==='N'){if(currentView==='tasks'){if(currentDashboard==='personal')openTaskModal(null,'personal');else if(isAdmin())openTaskModal();}}
+  if(e.key==='n'||e.key==='N'){if(currentView==='tasks'){if(currentDashboard==='personal')openTaskModal(null,'personal');else if(currentDashboard==='team'&&isAdmin())openTaskModal(null,'team');}}
   if(e.key==='/'||e.key==='f'){document.getElementById('searchInput')?.focus();}
   if(e.key==='b'||e.key==='B'){toggleSidebar();}
   if(e.key==='t'||e.key==='T'){switchView('tasks');}
@@ -4807,6 +5145,159 @@ if(location.hash==='#compliance'){setTimeout(()=>switchView('compliance'),500);}
 setInterval(checkOverdueNotifs,3600000);
 // Check compliance reminders every hour
 setInterval(checkComplianceReminders,3600000);
+
+// ── TASKBOARD UI REDESIGN ──
+(function injectTaskboardStyles(){
+  var css=[
+  ':root{',
+  '--bg:#EFF1F7;--bg2:#E4E7F0;',
+  '--surface:#FFFFFF;--surface2:#F8F9FC;',
+  '--border:#E5E8F0;--border2:#D0D5E8;',
+  '--ink:#111827;--ink2:#1F2D45;--ink-mid:#5A6A82;--ink-dim:#9BA8BE;',
+  '--accent:#5B4FE9;--accent-light:#EDE9FF;--accent-mid:#C4B8FF;--accent2:#7C5CFC;',
+  '--green:#10B981;--green-bg:#ECFDF5;--green-border:#6EE7B7;',
+  '--red:#EF4444;--red-bg:#FEF2F2;--red-border:#FCA5A5;',
+  '--amber:#F59E0B;--amber-bg:#FFFBEB;--amber-border:#FCD34D;',
+  '--blue:#3B82F6;--blue-bg:#EFF6FF;--blue-border:#BFDBFE;',
+  '--purple:#8B5CF6;--purple-bg:#F5F3FF;--purple-border:#DDD6FE;',
+  '--sidebar-w:180px;',
+  '--grad-accent:linear-gradient(135deg,#5B4FE9 0%,#7C5CFC 100%);',
+  '}',
+  '[data-theme="dark"]{--bg:#0F1117;--bg2:#161B27;--surface:#1A2035;--border:#2A3450;--border2:#364060}',
+  'body{background:var(--bg)}',
+  '.header{background:var(--surface)!important;border-bottom:1.5px solid var(--border)!important;padding:0 24px!important}',
+  '.logo-mark{background:var(--grad-accent)!important;border-radius:10px!important}',
+  '.nav-tabs{background:var(--bg)!important;border:1.5px solid var(--border)!important;border-radius:10px!important;padding:3px!important}',
+  '.tab{font-size:.77rem!important;padding:5px 12px!important;border-radius:7px!important;font-weight:600!important}',
+  '.tab.active{background:var(--surface)!important;color:var(--accent)!important;box-shadow:0 1px 4px rgba(91,79,233,.15)!important}',
+  '.global-search-input{background:var(--bg)!important;border:1.5px solid var(--border)!important;border-radius:10px!important}',
+  '.global-search-input:focus{border-color:var(--accent)!important;box-shadow:0 0 0 3px rgba(91,79,233,.12)!important}',
+  '.user-chip{border-radius:12px!important;border-color:var(--border)!important}',
+  '.btn-icon{border-color:var(--border)!important;border-radius:9px!important}',
+  '.sync-dot{background:var(--green)!important}',
+  '.sync-label{color:var(--green)!important}',
+  '.sidebar{background:var(--surface)!important;border-right:1.5px solid var(--border)!important;width:var(--sidebar-w)!important;padding:16px 14px!important}',
+  '.sidebar-label{font-family:Figtree,sans-serif!important;font-size:.65rem!important;font-weight:700!important;color:var(--ink-dim)!important;text-transform:uppercase!important;letter-spacing:.8px!important;padding:0 8px!important;margin-bottom:6px!important}',
+  '.sidebar-section{margin-bottom:16px!important}',
+  /* stat-grid removed - replaced with compact overview */
+  '.filter-btn{border-radius:8px!important;padding:7px 10px!important;font-size:.79rem!important;font-weight:500!important;color:var(--ink-mid)!important;margin-bottom:1px!important}',
+  '.filter-btn:hover{background:var(--bg)!important;color:var(--ink)!important}',
+  '.filter-btn.active{background:var(--accent-light)!important;color:var(--accent)!important;font-weight:600!important}',
+  '.due-filter-btn{border-radius:8px!important;font-size:.78rem!important;padding:6px 10px!important;margin-bottom:1px!important}',
+  '.due-filter-btn.active{background:var(--amber-bg)!important;color:var(--amber)!important}',
+  '#sidebarAddNew{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:9px 16px;margin-bottom:18px;background:var(--grad-accent);color:#fff;border:none;border-radius:10px;font-family:Figtree,sans-serif;font-size:.83rem;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(91,79,233,.35);transition:all .18s;letter-spacing:-.01em}',
+  '#sidebarAddNew:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(91,79,233,.48)}',
+  '.dash-switcher{background:var(--surface)!important;border-bottom:1.5px solid var(--border)!important;padding:12px 22px!important;gap:8px!important}',
+  '.dash-tab{border-radius:10px!important;border:1.5px solid var(--border)!important;font-size:.81rem!important;font-weight:600!important;padding:7px 18px!important;color:var(--ink-mid)!important;background:transparent!important}',
+  '.dash-tab:hover{border-color:var(--accent-mid)!important;background:var(--accent-light)!important;color:var(--ink)!important}',
+  '.dash-tab.active{background:var(--grad-accent)!important;border-color:transparent!important;color:#fff!important;box-shadow:0 4px 14px rgba(91,79,233,.38)!important}',
+  '.dash-tab.active.team{background:linear-gradient(135deg,#7C5CFC,#5B4FE9)!important}',
+  '.toolbar{background:var(--surface)!important;border-bottom:1.5px solid var(--border)!important;padding:10px 22px!important;gap:8px!important}',
+  '.view-toggle{background:var(--bg)!important;border:1.5px solid var(--border)!important;border-radius:8px!important}',
+  '.view-btn{font-size:.75rem!important;border-radius:6px!important;padding:5px 11px!important}',
+  '.view-btn.active{background:var(--surface)!important;color:var(--accent)!important;box-shadow:0 1px 4px rgba(91,79,233,.15)!important}',
+  '.search-input{background:var(--bg)!important;border:1.5px solid var(--border)!important;border-radius:10px!important;font-size:.8rem!important}',
+  '.search-input:focus{border-color:var(--accent)!important;box-shadow:0 0 0 3px rgba(91,79,233,.12)!important}',
+  '.btn-new-task{background:var(--grad-accent)!important;border-radius:10px!important;padding:9px 20px!important;font-size:.84rem!important;font-weight:700!important;box-shadow:0 4px 14px rgba(91,79,233,.35)!important}',
+  '.btn-new-task:hover{transform:translateY(-1px)!important;box-shadow:0 8px 22px rgba(91,79,233,.45)!important}',
+  '.grid-wrap{background:var(--bg)!important;padding:18px 22px!important}',
+  '.kanban-col{width:290px!important;border-radius:16px!important;background:var(--bg)!important;border:1.5px solid var(--border)!important}',
+  '.kanban-col-header{background:var(--surface)!important;border-bottom:1.5px solid var(--border)!important;border-radius:14px 14px 0 0!important;padding:12px 14px!important;gap:9px!important}',
+  '.kanban-col-title{font-size:.86rem!important;font-weight:700!important}',
+  '.kanban-col-count{font-size:.62rem!important;padding:2px 9px!important;border-radius:99px!important;font-weight:700!important;background:var(--bg)!important;border:1.5px solid var(--border)!important;color:var(--ink-mid)!important}',
+  '.kanban-cards{padding:12px!important;gap:9px!important}',
+  '.task-card{background:var(--surface)!important;border:1.5px solid var(--border)!important;border-radius:14px!important;padding:14px!important;box-shadow:0 1px 4px rgba(17,24,39,.05)!important;transition:all .2s!important}',
+  '.task-card:hover{border-color:var(--accent-mid)!important;box-shadow:0 6px 20px rgba(91,79,233,.1),0 2px 6px rgba(17,24,39,.06)!important;transform:translateY(-2px)!important}',
+  '.task-card.selected{border-color:var(--accent)!important;background:var(--accent-light)!important}',
+  '.card-title{font-size:.88rem!important;font-weight:600!important;letter-spacing:-.02em!important;line-height:1.45!important}',
+  '.badge{border-radius:99px!important;padding:2px 9px!important;font-size:.67rem!important;font-weight:700!important;border:1.5px solid!important}',
+  '.tag{border-radius:99px!important;font-size:.66rem!important;padding:1px 8px!important}',
+  '.card-progress-bar{background:var(--bg2)!important;border-radius:99px!important;height:4px!important}',
+  '.card-progress-fill{background:linear-gradient(90deg,var(--accent),var(--purple))!important;border-radius:99px!important}',
+  '.checkbox-btn{width:16px!important;height:16px!important;border:2px solid var(--border2)!important;border-radius:5px!important;background:transparent!important;flex-shrink:0!important}',
+  '.checkbox-btn.checked{background:var(--green)!important;border-color:var(--green)!important}',
+  '.checkbox-btn:hover:not(.checked){border-color:var(--accent)!important}',
+  '.card-menu-btn{background:none!important;border:none!important;border-radius:7px!important;width:26px!important;height:26px!important;cursor:pointer!important;color:var(--ink-dim)!important;display:flex!important;align-items:center!important;justify-content:center!important}',
+  '.card-menu-btn:hover{background:var(--bg)!important;color:var(--ink)!important}',
+  '.card-dropdown{background:var(--surface)!important;border:1.5px solid var(--border)!important;border-radius:12px!important;min-width:150px!important}',
+  '.card-menu-item{font-size:.79rem!important;padding:8px 14px!important;border-radius:8px!important}',
+  '.detail-panel{border-radius:20px!important;border:1.5px solid var(--border)!important}',
+  '.dh{background:var(--bg)!important;border-bottom:1.5px solid var(--border)!important}',
+  '.detail-title{font-size:1.15rem!important;font-weight:700!important}',
+  '.meta-grid{background:var(--bg)!important;border:1.5px solid var(--border)!important;border-radius:14px!important}',
+  '.modal{border-radius:20px!important;border:1.5px solid var(--border)!important}',
+  '.input{border-radius:10px!important;border:1.5px solid var(--border)!important}',
+  '.input:focus{border-color:var(--accent)!important;box-shadow:0 0 0 3px rgba(91,79,233,.12)!important}',
+  '.btn-primary{background:var(--grad-accent)!important;border-radius:10px!important;box-shadow:0 3px 12px rgba(91,79,233,.3)!important}',
+  '.btn-primary:hover{box-shadow:0 6px 20px rgba(91,79,233,.45)!important;transform:translateY(-1px)!important}',
+  '.btn-ghost{border-radius:10px!important;border-color:var(--border)!important}',
+  '.btn-danger{border-radius:10px!important}',
+  '.auth-box{border-radius:20px!important}',
+
+  '.tstat-card{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0;cursor:pointer;transition:all .2s;gap:3px;flex:1;border-radius:4px}',
+  '.tstat-card:hover{background:var(--bg)}',
+  '.tstat-num{font-family:"Bricolage Grotesque",sans-serif;font-size:1.1rem;font-weight:800;line-height:1;letter-spacing:-.04em}',
+  '.tstat-lbl{font-family:"JetBrains Mono",monospace;font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--ink-dim)}',
+  '.tstat-divider{width:1.5px;background:var(--border);margin:10px 0;align-self:stretch;flex-shrink:0}',
+
+
+  '.ct-filter-input{padding:6px 10px!important;font-size:.78rem!important;border-radius:8px!important;border:1.5px solid var(--border)!important;background:var(--surface)!important;height:34px!important}',
+  '.ct-filter-input:focus{border-color:var(--accent)!important;box-shadow:0 0 0 2px rgba(91,79,233,.1)!important}',
+  '.flt-lbl{font-family:"JetBrains Mono",monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:1.1px;color:var(--ink-dim);font-weight:600}',
+  '.c-sticky-header{background:var(--surface)!important;border-bottom:1.5px solid var(--border)!important;padding:14px 20px!important}',
+  '.c-view-toggle{display:flex;gap:2px;background:var(--bg)!important;border:1.5px solid var(--border)!important;border-radius:8px!important;padding:2px!important}',
+  '.c-view-btn{padding:4px 10px!important;font-size:.75rem!important;border-radius:6px!important;border:none!important;background:none!important;cursor:pointer;font-weight:600;color:var(--ink-mid);transition:all .14s}',
+  '.c-view-btn.active{background:var(--surface)!important;color:var(--accent)!important;box-shadow:0 1px 3px rgba(91,79,233,.15)!important}',
+
+
+  /* ── LEFT PANEL (AutomatePro style) ── */
+  '.lp-sidebar{width:180px!important;padding:16px 10px!important;display:flex;flex-direction:column;gap:0;background:var(--surface)!important;border-right:1.5px solid var(--border)!important}',
+  '.lp-add-btn{display:flex;align-items:center;gap:8px;width:100%;padding:9px 14px;margin-bottom:6px;background:var(--grad-accent);color:#fff;border:none;border-radius:10px;font-family:Figtree,sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;box-shadow:0 3px 12px rgba(91,79,233,.3);transition:all .18s;letter-spacing:-.01em}',
+  '.lp-add-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(91,79,233,.45)}',
+  '.lp-section{display:flex;flex-direction:column;gap:1px;margin-bottom:4px}',
+  '.lp-section-label{font-family:Figtree,sans-serif;font-size:.62rem;font-weight:700;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.8px;padding:8px 10px 4px;margin-top:2px}',
+  '.lp-divider{height:1.5px;background:var(--border);margin:8px 0;border-radius:99px}',
+  '.lp-nav-item{display:flex;align-items:center;gap:10px;width:100%;padding:8px 12px;border:none;background:none;cursor:pointer;font-family:Figtree,sans-serif;font-size:.84rem;font-weight:500;color:var(--ink-mid);border-radius:9px;transition:all .15s;text-align:left;letter-spacing:-.01em}',
+  '.lp-nav-item:hover{background:var(--bg);color:var(--ink)}',
+  '.lp-nav-item svg{flex-shrink:0;opacity:.7}',
+  '.lp-nav-item.lp-active{background:var(--accent-light);color:var(--accent);font-weight:700}',
+  '.lp-nav-item.lp-active svg{opacity:1}',
+  '.lp-filter-item{display:flex;align-items:center;gap:9px;width:100%;padding:7px 12px;border:none;background:none;cursor:pointer;font-family:Figtree,sans-serif;font-size:.81rem;font-weight:500;color:var(--ink-mid);border-radius:8px;transition:all .14s;text-align:left}',
+  '.lp-filter-item:hover{background:var(--bg);color:var(--ink)}',
+  '.lp-filter-item.active{background:var(--accent-light);color:var(--accent);font-weight:600}',
+  '.lp-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}',
+  '.fcount{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:.6rem;background:var(--bg2);padding:1px 7px;border-radius:99px;color:var(--ink-dim);font-weight:600}',
+  /* stat-grid duplicate removed */
+
+
+  '.ap-spreadsheet{border-collapse:collapse;width:100%;background:var(--surface)}',
+  '.ap-spreadsheet thead th{color:var(--ink-dim);font-family:Figtree,sans-serif;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:8px 14px;border-bottom:1.5px solid var(--border);white-space:nowrap;text-align:left}',
+  '.ap-row{border-bottom:1.5px solid var(--border);cursor:pointer;transition:background .12s}',
+  '.ap-row:hover{background:var(--bg)}',
+  '.ap-row:hover .ap-row-actions{opacity:1!important}',
+  '.ap-row-done{opacity:.55}',
+  '.ap-td-check{width:36px;padding:10px 8px 10px 14px;vertical-align:middle}',
+  '.ap-td-status{padding:10px 12px;vertical-align:middle;white-space:nowrap;width:110px}',
+  '.ap-td-task{padding:10px 14px;vertical-align:middle;min-width:180px}',
+  '.ap-td-desc{padding:10px 14px;vertical-align:middle;max-width:220px}',
+  '.ap-td-assignee{padding:10px 14px;vertical-align:middle;white-space:nowrap}',
+  '.ap-td-due{padding:10px 14px;vertical-align:middle}',
+  '.ap-td-priority{padding:10px 14px;vertical-align:middle}',
+  '.ap-td-progress{padding:10px 14px;vertical-align:middle;min-width:120px}',
+  '.ap-td-actions{padding:10px 8px;vertical-align:middle;width:56px}',
+  '.ap-task-name{font-family:Figtree,sans-serif;font-size:.86rem;font-weight:600;color:var(--ink);letter-spacing:-.01em}',
+  '.ap-done-text{text-decoration:line-through;color:var(--ink-dim)!important}',
+  '.ap-desc-text{font-size:.78rem;color:var(--ink-mid)}',
+  '.grid-wrap{background:var(--surface)!important;padding:0!important}',
+
+  ].join('\n');
+  var el=document.createElement('style');
+  el.id='tb-redesign';
+  el.textContent=css;
+  document.head.appendChild(el);
+  // sidebar Add New button is now in HTML directly as lp-add-btn
+})();
+
 </script>
 </body>
 </html>
