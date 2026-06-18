@@ -2355,6 +2355,15 @@ import{getDatabase,ref,set,onValue,push,remove,update}from'https://www.gstatic.c
 const FIREBASE_CONFIG={apiKey:"AIzaSyAzXRyASLi6DadFqFdb80iipyKezO5byd4",authDomain:"task-flow-65be7.firebaseapp.com",databaseURL:"https://task-flow-65be7-default-rtdb.firebaseio.com",projectId:"task-flow-65be7",appId:"1:572271775582:web:88dddc228c5511a9b409cf"};
 const app=initializeApp(FIREBASE_CONFIG);const auth=getAuth(app);const db=getDatabase(app);
 
+// ── GLOBAL ERROR HANDLERS — prevent silent crashes ──
+window.addEventListener('unhandledrejection',e=>{
+  console.error('[Unhandled Promise]',e.reason);
+  e.preventDefault(); // Prevent app from dying
+});
+window.addEventListener('error',e=>{
+  console.error('[Global Error]',e.message,e.filename,e.lineno);
+});
+
 // ── CONSTANTS ──
 const P={
   critical:{label:'Critical',color:'#b91c1c',bg:'#fef2f2',border:'#fca5a5',icon:'🔴'},
@@ -2753,12 +2762,10 @@ window.doLogin=async function(){
 
     const actualRole=profile?.role||'member';
     if(actualRole!==selectedPortalRole){
-      await signOut(auth);
-      err.textContent=actualRole==='admin'
-        ?'This account is an Admin. Please sign in via the Admin Portal.'
-        :'This account is a Member. Please sign in via the Team Member Portal.';
-      err.style.display='block';
-      return;
+      // Auto-switch portal instead of rejecting login
+      selectPortal(actualRole);
+      toast(actualRole==='admin'?'🏆 Signed in as Admin':'👤 Signed in as Team Member');
+      return; // onAuthStateChanged will handle the rest
     }
   }catch(e){err.textContent=e.code==='auth/invalid-credential'?'Invalid email or password.':e.message;err.style.display='block';}
 };
@@ -2793,6 +2800,13 @@ onAuthStateChanged(auth,user=>{
     document.getElementById('app').style.display='block';
     subscribeAll();
     initSessionTimeout();
+    // ── DATA LOADING WATCHDOG — show warning if data hasn't loaded after 12s ──
+    setTimeout(()=>{
+      if(tasks.length===0&&members.length<=1&&currentUser){
+        console.warn('[Watchdog] No data loaded after 12s. Possible Firebase rules issue.');
+        toast('⚠ Data not loading? Check your Firebase Database rules — all nodes need read/write access for authenticated users.',8000);
+      }
+    },12000);
     // Check if first-ever login for this user
     const isNew=localStorage.getItem('gf_newuser_'+user.uid)==='1';
     if(isNew){
@@ -2818,6 +2832,19 @@ onAuthStateChanged(auth,user=>{
 let _localFallbackProfile = null;
 
 function subscribeAll(){
+  // ── FIREBASE CONNECTION MONITOR ──
+  try{
+    const connRef=ref(db,'.info/connected');
+    onValue(connRef,snap=>{
+      const connected=snap.val()===true;
+      const syncEl=document.querySelector('.sync-label');
+      const syncDot=document.querySelector('.sync-dot');
+      if(syncEl){syncEl.innerHTML=connected?'<div class="sync-dot"></div> Live':'<span style="color:var(--red)">⚠ Offline</span>';}
+      if(syncDot){syncDot.style.background=connected?'var(--green)':'var(--red)';}
+      if(!connected){console.warn('[Firebase] Connection lost — data may be stale');}
+    });
+  }catch(e){console.warn('Connection monitor failed:',e);}
+
   onValue(ref(db,'members'),snap=>{
     const v=snap.val()||{};
     members=Object.entries(v).map(([id,m])=>({id,...m}));
@@ -2854,6 +2881,9 @@ function subscribeAll(){
     }
 
     updateUserHeader();renderAll();if(currentView==='compliance')renderCompliance();
+  },err=>{
+    console.error('[Firebase] members read error:',err.message);
+    toast('⚠ Cannot read team data. Check Firebase rules.');
   });
   onValue(ref(db,'tasks'),snap=>{const v=snap.val()||{};const VP=['critical','high','medium','low'];const VS=['todo','in_progress','review','done'];
     const prevTasks=[...tasks];
@@ -2875,12 +2905,17 @@ function subscribeAll(){
     checkRecurring();
     // Auto-delete done tasks older than 90 days (admin only, runs once per session)
     if(isAdmin())autoDeleteOldDoneTasks();
+  },err=>{
+    console.error('[Firebase] tasks read error:',err.message);
+    toast('⚠ Cannot read tasks. Check Firebase rules.');
   });
-  onValue(ref(db,'activity'),snap=>{const v=snap.val()||{};activity=Object.entries(v).map(([id,a])=>({id,...a})).sort((a,b)=>b.ts-a.ts).slice(0,300);renderActivity();});
-  subscribeCompliance();
-  subscribeAudit();
-  subscribeGoals();
-  subscribeContracts();
+  onValue(ref(db,'activity'),snap=>{const v=snap.val()||{};activity=Object.entries(v).map(([id,a])=>({id,...a})).sort((a,b)=>b.ts-a.ts).slice(0,300);renderActivity();},err=>{
+    console.error('[Firebase] activity read error:',err.message);
+  });
+  try{subscribeCompliance();}catch(e){console.error('subscribeCompliance init error:',e);}
+  try{subscribeAudit();}catch(e){console.error('subscribeAudit init error:',e);}
+  try{subscribeGoals();}catch(e){console.error('subscribeGoals init error:',e);}
+  try{subscribeContracts();}catch(e){console.error('subscribeContracts init error:',e);}
 }
 
 // ── RECURRING TASKS ──
@@ -4622,6 +4657,11 @@ function subscribeGoals(){
     const v=snap.val()||{};
     goals=Object.values(v).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
     if(currentView==='goals')renderGoals();
+  },err=>{
+    console.error('[Firebase] goals read error:',err.message);
+    if(err.message&&err.message.toLowerCase().includes('permission')){
+      console.warn('Fix: Add "goals":{".read":"auth != null",".write":"auth != null"} to your Firebase Database rules.');
+    }
   });
 }
 function renderGoals(){
@@ -4758,11 +4798,16 @@ function subscribeCompliance(){
     const today=new Date().toISOString().split('T')[0];
     complianceItems.forEach(c=>{
       if(c.due&&c.due<today&&c.status!=='completed'&&c.status!=='overdue')
-        update(ref(db,`compliance/${c.id}`),{status:'overdue'});
+        update(ref(db,`compliance/${c.id}`),{status:'overdue'}).catch(e=>console.warn('Compliance auto-overdue failed:',e.message));
     });
     if(currentView==='compliance') renderCompliance();
     // ── AUTO-HEAL: spawn any missing recurring cycles ──
     autoHealRecurring();
+  },err=>{
+    console.error('[Firebase] compliance read error:',err.message);
+    if(err.message&&err.message.toLowerCase().includes('permission')){
+      console.warn('Fix: Add "compliance":{".read":"auth != null",".write":"auth != null"} to your Firebase Database rules.');
+    }
   });
 }
 
@@ -5287,11 +5332,18 @@ function subscribeAudit(){
     const v=snap.val()||{};
     auditParents=Object.entries(v).map(([id,p])=>({id,...p})).sort((a,b)=>(a.order??a.ts)-(b.order??b.ts));
     if(currentView==='audit') renderAuditWork();
+  },err=>{
+    console.error('[Firebase] auditWork/parentTasks read error:',err.message);
+    if(err.message&&err.message.toLowerCase().includes('permission')){
+      console.warn('Fix: Add "auditWork":{".read":"auth != null",".write":"auth != null"} to your Firebase Database rules.');
+    }
   });
   onValue(ref(db,'auditWork/subTasks'),snap=>{
     const v=snap.val()||{};
     auditSubs=Object.entries(v).map(([id,s])=>({id,...s})).sort((a,b)=>(a.order??a.ts)-(b.order??b.ts));
     if(currentView==='audit') renderAuditWork();
+  },err=>{
+    console.error('[Firebase] auditWork/subTasks read error:',err.message);
   });
 }
 
@@ -6838,6 +6890,12 @@ function subscribeContracts(){
     _ctPopulateAssigneeFilter();
     // Check expiry reminders (runs on data load)
     checkContractExpiryReminders();
+  },err=>{
+    console.error('[Firebase] contracts read error:',err.message);
+    if(err.message&&err.message.toLowerCase().includes('permission')){
+      console.warn('Fix: Add "contracts":{".read":"auth != null",".write":"auth != null"} to your Firebase Database rules.');
+      toast('⚠ Contracts module needs Firebase rules update. See console for details.');
+    }
   });
 }
 
